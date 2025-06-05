@@ -2,9 +2,6 @@
 Projet de Cap ECL
 Nom de groupe:
 
-
-
-Qui fait quoi?
-
-
+Lien pour mettre ses sources, liens et tout ce que vous avez utilisé comme information:
+https://enisefr-my.sharepoint.com/:x:/g/personal/zahara_nasr_enise_fr/ERl2IKZVWdBGl874xjeNzNsBP6ylxiS1bpFtMrdOrvQ2xg?e=MtYfpd
  
