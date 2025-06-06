@@ -169,4 +169,4 @@ def Temp(lat, lng ):
     plt.show()
 
 
-Temp(10,70)
+Temp(45,4)
