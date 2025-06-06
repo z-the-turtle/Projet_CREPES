@@ -30,13 +30,17 @@ def P_rec(t):
         return 0
 
 #Formule fonctionnant la nuit :
-while t < 10*84600 :
+while t < 30*84600 :
     liste_T.append(T)
     liste_t.append(t)
     T = T + dt*(1-A)*(1+A*Beta*(1-A))*P_rec(t)/(C*rho_eau*profondeur) - T**4*sigma*dt*(1-(1-A)*Beta)/(C*rho_eau*profondeur)
     t = t+dt
 
+fig, ax = plt.subplots()
+
 plt.plot(liste_t, liste_T)
+ax.set_xlabel('temps (s)', fontsize=15)
+ax.set_ylabel('Température à la surface (K)', fontsize=15)
 plt.show()
 
 
