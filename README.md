@@ -1,7 +1,9 @@
 # Projet_CREPES
 Projet de Cap ECL
 Nom de groupe:
+la fonction decoupage capacité et albedo api sont prêtes a être utilisés dans le code , prennent en paramètres la latitude et la longitude.
 
+dans ce document sont toutes les infos regroupées, vous pouvez rajouter vos sources :
 https://docs.google.com/document/d/1brJ2jxt_qV-7utBuGxu4oJdD93AJbg-jqgVYEiY2jeY/edit?usp=sharing
 
 Lien pour mettre ses sources, liens et tout ce que vous avez utilisé comme information:
