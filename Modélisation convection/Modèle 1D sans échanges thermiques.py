@@ -4,12 +4,13 @@ import matplotlib.animation as animation
 import numpy as np
 
 # Paramètres
-sol_width = 100
-sol_height = 2
-air_height = 5
-bloc_width = 5
-vitesse = 1 #10m/s
-nb_blocs = sol_width // bloc_width
+sol_width = 100          # Largeur totale du sol
+sol_height = 2           # Hauteur du sol
+air_height = 5           # Hauteur des blocs d'air
+bloc_width = 5           # Largeur de chaque bloc d'air
+vitesse = 1              # Vitesse de déplacement horizontal (blocs d'air), ici 10 m/s
+nb_blocs = sol_width // bloc_width  # Nombre total de blocs
+
 
 # Température du sol
 def sol_temperature(x):
@@ -26,7 +27,7 @@ ax.set_ylim(0, sol_height + air_height + 2)
 ax.axis('off')
 plt.title("Masse d'air fragmentée : échanges thermiques jour/nuit", fontsize=14, pad=20)
 
-# Sol visuel
+# Sol visuel : dessin du sol en deux couleurs représentant la température (bleu pour froid, rouge pour chaud).
 sol_gauche = patches.Rectangle((0, 0), sol_width / 2, sol_height, facecolor='midnightblue', edgecolor='black')
 sol_droite = patches.Rectangle((sol_width / 2, 0), sol_width / 2, sol_height, facecolor='lightcoral', edgecolor='black')
 ax.add_patch(sol_gauche)
