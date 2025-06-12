@@ -2,16 +2,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 from math import cos, sin, pi
 
-
-profondeur = 0.6
-rho_eau = 1000
-T = 290
-t = 0 #Heure du coucher du soleil, pris comme référence
-dt = 60
-sigma =5.67*10**(-8) #Constante de Stefan-Boltzmann
-Beta = 0.5 #Proportion de ce qui est renvoyé dans la terre par l'atmosphère, dans le rayonnemment infrarouge
+#Constantes et paramètres
+dt = 600 #Pas de temps
+rho_terre = 5500 #Masse volumique de la Terre
+rho_atmosphère = 1.2 #Masse volumique de l'atmosphère, en fonction de la concentration en les gazs
+capa_atm = 1000
+epaisseur_atm = 13000 #Epaisseur de l'atmosphère
+Prof = 0.6 #Profondeur typique de variation de température de la terre sur une journée
+sigma = 4.67*10**(-8) #Constante de Stefan-Boltzmann
 pi = np.pi
 puiss = np.array([1340, 0, 0])
+epsilon = 0.8 #Proportions des rayons infrarouges qui sont effectivement absorbés par l'atmosphère, on considère que le reste est perdu dans le vide intersidéral
 
 def convertir(degres):
     """permet de convertir une valeur en degrés en radiant"""
@@ -178,7 +179,6 @@ def capacite(lat, lng):
     else:
         return capa_neige
 
-
 def B_point(j):
     '''Calcule angle entre l'inclinaison entre l'axe de rotation de la Terre autour d'elle même et celui autour du Soleil'''
     return alpha*cos(2*pi*j/365) #Le jour n°0 correspond ainsi au solstice d'été, le 21 juin
@@ -197,22 +197,25 @@ def dpuiss(lat, lng, h, j, puiss):
     else :
         return 0
 
-
-
-
 def Temp(lat, lng ):
     jour = 0
+    liste_T_atm = []
     liste_T = []
     liste_t = []
-    T = 290
-    while (jour<400):
+    T_T = 280
+    T_atm = 255
+    while (jour<1200):
         t = 0
         #Formule fonctionnant la nuit :
         while t < 84600 :
             h = t//3600
-            liste_T.append(T)
+            liste_T.append(T_T)
+            liste_T_atm.append(T_atm)
             liste_t.append(t+jour*84600)
-            T = T + dt*(1-albedo(lat,lng))*(1+albedo(lat,lng)*Beta*(1-albedo(lat,lng)))*dpuiss(lat, lng,h, jour, puiss)/(capacite(lat,lng)*rho_eau*profondeur) - T**4*sigma*dt*(1-(1-albedo(lat,lng))*Beta)/(capacite(lat,lng)*rho_eau*profondeur)
+            dT_T = ((1- albedo(lat,lng))*dpuiss(lat,lng,h,jour,puiss)+sigma*(T_atm**4-T_T**4))*dt/(capacite(lat,lng)*rho_terre*Prof)
+            dT_atm = sigma*(epsilon*T_T**4-2*T_atm**4)*dt/(capa_atm*rho_atmosphère*epaisseur_atm)
+            T_T = T_T + dT_T
+            T_atm = T_atm + dT_atm
             t = t+dt
         jour = jour + 1
 
@@ -222,6 +225,5 @@ def Temp(lat, lng ):
     ax.set_xlabel('temps (s)', fontsize=15)
     ax.set_ylabel('Température à la surface (K)', fontsize=15)
     plt.show()
-
 
 Temp(45,4)

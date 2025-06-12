@@ -3,7 +3,7 @@ import numpy as np
 from math import cos, sin, pi
 
 #Constantes et paramètres
-dt = 10 #Pas de temps
+dt = 600 #Pas de temps
 rho_terre = 1000 #Masse volumique de l'eau
 rho_atmosphère = 1.2 #Masse volumique de l'atmosphère, en fonction de la concentration en les gazs
 capa_atm = 1000
@@ -200,9 +200,9 @@ def Temp(lat, lng ):
     jour = 0
     liste_T = []
     liste_t = []
-    T_T = 290
+    T_T = 280
     T_atm = 255
-    while (jour<400):
+    while (jour<1200):
         t = 0
         #Formule fonctionnant la nuit :
         while t < 84600 :
