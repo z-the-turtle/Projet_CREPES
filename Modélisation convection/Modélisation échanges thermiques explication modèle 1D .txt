@@ -1,7 +1,6 @@
 Modélisation échanges thermiques jour/nuit la plus simple en 1D, sans échange thermique.
 On considère dans ce modèle la Terre comme un segment de périmètre 2πR.
-Dans un premier temps, nous avons modélisé le déplacement des blocs d’air de la zone nuit vers la zone jour, c’est-à-dire d’un thermostat à un autre.
-Nous avons utilisé la loi de Newton (voir dans le dossier)
+Dans un premier temps, nous avons modélisé le déplacement des blocs d’air de la zone nuit vers la zone jour, c’est-à-dire d’un thermostat à un autre. Nous avons choisi de mettre un vent de 10m/s. 
 
 Modélisation échanges thermiques jour/nuit la plus simple en 1D, avec échange thermique.
 Ensuite, nous avons introduit la modélisation du transfert de chaleur en appliquant une forme discrète de la loi de Newton du refroidissement, à chaque pas de temps dt.
