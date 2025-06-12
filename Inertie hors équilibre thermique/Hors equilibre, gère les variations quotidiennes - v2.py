@@ -3,7 +3,7 @@ import numpy as np
 from math import cos, sin, pi
 
 
-profondeur = 0.5
+profondeur = 0.6
 rho_eau = 1000
 T = 290
 t = 0 #Heure du coucher du soleil, pris comme référence
