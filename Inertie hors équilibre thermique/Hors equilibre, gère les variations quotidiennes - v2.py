@@ -2,13 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from math import cos, sin, pi
 
-Ps = 1000
-A = 0.4 #Albedo de la Terre dans la longueur d'onde qu'elle émet, c'est à dire les infrarouges
-C_eau = 4185
-C_sable = 835
-C = C_eau*0.7 + C_sable*0.3
-Capacite_terre = 3300
-profondeur = 0.2
+
+profondeur = 0.5
 rho_eau = 1000
 T = 290
 t = 0 #Heure du coucher du soleil, pris comme référence
@@ -229,7 +224,7 @@ def Temp(lat, lng ):
             h = t//3600
             liste_T.append(T)
             liste_t.append(t+jour*84600)
-            T = T + dt*(1-A)*(1+A*Beta*(1-A))*p_sol(lat, lng,h, jour, puiss)/(capacite(lat,lng)*rho_eau*profondeur) - T**4*sigma*dt*(1-(1-A)*Beta)/(capacite(lat,lng)*rho_eau*profondeur)
+            T = T + dt*(1-albedo(lat,lng))*(1+albedo(lat,lng)*Beta*(1-albedo(lat,lng)))*p_sol(lat, lng,h, jour, puiss)/(capacite(lat,lng)*rho_eau*profondeur) - T**4*sigma*dt*(1-(1-albedo(lat,lng))*Beta)/(capacite(lat,lng)*rho_eau*profondeur)
             t = t+dt
         jour = jour + 1
 
