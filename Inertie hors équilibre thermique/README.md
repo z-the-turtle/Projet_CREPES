@@ -11,4 +11,4 @@ Il faudrait justifier les choix des valeurs de toutes les constantes, dont la pl
 V2: version avec l'ablédo suivant le même découpage que la capacité 
 (pas appel API car calcul avec moyenne sur une année)
 
-Temp_Terre_et_atm_dynamiques.py: version avec le système d'équations différentielles gérant l'effet de serre résolu
+Temp_Terre_et_atm_dynamiques.py: version avec le système d'équations différentielles gérant l'effet de serre résolu mais pas très précis : mélange entre visible et infrarouge.
