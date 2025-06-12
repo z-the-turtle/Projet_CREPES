@@ -7,7 +7,7 @@ profondeur = 0.5
 rho_eau = 1000
 T = 290
 t = 0 #Heure du coucher du soleil, pris comme référence
-dt = 10
+dt = 60
 sigma =5.67*10**(-8) #Constante de Stefan-Boltzmann
 Beta = 0.5 #Proportion de ce qui est renvoyé dans la terre par l'atmosphère, dans le rayonnemment infrarouge
 liste_T = []
@@ -200,16 +200,6 @@ def dpuiss(lat, lng, h, j, puiss):
         return 0
 
 
-def puiss_sol(lat, lng, h, j, puiss):
-    '''Calcule la puissance totale reçue par la pacelle de sol après les différents rebonds liés à l'effet de serre, mais sans prendre en compte la réémission propre au corps noir qu'est la Terre. On considère ici que l'albedo de l'atmosphère      est constant, égal à 0.8. On somme toutes les réfléxions et on a mis ici la somme de la série, qui est une série géométrique de raison strictement inférieure à 1.'''
-    p = (0.8*(1-albedo(lat,lng))*dpuiss (lat, lng, h, j, puiss))/(1-0.2*albedo(lat,lng))
-    return p
-
-def p_sol(lat, lng, h, j, puiss):
-    '''Calcule la puissance reçue par la Terre après réémission des infrarouges liées au corps noir, en supposant que la Terre est un système thermodynamique à l'équilibre, elle re-reçoit donc une partie de ce qu'elle a ré-émis.'''
-    Precue = puiss_sol(lat, lng, h, j, puiss)
-    p = (Precue*(1.2-0.4*albedo(lat,lng)))/(1-0.2*albedo(lat,lng))
-    return p
 
 
 def Temp(lat, lng ):
@@ -224,7 +214,7 @@ def Temp(lat, lng ):
             h = t//3600
             liste_T.append(T)
             liste_t.append(t+jour*84600)
-            T = T + dt*(1-albedo(lat,lng))*(1+albedo(lat,lng)*Beta*(1-albedo(lat,lng)))*p_sol(lat, lng,h, jour, puiss)/(capacite(lat,lng)*rho_eau*profondeur) - T**4*sigma*dt*(1-(1-albedo(lat,lng))*Beta)/(capacite(lat,lng)*rho_eau*profondeur)
+            T = T + dt*(1-albedo(lat,lng))*(1+albedo(lat,lng)*Beta*(1-albedo(lat,lng)))*dpuiss(lat, lng,h, jour, puiss)/(capacite(lat,lng)*rho_eau*profondeur) - T**4*sigma*dt*(1-(1-albedo(lat,lng))*Beta)/(capacite(lat,lng)*rho_eau*profondeur)
             t = t+dt
         jour = jour + 1
 
