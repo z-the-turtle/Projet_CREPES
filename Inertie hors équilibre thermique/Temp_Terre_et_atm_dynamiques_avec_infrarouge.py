@@ -12,7 +12,7 @@ Prof = 0.6 #Profondeur typique de variation de température de la terre sur une 
 sigma = 4.67*10**(-8) #Constante de Stefan-Boltzmann
 pi = np.pi
 puiss = np.array([1340, 0, 0])
-epsilon = 0.8 #Proportions des rayons infrarouges qui sont effectivement absorbés par l'atmosphère, on considère que le reste est perdu dans le vide intersidéral
+epsilon = 0.71 #Proportions des rayons infrarouges qui sont effectivement absorbés par l'atmosphère, on considère que le reste est perdu dans le vide intersidéral
 
 def convertir(degres):
     """permet de convertir une valeur en degrés en radiant"""
@@ -203,7 +203,7 @@ def Temp(lat, lng ):
     liste_T = []
     liste_t = []
     T_T = 280
-    T_atm = 255
+    T_atm = 0
     while (jour<1200):
         t = 0
         #Formule fonctionnant la nuit :
@@ -212,8 +212,8 @@ def Temp(lat, lng ):
             liste_T.append(T_T)
             liste_T_atm.append(T_atm)
             liste_t.append(t+jour*84600)
-            dT_T = ((1- albedo(lat,lng))*dpuiss(lat,lng,h,jour,puiss)+sigma*(T_atm**4-T_T**4))*dt/(capacite(lat,lng)*rho_terre*Prof)
-            dT_atm = sigma*(epsilon*T_T**4-2*T_atm**4)*dt/(capa_atm*rho_atmosphère*epaisseur_atm)
+            dT_T = ((1- albedo(lat,lng))*dpuiss(lat,lng,h,jour,puiss)+sigma*(epsilon*T_atm**4-T_T**4))*dt/(capacite(lat,lng)*rho_terre*Prof)
+            dT_atm = sigma*(epsilon*T_T**4-2*epsilon*T_atm**4)*dt/(capa_atm*rho_atmosphère*epaisseur_atm)
             T_T = T_T + dT_T
             T_atm = T_atm + dT_atm
             t = t+dt
@@ -226,4 +226,4 @@ def Temp(lat, lng ):
     ax.set_ylabel('Température à la surface (K)', fontsize=15)
     plt.show()
 
-Temp(45,4)
+Temp(45, 4)
