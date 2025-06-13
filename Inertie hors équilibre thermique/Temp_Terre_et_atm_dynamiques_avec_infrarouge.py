@@ -226,3 +226,5 @@ def Temp(lat, lng ):
     #plt.show()
 
 
+#Temp(45,4) - Température à St-Etienne
+
