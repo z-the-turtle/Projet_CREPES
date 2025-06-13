@@ -7,6 +7,12 @@ modele 1D complet final.py :
 Dans ce code on a introduit la modélisation du transfert de chaleur en appliquant une forme discrète de la loi de Newton du refroidissement, à chaque pas de temps dt.(voir Loi de Newton.png pour avoir la formule) 
 Cette formule permet de prendre en compte la convection dans notre modèle.
 
+courbes temperatures.py :
+Ce code permet de représenter la température de deux blocs d'air placés sur deux sols de températures différentes en fonction du temps. Comme dans les codes précédents, les blocs vont d'un sol à l'autre. On prend en compte les échanges thermiques.
+
+Schéma modèle 1D.pdf :
+Ce schéma explique globalement l'idée de la modélisation. ATTENTION il y des erreurs :la taille d'un bloc d'air est de 2000 km et non de 200 km, et T1=10°C.
+
 
 
 
