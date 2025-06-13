@@ -11,7 +11,7 @@ courbes temperatures.py :
 Ce code permet de représenter la température de deux blocs d'air placés sur deux sols de températures différentes en fonction du temps. Comme dans les codes précédents, les blocs vont d'un sol à l'autre. On prend en compte les échanges thermiques.
 
 Schéma modèle 1D.pdf :
-Ce schéma explique globalement l'idée de la modélisation. ATTENTION il y des erreurs :la taille d'un bloc d'air est de 2000 km et non de 200 km, et T1=10°C.
+Ce schéma explique globalement l'idée de la modélisation.
 
 
 
