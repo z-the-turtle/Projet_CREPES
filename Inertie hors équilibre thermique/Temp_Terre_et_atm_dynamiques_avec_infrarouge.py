@@ -226,4 +226,4 @@ def Temp(lat, lng ):
     ax.set_ylabel('Température à la surface (K)', fontsize=15)
     plt.show()
 
-Temp(45, 4)
+Temp(0,0)
