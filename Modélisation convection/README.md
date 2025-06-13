@@ -4,9 +4,9 @@ Modèle 1D sans échanges thermiques.py :
 
 Dans le Modèle 1D sans échanges thermiques.py, nous avons modélisé le déplacement des blocs d’air de la zone nuit vers la zone jour, c’est-à-dire d’un thermostat à un autre où chaque bloc d'air garde sa température initiale pendant le déplacement. On a représenté 18 blocs faisant chacun 2 km sont représentés. Le vent va à 10m/s, donc à chaque fois qu'un bloc passe de l'autre côté il s'est passé 55h30.
 
-modele 1D complet final.py :
+modele 1D convection.py :
 
-Dans ce code on a introduit la modélisation du transfert de chaleur en appliquant une forme discrète de la loi de Newton du refroidissement, à chaque pas de temps dt.(voir Loi de Newton.png pour avoir la formule) 
+Dans ce code on a introduit la modélisation du transfert de chaleur en appliquant une forme discrète de la loi de Newton du refroidissement, à chaque pas de temps dt.Voir Loi de Newton.png pour visualiser la formule.
 Cette formule permet de prendre en compte la convection dans notre modèle.
 
 courbes temperatures.py :
