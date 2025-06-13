@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 from fonction_découpage_capacité import colours, capacite
 import matplotlib.patches as mpatches
-
+from Temp_Terre_et_atm_dynamiques_avec_infrarouge import *
 
 
 # Fonction pour créer une carte du monde avec Cartopy
@@ -51,9 +51,9 @@ def onclick(event):
     if event.inaxes == ax:
 
         lon, lat = ax.projection.transform_point(event.xdata, event.ydata, ccrs.PlateCarree())
-        print(f'coordonnée: Longitude = {lon:.2f}, Latitude = {lat:.2f}')
+        print(f'coordonnée: Longitude = {lon:.2f}, Latitude = {lat:.2f}, Temperature = {Temp(lat, lon)}')
 
-        return lon, lat 
+    
 
 
 # Lier l'événement de clic à la fonction onclick
