@@ -1,0 +1,60 @@
+if lat >= 65 or lat <= -65:
+    T_0 = 247  # Zones polaires (Arctique en été ~0°C, Antarctique en hiver extrêmement froid)
+elif lng >= 160 or lng <= -140:
+    T_0 = 299  # Océan Pacifique 
+elif lng <= -120 and lng >= -140 and lat >= -65 and lat <= 50:
+    T_0 = 294  # Côte ouest de l’Amérique du Nord et Sud
+elif lng <= -80 and lng >= -120 and lat >= -65 and lat <= 20:
+    T_0 = 297  # Amérique centrale
+elif lng <= 140 and lng >= -60 and lat >= -65 and lat <= -30:
+    T_0 = 281  # Océan Austral 
+elif lng <= -60 and lng >= -80 and lat >= 10 and lat <= 40:
+    T_0 = 298  # Nord de l’Amérique du Sud 
+elif lng <= 0 and lng >= -60 and lat >= 30 and lat <= 65:
+    T_0 = 296  # Europe et nord de l’Afrique 
+elif lng <= -20 and lng >= -60 and lat >= 10 and lat <= 30:
+    T_0 = 299  # Afrique de l’Ouest et Amérique centrale 
+elif lng <= 10 and lng >= -60 and lat >= 0 and lat <= 10:
+    T_0 = 298  # Zone équatoriale océanique 
+elif lng <= 10 and lng >= -40 and lat >= -30 and lat <= 0:
+    T_0 = 290  # Océan Atlantique sud tropical 
+elif lng <= 120 and lng >= 40 and lat >= 10 and lat <= 20:
+    T_0 = 304  # Inde, Pakistan 
+elif lng <= 100 and lng >= 40 and lat >= -30 and lat <= 10:
+    T_0 = 296  # Asie du Sud-Est, Indonésie 
+elif lng <= 120 and lng >= 100 and lat >= -30 and lat <= -10:
+    T_0 = 291  # Nord de l’Australie 
+elif lng <= 140 and lng >= 120 and lat >= 0 and lat <= 30:
+    T_0 = 297  # Philippines, sud-est Chine 
+elif lng <= 160 and lng >= 140 and lat >= 0 and lat <= 60:
+    T_0 = 294  # Asie de l'Est
+elif lng <= -60 and lng >= -80 and lat <= 10 and lat >= 0:
+    T_0 = 299  # Amazonie équatoriale 
+elif lng <= -40 and lng >= -80 and lat <= 0 and lat >= -30:
+    T_0 = 293  # Brésil sud, Paraguay 
+elif lng <= -60 and lng >= -80 and lat <= -30 and lat >= -65:
+    T_0 = 279  # Patagonie, sud Chili 
+elif lng <= 40 and lng >= -20 and lat <= 20 and lat >= -10:
+    T_0 = 298  # Afrique équatoriale 
+elif lng <= 140 and lng >= 100 and lat <= 40 and lat >= 30:
+    T_0 = 298  # Chine orientale 
+elif lng <= 120 and lng >= 100 and lat <= 30 and lat >= 0:
+    T_0 = 299  # Sud-est asiatique 
+elif lng <= 160 and lng >= 100 and lat <= 0 and lat >= -10:
+    T_0 = 297  # Indonésie, nord Australie 
+elif lng <= 40 and lng >= 10 and lat <= -10 and lat >= -30:
+    T_0 = 302  # Afrique australe semi-aride 
+elif lng <= 60 and lng >= 0 and lat <= 40 and lat >= 20:
+    T_0 = 308  # Sahara, Moyen-Orient 
+elif lng <= 160 and lng >= 120 and lat <= -10 and lat >= -30:
+    T_0 = 296  # Australie intérieure 
+elif lng <= -80 and lng >= -120 and lat <= 50 and lat >= 20:
+    T_0 = 295  # États-Unis continentaux 
+elif lng <= 140 and lng >= 0 and lat <= 60 and lat >= 30:
+    T_0 = 295  # Europe de l'Est, Asie centrale 
+elif lng <= 60 and lng >= 40 and lat <= 40 and lat >= 20:
+    T_0 = 300  # Iran, Afghanistan 
+elif lng <= 100 and lng >= 40 and lat <= 40 and lat >= 20:
+    T_0 = 302  # Inde du Nord 
+else:
+    T_0 = 275  # Reste montagnes, hautes latitudes fraîches

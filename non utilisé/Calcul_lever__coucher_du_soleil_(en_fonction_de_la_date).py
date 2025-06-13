@@ -1,3 +1,4 @@
+######## Non necessaire car pris en compte differement dans le code final
 import ephem
 from datetime import datetime
 
