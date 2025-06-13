@@ -30,7 +30,7 @@ bloc_positions = np.arange(0, sol_width, bloc_width)
 bloc_temps = np.array([sol_temperature(x + bloc_width / 2) for x in bloc_positions], dtype=float)
 
 sol_y = 4
-y_air = sol_y + sol_height + 0.5
+y_air = sol_y + sol_height + 0.5   #0.5 représente l'espace entre l'air et le sol (la couche limite)
 
 fig, ax = plt.subplots(figsize=(14, 8))
 ax.set_xlim(0, sol_width)
