@@ -8,7 +8,6 @@ Il manque une initialisation du temps (en gros, définir à quoi correspond t = 
 Aussi, il prend en compte une valeur moyenne de la capacité thermique de la Terre, il faut en réalité prendre en compte la capacité thermique de la surface considérée pour le point sur lequel on est.
 Il faudrait y implémenter, une fois terminé, le modèle conducto-convectif.
 Il faudrait prendre en compte l'humidité de l'air en fonction de la zone géographique.
-Il faudrait justifier les choix des valeurs de toutes les constantes, dont la plupart ont été prises arbitrairement.
 
 evolution_temp_avec_albedo_capacite v2.py:
 
