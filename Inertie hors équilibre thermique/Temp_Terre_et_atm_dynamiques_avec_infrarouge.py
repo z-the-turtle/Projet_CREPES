@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from math import cos, sin, pi
-
 #Constantes et paramètres
 dt = 600 #Pas de temps
 rho_terre = 5500 #Masse volumique de la Terre
@@ -224,6 +223,6 @@ def Temp(lat, lng ):
     plt.plot(liste_t, liste_T)
     ax.set_xlabel('temps (s)', fontsize=15)
     ax.set_ylabel('Température à la surface (K)', fontsize=15)
-    plt.show()
+    #plt.show()
 
-Temp(45,4)
+
