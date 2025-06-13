@@ -4,22 +4,22 @@ import matplotlib.animation as animation
 import numpy as np
 
 # Paramètres généraux
-sol_width = 100
-sol_height = 2
-air_height = 10
+sol_width = 100  #largeur du sol
+sol_height = 2   #hauteur du sol
+air_height = 10  #hauteur des blocs d'air
 
-nb_blocs = 18  # <-- ici 18 blocs
+nb_blocs = 18  # ici 18 blocs
 bloc_width = sol_width / nb_blocs  # ≈ 5.5555
 
 vitesse = 1
 
-# Physique
-m = 1.0
-c = 1000.0
-A = 1.0
-h = 15.0
-dt = 1.0
-k = (h * A) / (m * c)
+# Grandeurs physiques
+m = 1.0      #masse du bloc d'air (kg)
+c = 1000.0   #capacité thermique massique (J/Kg/K)
+A = 1.0      #surface d'échange thermique (m²)
+h = 15.0     #coefficient d'échange thermique (W/m²·K)
+dt = 1.0     #pas de temps (s)
+k = (h * A) / (m * c)     # coefficient thermique combiné (en 1/s) pour la loi de Newton
 
 # Température du sol
 def sol_temperature(x):
