@@ -262,8 +262,8 @@ def Temp(lat, lng, date_debut="2022-01-01", nb_jours_simulation=365):
         t = 0
         while t < 84600:  # Une journée
             h = t // 3600
-            liste_T.append(T_T)
-            liste_T_atm.append(T_atm)
+            liste_T.append(T_T-273) #Conversion en degrés celsius
+            liste_T_atm.append(T_atm-273) #Conversion en degrés celsius
             liste_t.append(t + jour * 84600)
 
             dT_T = ((1 - albedo_local) * dpuiss(lat, lng, h, jour, puiss) +
@@ -282,7 +282,7 @@ def Temp(lat, lng, date_debut="2022-01-01", nb_jours_simulation=365):
     fig, ax = plt.subplots(figsize=(12, 6))
     plt.plot(np.array(liste_t) / 86400, liste_T, label='Température surface')
     ax.set_xlabel('Temps (jours)', fontsize=15)
-    ax.set_ylabel('Température à la surface (K)', fontsize=15)
+    ax.set_ylabel('Température à la surface (°C)', fontsize=15)
     ax.set_title(f'Simulation température - Lat:{lat}° Lng:{lng}° - Albédo NASA:{albedo_local:.3f}')
     plt.grid(True, alpha=0.3)
     plt.legend()

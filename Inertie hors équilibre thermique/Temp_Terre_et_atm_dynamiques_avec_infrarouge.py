@@ -202,7 +202,7 @@ def Temp(lat, lng ):
     liste_T = []
     liste_t = []
     T_T = 280
-    T_atm = 0
+    T_atm = 220
     while (jour<1200):
         t = 0
         #Formule fonctionnant la nuit :
@@ -223,8 +223,8 @@ def Temp(lat, lng ):
     plt.plot(liste_t, liste_T)
     ax.set_xlabel('temps (s)', fontsize=15)
     ax.set_ylabel('Température à la surface (K)', fontsize=15)
-    #plt.show()
+    plt.show()
 
 
-#Temp(45,4) - Température à St-Etienne
+Temp(26.83,30.80)
 
