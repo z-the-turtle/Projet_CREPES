@@ -7,9 +7,9 @@ capa_foret = 2400
 capa_terre = 750
 
 colours = {
-    capa_glace: "#98153A",   # bleu clair pour la glace
+    capa_glace: "#4F84A0",   # bleu clair pour la glace
     capa_eau: "#2D1EFF",     # bleu pour l'eau
-    capa_neige: "#F8F8FF",   # blanc neige
+    capa_neige: "#737A83",   # gris neige
     capa_desert: "#FFD700",  # jaune doré pour le désert
     capa_foret: "#228B22",   # vert forêt
     capa_terre: "#8B4513",   # marron pour la terre
@@ -47,6 +47,8 @@ def capacite(lat, lng):
         return capa_eau
     elif lng <= 160 and lng >= 140 and lat >= 0 and lat <= 60 :
         return capa_eau
+    elif lng <= 160 and lng >= 140 and lat<= -40 and lat >= -60 :
+        return capa_eau
     elif lng <= -60 and lng >= - 80 and lat<= 10 and lat >= 0 :
        return capa_foret
     elif lng <= -40 and lng >= - 80 and lat <= 0 and lat >= -30 :
@@ -61,11 +63,15 @@ def capacite(lat, lng):
         return capa_foret
     elif lng <= 160 and lng >= 100 and lat<= 0 and lat >= -10 :
         return capa_foret
+    elif lng <= 160 and lng >= 140 and lat<= -30 and lat >= -40 :
+        return capa_foret
     elif lng <= 40 and lng >= 10 and lat<= -10 and lat >= -30 :
         return capa_desert
     elif lng <= 60 and lng >= 0 and lat<= 40 and lat >= 20 :
         return capa_desert
     elif lng <= 160 and lng >= 120 and lat<= -10 and lat >= -30 :
+        return capa_desert
+    elif lng <= -0 and lng >= - 20 and lat<= 30 and lat >= 20 :
         return capa_desert
     elif lng <= -80 and lng >= - 120 and lat<= 50 and lat >= 20 :
         return capa_terre

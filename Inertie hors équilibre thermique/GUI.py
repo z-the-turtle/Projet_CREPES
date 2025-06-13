@@ -25,13 +25,14 @@ def plot_world_map():
 
 
 def color_zones(ax):
-    # choisir la resolution
-    res = 100
-    for lon in np.arange(-180, 180, 10):
+    # Use a finer grid to cover the whole map
+    res = 10
+    for lon in np.arange(-180, 180, res):
         for lat in np.arange(-90, 90, res):
             cap = capacite(lat + res/2, lon + res/2)  # Center of the cell
             color = colours.get(cap, '#FF00FF')  # Default to magenta if not found
-            print(f"lat={lat+res/2}, lon={lon+res/2}, cap={cap}, color={color}")
+            # Debug print can be commented out if not needed
+            # print(f"lat={lat+res/2}, lon={lon+res/2}, cap={cap}, color={color}")
             rect = mpatches.Rectangle(
                 (lon, lat), res, res,
                 facecolor=color, alpha=0.6,  # More visible
@@ -43,6 +44,7 @@ def color_zones(ax):
 # Créer la carte du monde
 fig, ax = plot_world_map()
 color_zones(ax)  # Color the zones
+ax.set_extent([-180, 180, -90, 90], crs=ccrs.PlateCarree())
 
 # Fonction pour obtenir les coordonnées des clics
 def onclick(event):
