@@ -1,5 +1,6 @@
+def temp_ini(lat,lng) :
 if lat >= 65 or lat <= -65:
-    T_0 = 247  # Zones polaires (Arctique en été ~0°C, Antarctique en hiver extrêmement froid)
+    T_0 = 247  # Zones polaires 
 elif lng >= 160 or lng <= -140:
     T_0 = 299  # Océan Pacifique 
 elif lng <= -120 and lng >= -140 and lat >= -65 and lat <= 50:
