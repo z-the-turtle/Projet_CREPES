@@ -196,14 +196,14 @@ def dpuiss(lat, lng, h, j, puiss):
     else :
         return 0
 
-def Temp(lat, lng ):
+def Temp(lat, lng, time):
     jour = 0
     liste_T_atm = []
     liste_T = []
     liste_t = []
     T_T = 280
     T_atm = 220
-    while (jour<1200):
+    while (jour<time):
         t = 0
         #Formule fonctionnant la nuit :
         while t < 84600 :
@@ -226,5 +226,5 @@ def Temp(lat, lng ):
     plt.show()
 
 
-Temp(26.83,30.80)
+Temp(26.83,30.80, 3)
 

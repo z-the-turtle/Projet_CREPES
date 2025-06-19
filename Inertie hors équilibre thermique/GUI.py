@@ -138,7 +138,7 @@ class WorldMapTempViewer:
             # Check if Temp function accepts time parameter
             try:
                 # Try with time parameter first
-                temp_values = [Temp(lat, lon, hour) for hour in t]
+                temp_values = [Temp(lat, lon, time) for time in t]
             except TypeError:
                 try:
                     # Try without time parameter
