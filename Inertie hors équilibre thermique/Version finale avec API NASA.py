@@ -15,6 +15,7 @@ sigma = 4.67*10**(-8)  # Constante de Stefan-Boltzmann
 pi = np.pi
 puiss = np.array([1340, 0, 0])
 epsilon = 0.71
+PHI = 0.409  # precession angle rad  (23.45 deg)
 
 # Cache pour stocker les albédos calculés par l'API NASA
 albedo_cache = {}
@@ -137,7 +138,7 @@ def albedo(lat, lng, date_debut="2022-01-01", duree_simulation=365):
 
 
 
-def capacite(lat, lng, t):
+def capacite(lat, lng, t=0):
     # Capacités thermiques (constantes)
     capa_glace = 2060
     capa_eau = 4185
@@ -213,22 +214,22 @@ def B_point(j):
     return alpha * cos(2 * pi * j / 365)
 
 def dpuiss(lat, lng, t):
-    annee = t%(24*3600*365)
-    j = (t - annee*(24*3600*365))%(24*3600)
-    h = (t - j*(24*3600))%24
     puiss = np.array([1340, 0, 0])
-    angle = PHI * cos(2 * pi * j / 365)
-    er = np.array([
-        cos(lng + ((h - 8) * 2 * pi / 24) - pi/2) * sin(angle + (pi / 2) - lat),
-        sin(angle + (pi / 2) - lat) * sin(lng + ((h - 8) * 2 * pi / 24) - pi/2),
-        cos((angle + (pi / 2) - lat))
-    ])
+    '''Puissance reçu par une maille avec er la projection du vecteur de la base sphérique dans la base cartesienne'''
+    # Calcul du jour et de l'heure à partir du temps t
+    j = t // 86400  # Jour (nombre entier de jours écoulés)
+    h = (t % 86400) / 3600  # Heure dans la journée courante
+
+    B = B_point(t)
+
+    er = np.array([cos(lng+((h - 8) * 2 * pi / 24)-pi/2) * sin(B + (pi / 2) - lat), sin(B + (pi / 2) - lat) * sin(lng+((h - 8) * 2 * pi / 24)-pi/2), cos((B + (pi / 2) - lat))])
 
     vec = np.dot(er, puiss)
 
-    if vec <= 0:
+    if vec <= 0 :
         return abs(vec)
-    else:
+
+    else :
         return 0
 
 def Temp(lat, lng, date_debut="2022-01-01", nb_jours_simulation=365):
@@ -255,32 +256,26 @@ def Temp(lat, lng, date_debut="2022-01-01", nb_jours_simulation=365):
         print(f"ERREUR: {e}")
         raise Exception(f"Impossible de continuer la simulation sans les données d'albédo NASA: {e}")
 
-    jour = 0
+    t = 0
     liste_T_atm = []
     liste_T = []
     liste_t = []
     T_T = 280
     T_atm = 250
 
-    while jour < nb_jours_simulation:
-        t = 0
-        while t < 84600:  # Une journée
-            h = t // 3600
-            liste_T.append(T_T-273) #Conversion en degrés celsius
-            liste_T_atm.append(T_atm-273) #Conversion en degrés celsius
-            liste_t.append(t + jour * 84600)
+    while t < temps_final:
+        dT_T = ((1 - albedo(lat, lng)) * dpuiss(lat, lng, t)
+                + sigma * (epsilon * T_atm ** 4 - T_T ** 4)) * dt / (
+                capacite(lat, lng) * rho_terre * Prof)
+        dT_atm = (sigma * (epsilon * T_T ** 4 - 2 * epsilon * T_atm ** 4)) * dt / (
+                capa_atm * rho_atmosphère * epaisseur_atm)
+        T_T += dT_T
+        T_atm += dT_atm
+        liste_T.append(T_T-273) #Conversion en degrés celsius
+        liste_T_atm.append(T_atm-273) #Conversion en degrés celsius
+        liste_t.append(t)
+        t += dt
 
-            dT_T = ((1 - albedo_local) * dpuiss(lat, lng, h, jour, puiss) +
-                   sigma * (epsilon * T_atm**4 - T_T**4)) * dt / (capacite(lat, lng) * rho_terre * Prof)
-            dT_atm = sigma * (epsilon * T_T**4 - 2 * epsilon * T_atm**4) * dt / (capa_atm * rho_atmosphère * epaisseur_atm)
-
-            T_T = T_T + dT_T
-            T_atm = T_atm + dT_atm
-            t = t + dt
-        jour = jour + 1
-
-        if jour % 30 == 0:  # Affichage du progrès
-            print(f"Jour {jour}/{nb_jours_simulation} - T_surface: {T_T:.1f}K")
 
     # Affichage des résultats
     fig, ax = plt.subplots(figsize=(12, 6))
