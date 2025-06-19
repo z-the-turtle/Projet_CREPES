@@ -17,7 +17,7 @@ vitesse = 1
 m = 1.0      #masse du bloc d'air (kg)
 c = 1000.0   #capacité thermique massique (J/Kg/K)
 A = 1.0      #surface d'échange thermique (m²)
-h = 15.0     #coefficient d'échange thermique (W/m²·K)
+h = 15.0     #coefficient d'échange thermique (W/(m²·K))
 dt = 1.0     #pas de temps (s)
 k = (h * A) / (m * c)     # coefficient thermique combiné (en 1/s) pour la loi de Newton
 
