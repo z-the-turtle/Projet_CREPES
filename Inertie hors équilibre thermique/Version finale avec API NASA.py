@@ -135,15 +135,16 @@ def albedo(lat, lng, date_debut="2022-01-01", duree_simulation=365):
     """
     return get_nasa_albedo(lat, lng, date_debut, duree_simulation)
 
-# Capacités thermiques (inchangées)
-capa_glace = 2060
-capa_eau = 4185
-capa_neige = 2092
-capa_desert = 835
-capa_foret = 2400
-capa_terre = 750
 
-def capacite(lat, lng):
+
+def capacite(lat, lng, t):
+    # Capacités thermiques (constantes)
+    capa_glace = 2060
+    capa_eau = 4185
+    capa_neige = 2092
+    capa_desert = 835
+    capa_foret = 2400
+    capa_terre = 750
     """Capacité thermique massique en fonction de la localisation"""
     if lat >= 65 or lat <= -65:
         return capa_glace

@@ -11,6 +11,10 @@ P0 = 1360  # W/m² – zenith irradiance at the top of the atmosphere
 PHI = 0.409  # precession angle rad  (23.45 deg)
 SIGMA = 5.67e-8  # W/m²K⁴ – Stefan-Boltzmann constant
 
+#Fonctions qui servent à déterminer des constantes
+
+
+
 
 def P_inc_solar(lat: float, long: float, t: float): ##puissance incidente
     """
