@@ -140,13 +140,14 @@ class WorldMapTempViewer:
                 # Try with time parameter first
                 temp_values = [Temp(lat, lon, time) for time in t]
             except TypeError:
-                try:
-                    # Try without time parameter
-                    temp_value = Temp(lat, lon)
-                    temp_values = [temp_value] * len(t)  # Constant temperature
-                except Exception as e:
-                    print(f"Error calculating temperature: {e}")
-                    temp_values = [20] * len(t)  # Default temperature
+                print(f"sytjsj")
+                # try:
+                #     # Try without time parameter
+                #     temp_value = Temp(lat, lon)
+                #     temp_values = [temp_value] * len(t)  # Constant temperature
+                # except Exception as e:
+                #     print(f"Error calculating temperature: {e}")
+                #     temp_values = [20] * len(t)  # Default temperature
             
             # Plot the temperature
             self.ax_temp.plot(t, temp_values, 'b-', linewidth=2)

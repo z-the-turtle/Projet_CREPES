@@ -198,25 +198,25 @@ def dpuiss(lat, lng, h, j, puiss):
 
 def Temp(lat, lng, time):
     jour = 0
-    liste_T_atm = []
     liste_T = []
-    liste_t = []
     T_T = 280
     T_atm = 220
-    while (jour<time):
+
+    while jour < time:
         t = 0
-        #Formule fonctionnant la nuit :
-        while t < 84600 :
-            h = t//3600
-            liste_T.append(T_T)
-            liste_T_atm.append(T_atm)
-            liste_t.append(t+jour*84600)
-            dT_T = ((1- albedo(lat,lng))*dpuiss(lat,lng,h,jour,puiss)+sigma*(epsilon*T_atm**4-T_T**4))*dt/(capacite(lat,lng)*rho_terre*Prof)
-            dT_atm = sigma*(epsilon*T_T**4-2*epsilon*T_atm**4)*dt/(capa_atm*rho_atmosphère*epaisseur_atm)
-            T_T = T_T + dT_T
-            T_atm = T_atm + dT_atm
-            t = t+dt
-        jour = jour + 1
+        while t < 84600:  # 24h en secondes
+            h = t // 3600
+            dT_T = ((1 - albedo(lat, lng)) * dpuiss(lat, lng, h, jour, puiss)
+                    + sigma * (epsilon * T_atm**4 - T_T**4)) * dt / (capacite(lat, lng) * rho_terre * Prof)
+            dT_atm = sigma * (epsilon * T_T**4 - 2 * epsilon * T_atm**4) * dt / (capa_atm * rho_atmosphère * epaisseur_atm)
+            T_T += dT_T
+            T_atm += dT_atm
+            liste_T.append(T_T - 273.15)  # conversion en °C
+            t += dt
+        jour += 1
+
+    return liste_T
+
 
     fig, ax = plt.subplots()
 
