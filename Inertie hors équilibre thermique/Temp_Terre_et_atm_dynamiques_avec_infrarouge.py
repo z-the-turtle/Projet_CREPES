@@ -232,13 +232,9 @@ def Temp(lat, lng, days):
     ax.set_xlabel('temps (s)', fontsize=15)
     ax.set_ylabel('Température à la surface (°C)', fontsize=15)
     #plt.show()
-<<<<<<< HEAD
     return liste_T
 
 
-=======
-    #return liste_T
->>>>>>> f811c415a56d2ddb3fecca04b254dd2dc123ec77
 
 # Exemple d'utilisation
 #Temp(45, 4, 600)
