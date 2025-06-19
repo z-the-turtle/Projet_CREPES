@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from math import cos, sin, pi
 #Constantes et paramètres
-dt = 600 #Pas de temps
+dt = 3600 #Pas de temps
 rho_terre = 5500 #Masse volumique de la Terre
 rho_atmosphère = 1.2 #Masse volumique de l'atmosphère, en fonction de la concentration en les gazs
 capa_atm = 1000
@@ -12,6 +12,7 @@ sigma = 4.67*10**(-8) #Constante de Stefan-Boltzmann
 pi = np.pi
 puiss = np.array([1340, 0, 0])
 epsilon = 0.71 #Proportions des rayons infrarouges qui sont effectivement absorbés par l'atmosphère, on considère que le reste est perdu dans le vide intersidéral
+PHI = 0.409  # precession angle rad  (23.45 deg)
 
 def convertir(degres):
     """permet de convertir une valeur en degrés en radiant"""
@@ -182,33 +183,37 @@ def B_point(j):
     '''Calcule angle entre l'inclinaison entre l'axe de rotation de la Terre autour d'elle même et celui autour du Soleil'''
     return alpha*cos(2*pi*j/365) #Le jour n°0 correspond ainsi au solstice d'été, le 21 juin
 
-def dpuiss(lat, lng, h, j, puiss):
-    '''Puissance reçu par une maille avec er la projection du vecteur de la base sphérique dans la base cartesienne'''
-    B = B_point(j)
+def dpuiss(lat: float, lng: float, t: float):
 
-    er = np.array([cos(lng+((h - 8) * 2 * pi / 24)-pi/2) * sin(B + (pi / 2) - lat), sin(B + (pi / 2) - lat) * sin(lng+((h - 8) * 2 * pi / 24)-pi/2), cos((B + (pi / 2) - lat))])
+    annee = t%(24*3600*365)
+    j = (t - annee*(24*3600*365))%(24*3600)
+    h = (t - j*(24*3600))%24
+    puiss = np.array([1340, 0, 0])
+
+    angle = PHI * cos(2 * pi * j / 365)
+    er = np.array([
+        cos(lng + ((h - 8) * 2 * pi / 24) - pi/2) * sin(angle + (pi / 2) - lat),
+        sin(angle + (pi / 2) - lat) * sin(lng + ((h - 8) * 2 * pi / 24) - pi/2),
+        cos((angle + (pi / 2) - lat))
+    ])
 
     vec = np.dot(er, puiss)
 
-    if vec <= 0 :
+    if vec <= 0:
         return abs(vec)
-
-    else :
+    else:
         return 0
 
 def Temp(lat, lng, days):
-    jour = 0
+    t = 0
     T_T = 280
     T_atm = 220
     liste_T = []
     liste_T_atm = []
     liste_t = []
 
-    while jour < days:
-        t = 0
-        while t < 86400:
-            h = t // 3600
-            dT_T = ((1 - albedo(lat, lng)) * dpuiss(lat, lng, h, jour, puiss)
+    while t < days*24*365*3600:
+            dT_T = ((1 - albedo(lat, lng)) * dpuiss(lat, lng,t)
                     + sigma * (epsilon * T_atm ** 4 - T_T ** 4)) * dt / (
                     capacite(lat, lng) * rho_terre * Prof)
             dT_atm = (sigma * (epsilon * T_T ** 4 - 2 * epsilon * T_atm ** 4)) * dt / (
@@ -217,9 +222,8 @@ def Temp(lat, lng, days):
             T_atm += dT_atm
             liste_T.append(T_T-273) #Conversion en degrés celsius
             liste_T_atm.append(T_atm-273) #Conversion en degrés celsius
-            liste_t.append(t + jour * 84600)
+            liste_t.append(t)
             t += dt
-        jour += 1
 
     fig, ax = plt.subplots()
 
@@ -227,11 +231,11 @@ def Temp(lat, lng, days):
     ax.set_xlabel('temps (s)', fontsize=15)
     ax.set_ylabel('Température à la surface (°C)', fontsize=15)
     plt.show()
-    return 0
+    return liste_T
 
 
 
-Temp(45,4,600)
+Temp(45,4,100)
 
 
 
