@@ -88,25 +88,23 @@ def capacite(lat: float, lng: float, t: float):
 
 
 
-def P_inc_solar(lat: float, lng: float, t: float):
-
-    annee = t%(24*3600*365)
-    j = (t - annee*(24*3600*365))%(24*3600)
-    h = (t - j*(24*3600))%24
+def P_inc_solar(lat, lng, t):
     puiss = np.array([1340, 0, 0])
+    '''Puissance reçu par une maille avec er la projection du vecteur de la base sphérique dans la base cartesienne'''
+    # Calcul du jour et de l'heure à partir du temps t
+    j = t // 86400  # Jour (nombre entier de jours écoulés)
+    h = (t % 86400) / 3600  # Heure dans la journée courante
 
-    angle = PHI * cos(2 * pi * j / 365)
-    er = np.array([
-        cos(lng + ((h - 8) * 2 * pi / 24) - pi/2) * sin(angle + (pi / 2) - lat),
-        sin(angle + (pi / 2) - lat) * sin(lng + ((h - 8) * 2 * pi / 24) - pi/2),
-        cos((angle + (pi / 2) - lat))
-    ])
+    B = B_point(t)
+
+    er = np.array([cos(lng+((h - 8) * 2 * pi / 24)-pi/2) * sin(B + (pi / 2) - lat), sin(B + (pi / 2) - lat) * sin(lng+((h - 8) * 2 * pi / 24)-pi/2), cos((B + (pi / 2) - lat))])
 
     vec = np.dot(er, puiss)
 
-    if vec <= 0:
+    if vec <= 0 :
         return abs(vec)
-    else:
+
+    else :
         return 0
 
 
