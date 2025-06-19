@@ -28,8 +28,8 @@ def on_map_click(event):
         return
     lon, lat = round(lon,2), round(lat,2)
     # Récupérer les températures
-    temp_vals = Temp(lat, lon, days=1)
-    t = np.linspace(0, 24, len(temp_vals))
+    temp_vals = Temp(lat, lon, days=365)
+    t = np.linspace(0, 24*365, len(temp_vals))
     # Tracer
     ax_temp.clear()
     ax_temp.plot(t, temp_vals, 'b-', linewidth=2)
@@ -37,7 +37,7 @@ def on_map_click(event):
     ax_temp.set_xlabel("Temps (heures)")
     ax_temp.set_ylabel("Température (°C)")
     ax_temp.grid(True, alpha=0.3)
-    ax_temp.set_xlim(0, 24)
+    ax_temp.set_xlim(0, 24*365)
     if len(set(temp_vals)) > 1:
         y_min, y_max = min(temp_vals), max(temp_vals)
         margin = (y_max - y_min) * 0.1
