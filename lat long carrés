@@ -1,24 +1,126 @@
 import numpy as np
+from datetime import datetime, timedelta
+import requests
 
-# Pas en radians
-step = 0.1
+# Cache local pour éviter de refaire les appels
+albedo_cache = {}
 
-# Intervalle latitude [-π/2, π/2]
-latitudes = np.arange(-np.pi/2, np.pi/2 + step, step)
+def get_albedo_estimation(latitude, longitude, start_date, end_date):
+    """Récupère l'estimation d'albédo depuis l'API NASA POWER"""
+    url = f"https://power.larc.nasa.gov/api/temporal/daily/point"
 
-# Intervalle longitude [-π, π]
-longitudes = np.arange(-np.pi, np.pi + step, step)
+    params = {
+        "parameters": "ALLSKY_SFC_SW_DWN,ALLSKY_SFC_SW_UP",
+        "community": "AG",
+        "longitude": longitude,
+        "latitude": latitude,
+        "start": start_date,
+        "end": end_date,
+        "format": "JSON"
+    }
 
-# Générer les carrés (chaque carré est défini par ses coins sud-ouest et nord-est)
-squares = []
+    try:
+        response = requests.get(url, params=params)
+        response.raise_for_status()
+        data = response.json()
 
-for lat in latitudes[:-1]:  # sauf le dernier pour éviter débordement
-    for lon in longitudes[:-1]:
-        square = {
-            'south_west': (lat, lon),
-            'north_east': (lat + step, lon + step)
-        }
-        squares.append(square)
+        # Extraire les données de rayonnement solaire
+        down_radiation = data['properties']['parameter']['ALLSKY_SFC_SW_DWN']
+        up_radiation = data['properties']['parameter']['ALLSKY_SFC_SW_UP']
 
-print(f"Nombre total de carrés : {len(squares)}")
-print("Exemple de carré :", squares[0])
+        # Calculer l'albédo pour chaque jour
+        albedo_estimation = {}
+        for date in down_radiation.keys():
+            if down_radiation[date] != 0 and down_radiation[date] is not None:
+                albedo_estimation[date] = up_radiation[date] / down_radiation[date]
+            else:
+                albedo_estimation[date] = None
+
+        return albedo_estimation
+    except Exception as e:
+        print(f"Erreur lors de la récupération des données NASA: {e}")
+        return None
+
+def get_nasa_albedo(lat, lng, date_debut="2022-01-01", duree_simulation_jours=365):
+    """
+    Récupère l'albédo moyen depuis l'API NASA pour une position donnée
+
+    Args:
+        lat: latitude en degrés
+        lng: longitude en degrés
+        date_debut: date de début au format "YYYY-MM-DD"
+        duree_simulation_jours: durée de la simulation en jours
+
+    Returns:
+        float: albédo moyen
+
+    Raises:
+        Exception: Si l'API NASA ne peut pas fournir de données valides
+    """
+    # Clé pour le cache
+    cache_key = f"{lat},{lng},{date_debut},{duree_simulation_jours}"
+
+    if cache_key in albedo_cache:
+        return albedo_cache[cache_key]
+
+    # Convertir les dates au format requis par l'API
+    date_debut_obj = datetime.strptime(date_debut, "%Y-%m-%d")
+    date_fin_obj = date_debut_obj + timedelta(days=duree_simulation_jours-1)
+
+    start_date_str = date_debut_obj.strftime("%Y%m%d")
+    end_date_str = date_fin_obj.strftime("%Y%m%d")
+
+    print(f"Récupération albédo NASA pour lat={lat}, lng={lng} du {start_date_str} au {end_date_str}")
+
+    # Appel à l'API
+    albedo_data = get_albedo_estimation(lat, lng, start_date_str, end_date_str)
+
+    if albedo_data is None:
+        raise Exception("Échec de récupération des données depuis l'API NASA POWER")
+
+    # Calculer la moyenne des albédos valides
+    valeurs_valides = [v for v in albedo_data.values() if v is not None and 0 <= v <= 1]
+
+    if not valeurs_valides:
+        raise Exception("Aucune donnée d'albédo valide trouvée dans la réponse de l'API NASA")
+
+    albedo_moyen = sum(valeurs_valides) / len(valeurs_valides)
+    # Limiter l'albédo entre 0 et 1
+    albedo_moyen = max(0, min(1, albedo_moyen))
+    print(f"Albédo NASA calculé: {albedo_moyen:.3f} (basé sur {len(valeurs_valides)} mesures)")
+
+    # Mettre en cache
+    albedo_cache[cache_key] = albedo_moyen
+    return albedo_moyen
+
+# Paramètres de la grille
+step_rad = 0.1
+latitudes = np.arange(-np.pi/2, np.pi/2, step_rad)
+longitudes = np.arange(-np.pi, np.pi, step_rad)
+
+# Période de simulation
+date_debut = "2022-01-01"
+duree_simulation_jours = 365
+
+# Résultats stockés ici
+grid_cells = []
+
+for lat in latitudes:
+    for lon in longitudes:
+        # Centre du carré
+        lat_centre_rad = lat + step_rad / 2
+        lon_centre_rad = lon + step_rad / 2
+
+        # Conversion en degrés
+        lat_deg = np.degrees(lat_centre_rad)
+        lon_deg = np.degrees(lon_centre_rad)
+
+        try:
+            albedo = get_nasa_albedo(lat_deg, lon_deg, date_debut, duree_simulation_jours)
+        except Exception as e:
+            print(f"[!] Erreur pour lat={lat_deg:.2f}, lon={lon_deg:.2f} : {e}")
+            albedo = None
+        })
+
+for cell in grid_cells[:3]:
+    print(cell)
