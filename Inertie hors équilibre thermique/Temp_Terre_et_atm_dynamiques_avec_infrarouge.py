@@ -235,6 +235,7 @@ def Temp(lat, lng, days):
     return liste_T
 
 
+    #return liste_T
 
 # Exemple d'utilisation
 #Temp(45, 4, 600)
