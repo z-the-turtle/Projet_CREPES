@@ -21,7 +21,7 @@ capa_terre = 750
 
 #Fonctions qui servent à déterminer des constantes
 
-def capacite(lat: float, lng: float, t: float):
+def capacite(lat: float, lng: float, t: float = 0):
     """Capacité thermique massique en fonction de la localisation"""
     if lat >= 65 or lat <= -65:
         return capa_glace

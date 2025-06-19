@@ -231,8 +231,8 @@ def Temp(lat, lng, days):
     plt.plot(liste_t, liste_T)
     ax.set_xlabel('temps (s)', fontsize=15)
     ax.set_ylabel('Température à la surface (°C)', fontsize=15)
-    plt.show()
-    return liste_T
+    #plt.show()
+    #return liste_T
 
 # Exemple d'utilisation
 Temp(45, 4, 600)
