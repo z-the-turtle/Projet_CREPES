@@ -196,11 +196,13 @@ def dpuiss(lat, lng, h, j, puiss):
     else :
         return 0
 
-def Temp(lat, lng, days=1):
+def Temp(lat, lng, days):
     jour = 0
     T_T = 280
     T_atm = 220
     liste_T = []
+    liste_T_atm = []
+    liste_t = []
 
     while jour < days:
         t = 0
@@ -213,21 +215,24 @@ def Temp(lat, lng, days=1):
                     capa_atm * rho_atmosphère * epaisseur_atm)
             T_T += dT_T
             T_atm += dT_atm
-            liste_T.append(T_T - 273.15)
+            liste_T.append(T_T-273) #Conversion en degrés celsius
+            liste_T_atm.append(T_atm-273) #Conversion en degrés celsius
+            liste_t.append(t + jour * 84600)
             t += dt
         jour += 1
-
-    return liste_T
-
 
     fig, ax = plt.subplots()
 
     plt.plot(liste_t, liste_T)
     ax.set_xlabel('temps (s)', fontsize=15)
-    ax.set_ylabel('Température à la surface (K)', fontsize=15)
-    #plt.show()
+    ax.set_ylabel('Température à la surface (°C)', fontsize=15)
+    plt.show()
+    return 0
 
 
-#Temp(26.83,30.80, 3)
+
+Temp(45,4,600)
+
+
 
 
