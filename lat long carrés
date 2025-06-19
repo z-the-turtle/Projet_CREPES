@@ -120,7 +120,6 @@ for lat in latitudes:
         except Exception as e:
             print(f"[!] Erreur pour lat={lat_deg:.2f}, lon={lon_deg:.2f} : {e}")
             albedo = None
-        })
 
 for cell in grid_cells[:3]:
     print(cell)
