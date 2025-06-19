@@ -226,5 +226,9 @@ def Temp(lat, lng, time):
     #plt.show()
 
 
+<<<<<<< Updated upstream
 #Temp(26.83,30.80, 3)
+=======
+Temp(45,4)
+>>>>>>> Stashed changes
 
