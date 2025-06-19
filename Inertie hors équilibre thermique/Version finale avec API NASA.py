@@ -212,13 +212,16 @@ def B_point(j):
     """Calcule l'angle d'inclinaison de la Terre"""
     return alpha * cos(2 * pi * j / 365)
 
-def dpuiss(lat, lng, h, j, puiss):
-    """Puissance reçue par une maille"""
-    B = B_point(j)
+def dpuiss(lat, lng, t):
+    annee = t%(24*3600*365)
+    j = (t - annee*(24*3600*365))%(24*3600)
+    h = (t - j*(24*3600))%24
+    puiss = np.array([1340, 0, 0])
+    angle = PHI * cos(2 * pi * j / 365)
     er = np.array([
-        cos(lng + ((h - 8) * 2 * pi / 24) - pi/2) * sin(B + (pi / 2) - lat),
-        sin(B + (pi / 2) - lat) * sin(lng + ((h - 8) * 2 * pi / 24) - pi/2),
-        cos((B + (pi / 2) - lat))
+        cos(lng + ((h - 8) * 2 * pi / 24) - pi/2) * sin(angle + (pi / 2) - lat),
+        sin(angle + (pi / 2) - lat) * sin(lng + ((h - 8) * 2 * pi / 24) - pi/2),
+        cos((angle + (pi / 2) - lat))
     ])
 
     vec = np.dot(er, puiss)

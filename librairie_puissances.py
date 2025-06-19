@@ -11,26 +11,103 @@ P0 = 1360  # W/m² – zenith irradiance at the top of the atmosphere
 PHI = 0.409  # precession angle rad  (23.45 deg)
 SIGMA = 5.67e-8  # W/m²K⁴ – Stefan-Boltzmann constant
 
+# Capacités thermiques (constantes)
+capa_glace = 2060
+capa_eau = 4185
+capa_neige = 2092
+capa_desert = 835
+capa_foret = 2400
+capa_terre = 750
+
 #Fonctions qui servent à déterminer des constantes
 
+def capacite(lat: float, lng: float, t: float):
+    """Capacité thermique massique en fonction de la localisation"""
+    if lat >= 65 or lat <= -65:
+        return capa_glace
+    elif lng >= 160 or lng <= -140:
+        return capa_eau
+    elif lng <= -120 and lng >= -140 and lat >= -65 and lat <= 50:
+        return capa_eau
+    elif lng <= -80 and lng >= -120 and lat >= -65 and lat <= 20:
+        return capa_eau
+    elif lng <= 140 and lng >= -60 and lat >= -65 and lat <= -30:
+        return capa_eau
+    elif lng <= -60 and lng >= -80 and lat >= 10 and lat <= 40:
+        return capa_eau
+    elif lng <= 0 and lng >= -60 and lat >= 30 and lat <= 65:
+        return capa_eau
+    elif lng <= -20 and lng >= -60 and lat >= 10 and lat <= 30:
+        return capa_eau
+    elif lng <= 10 and lng >= -60 and lat >= 0 and lat <= 10:
+        return capa_eau
+    elif lng <= 10 and lng >= -40 and lat >= -30 and lat <= 0:
+        return capa_eau
+    elif lng <= 120 and lng >= 40 and lat >= 10 and lat <= 20:
+        return capa_eau
+    elif lng <= 100 and lng >= 40 and lat >= -30 and lat <= 10:
+        return capa_eau
+    elif lng <= 120 and lng >= 100 and lat >= -30 and lat <= -10:
+        return capa_eau
+    elif lng <= 140 and lng >= 120 and lat >= 0 and lat <= 30:
+        return capa_eau
+    elif lng <= 160 and lng >= 140 and lat >= 0 and lat <= 60:
+        return capa_eau
+    elif lng <= -60 and lng >= -80 and lat <= 10 and lat >= 0:
+        return capa_foret
+    elif lng <= -40 and lng >= -80 and lat <= 0 and lat >= -30:
+        return capa_foret
+    elif lng <= -60 and lng >= -80 and lat <= -30 and lat >= -65:
+        return capa_foret
+    elif lng <= 40 and lng >= -20 and lat <= 20 and lat >= -10:
+        return capa_foret
+    elif lng <= 140 and lng >= 100 and lat <= 40 and lat >= 30:
+        return capa_foret
+    elif lng <= 120 and lng >= 100 and lat <= 30 and lat >= 0:
+        return capa_foret
+    elif lng <= 160 and lng >= 100 and lat <= 0 and lat >= -10:
+        return capa_foret
+    elif lng <= 40 and lng >= 10 and lat <= -10 and lat >= -30:
+        return capa_desert
+    elif lng <= 60 and lng >= 0 and lat <= 40 and lat >= 20:
+        return capa_desert
+    elif lng <= 160 and lng >= 120 and lat <= -10 and lat >= -30:
+        return capa_desert
+    elif lng <= -80 and lng >= -120 and lat <= 50 and lat >= 20:
+        return capa_terre
+    elif lng <= 140 and lng >= 0 and lat <= 60 and lat >= 30:
+        return capa_terre
+    elif lng <= 60 and lng >= 40 and lat <= 40 and lat >= 20:
+        return capa_terre
+    elif lng <= 100 and lng >= 40 and lat <= 40 and lat >= 20:
+        return capa_terre
+    else:
+        return capa_neige
 
 
 
-def P_inc_solar(lat: float, long: float, t: float): ##puissance incidente
-    """
-    Solar irradiance
-    """
-    day_decimal = t / 86400
 
-    t_hours = (t % 86400) / 3600.0
 
-    delta = PHI * np.sin(2 * np.pi * (day_decimal - 81.0) / 365)
+def P_inc_solar(lat: float, lng: float, t: float):
 
-    H = np.pi / 12 * (t_hours - 12.0)
+    annee = t%(24*3600*365)
+    j = (t - annee*(24*3600*365))%(24*3600)
+    h = (t - j*(24*3600))%24
+    puiss = np.array([1340, 0, 0])
 
-    sin_h = np.sin(lat) * np.sin(delta) + np.cos(lat) * np.cos(delta) * np.cos(H)
+    angle = PHI * cos(2 * pi * j / 365)
+    er = np.array([
+        cos(lng + ((h - 8) * 2 * pi / 24) - pi/2) * sin(angle + (pi / 2) - lat),
+        sin(angle + (pi / 2) - lat) * sin(lng + ((h - 8) * 2 * pi / 24) - pi/2),
+        cos((angle + (pi / 2) - lat))
+    ])
 
-    return np.where(sin_h > 0.0, P0 * sin_h, 0.0)
+    vec = np.dot(er, puiss)
+
+    if vec <= 0:
+        return abs(vec)
+    else:
+        return 0
 
 
 # Surface
