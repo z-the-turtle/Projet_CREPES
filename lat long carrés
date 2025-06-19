@@ -1,0 +1,24 @@
+import numpy as np
+
+# Pas en radians
+step = 0.1
+
+# Intervalle latitude [-π/2, π/2]
+latitudes = np.arange(-np.pi/2, np.pi/2 + step, step)
+
+# Intervalle longitude [-π, π]
+longitudes = np.arange(-np.pi, np.pi + step, step)
+
+# Générer les carrés (chaque carré est défini par ses coins sud-ouest et nord-est)
+squares = []
+
+for lat in latitudes[:-1]:  # sauf le dernier pour éviter débordement
+    for lon in longitudes[:-1]:
+        square = {
+            'south_west': (lat, lon),
+            'north_east': (lat + step, lon + step)
+        }
+        squares.append(square)
+
+print(f"Nombre total de carrés : {len(squares)}")
+print("Exemple de carré :", squares[0])
