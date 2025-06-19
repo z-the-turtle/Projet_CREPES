@@ -214,7 +214,7 @@ def Temp(lat, lng, days):
     temps_final = days * 86400  # Temps final en secondes
 
     while t < temps_final:
-        dT_T = ((1 - albedo(lat, lng)) * dpuiss(lat, lng, t, puiss)
+        dT_T = ((1 - albedo(lat, lng)) * dpuiss(lat, lng, t)
                 + sigma * (epsilon * T_atm ** 4 - T_T ** 4)) * dt / (
                 capacite(lat, lng) * rho_terre * Prof)
         dT_atm = (sigma * (epsilon * T_T ** 4 - 2 * epsilon * T_atm ** 4)) * dt / (
