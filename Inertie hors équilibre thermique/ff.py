@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import matplotlib.patches as mpatches
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from Temp_Terre_et_atm_dynamiques_avec_infrarouge import Temp
+
 
 # --- Modules personnalisés corrigés ---
 from fonction_découpage_capacité_couleurs import colours, capacite
@@ -12,33 +14,6 @@ from Temp_Terre_et_atm_dynamiques_avec_infrarouge import (
     albedo, dpuiss, dt, rho_terre, rho_atmosphère, capa_atm, epaisseur_atm,
     Prof, sigma, epsilon, puiss
 )
-
-def Temp(lat, lng, days=1):
-    """
-    Calcule la température de surface sur 'days' jours.
-    Renvoie une liste de températures en °C toutes les dt secondes.
-    """
-    T_T = 280  # K
-    T_atm = 220  # K
-    temps_steps = int(days * 86400 / dt)
-    temp_list = []
-
-    for step in range(temps_steps):
-        j = step * dt // 86400  # jour actuel
-        h = (step * dt % 86400) / 3600  # heure en décimal
-        dT_T = (
-            (1 - albedo(lat, lng)) * dpuiss(lat, lng, h, j, puiss)
-            + sigma * (epsilon * T_atm**4 - T_T**4)
-        ) * dt / (capacite(lat, lng) * rho_terre * Prof)
-        dT_atm = (
-            sigma * (epsilon * T_T**4 - 2 * epsilon * T_atm**4)
-        ) * dt / (capa_atm * rho_atmosphère * epaisseur_atm)
-
-        T_T += dT_T
-        T_atm += dT_atm
-        temp_list.append(T_T - 273.15)  # convertir en °C
-
-    return temp_list
 
 def color_zones(ax, res=10):
     """Colorie la carte selon capacite/colours."""
