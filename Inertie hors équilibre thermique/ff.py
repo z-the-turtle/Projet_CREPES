@@ -6,14 +6,7 @@ import cartopy.crs as ccrs
 import matplotlib.patches as mpatches
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from Temp_Terre_et_atm_dynamiques_avec_infrarouge import Temp
-
-
-# --- Modules personnalisés corrigés ---
 from fonction_découpage_capacité_couleurs import colours, capacite
-from Temp_Terre_et_atm_dynamiques_avec_infrarouge import (
-    albedo, dpuiss, dt, rho_terre, rho_atmosphère, capa_atm, epaisseur_atm,
-    Prof, sigma, epsilon, puiss
-)
 
 def color_zones(ax, res=10):
     """Colorie la carte selon capacite/colours."""
