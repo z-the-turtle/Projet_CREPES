@@ -223,8 +223,8 @@ def Temp(lat, lng, time):
     plt.plot(liste_t, liste_T)
     ax.set_xlabel('temps (s)', fontsize=15)
     ax.set_ylabel('Température à la surface (K)', fontsize=15)
-    plt.show()
+    #plt.show()
 
 
-Temp(26.83,30.80, 3)
+#Temp(26.83,30.80, 3)
 

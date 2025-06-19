@@ -132,7 +132,7 @@ class WorldMapTempViewer:
             self.ax_temp.clear()
             
             # Create time array (24 hours)
-            t = np.linspace(0, 24, 100)
+            t = np.linspace(0, 24, 3)
             
             # Calculate temperature values
             # Check if Temp function accepts time parameter
