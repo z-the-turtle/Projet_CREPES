@@ -29,15 +29,16 @@ def on_map_click(event):
     lon, lat = round(lon,2), round(lat,2)
     # Récupérer les températures
     temp_vals = Temp(lat, lon, days=365)
-    t = np.linspace(0, 24*365, len(temp_vals))
+    # L'axe X en jours (0 à 365)
+    t = np.linspace(0, 365, len(temp_vals))
     # Tracer
     ax_temp.clear()
     ax_temp.plot(t, temp_vals, 'b-', linewidth=2)
     ax_temp.set_title(f"Température à lat={lat}°, lon={lon}°")
-    ax_temp.set_xlabel("Temps (heures)")
+    ax_temp.set_xlabel("Temps (jours)")  # Modifié ici
     ax_temp.set_ylabel("Température (°C)")
     ax_temp.grid(True, alpha=0.3)
-    ax_temp.set_xlim(0, 24*365)
+    ax_temp.set_xlim(0, 365)  # Modifié ici
     if len(set(temp_vals)) > 1:
         y_min, y_max = min(temp_vals), max(temp_vals)
         margin = (y_max - y_min) * 0.1
@@ -73,7 +74,7 @@ canvas_map.get_tk_widget().pack(fill=tk.BOTH, expand=True)
 fig_temp = plt.Figure(figsize=(7,5), dpi=100)
 ax_temp = fig_temp.add_subplot(1,1,1)
 ax_temp.set_title("Cliquez sur la carte pour voir la température")
-ax_temp.set_xlabel("Temps (heures)")
+ax_temp.set_xlabel("Temps (heures)")  # Par défaut, au départ
 ax_temp.set_ylabel("Température (°C)")
 ax_temp.grid(True, alpha=0.3)
 canvas_temp = FigureCanvasTkAgg(fig_temp, master=frame_right)
