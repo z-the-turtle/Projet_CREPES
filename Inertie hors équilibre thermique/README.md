@@ -22,3 +22,6 @@ version avec l'ablédo suivant le même découpage que la capacité
 Temp_Terre_et_atm_dynamiques.py: 
 version avec le système d'équations différentielles gérant l'effet de serre résolu mais pas très précis : mélange entre visible et infrarouge.
 -> atmosphere transparent au visible et opaque a l'infrarouge.
+
+Temp_Terre_et_atm_dynamiques_avec_infrarouge.py: 
+Version précédente plus précise avec considération de l'infrarouge.
