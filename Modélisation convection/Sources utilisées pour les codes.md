@@ -9,7 +9,11 @@ Lien source des différentes valeurs :
     36e6 m 
 
 https://www.notre-planete.info/terre/chiffres_cle.php
-- vitesse : 10m/s
-https://meteo-parapente.com/#/
-- masse volumique de l'air : 1,225 kg/m3 à 15 °C
-https://fr.wikipedia.org/wiki/Masse_volumique_de_l%27air
+
+**- vitesse : 10m/s**
+
+    https://meteo-parapente.com/#/
+
+**- masse volumique de l'air : 1,225 kg/m3 à 15 °C**
+
+    https://fr.wikipedia.org/wiki/Masse_volumique_de_l%27air
