@@ -8,6 +8,7 @@
 import numpy as np
 import pandas as pd
 import numpy as np
+import requests
 from math import sqrt
 from datetime import datetime, timedelta
 
@@ -387,3 +388,5 @@ def P_em_atm_thermal_up(lat: float, long: float, t: float, T_atm:float):  ## pui
 def P_em_atm_thermal_down(lat: float, long: float, t: float, T_atm:float): ## puissance emise par atmosphère domaine infrarouge vers l'intérieur de la Terre
     '''->float'''
     return SIGMA * (T_atm**4)
+
+
