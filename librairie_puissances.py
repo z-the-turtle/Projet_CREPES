@@ -21,7 +21,7 @@ capa_terre = 750
 
 #Fonctions qui servent à déterminer des constantes
 
-def capacite(lat: float, lng: float, t: float = 0):
+def capacite(lat: float, lng: float, t: float = 0):  '''->float'''
     """Capacité thermique massique en fonction de la localisation"""
     if lat >= 65 or lat <= -65:
         return capa_glace
@@ -88,7 +88,7 @@ def capacite(lat: float, lng: float, t: float = 0):
 
 
 
-def P_inc_solar(lat:float, lng:float, t:float):
+def P_inc_solar(lat:float, lng:float, t:float): '''->float'''
     puiss = np.array([1340, 0, 0])
     '''Puissance reçu par une maille avec er la projection du vecteur de la base sphérique dans la base cartesienne'''
     # Calcul du jour et de l'heure à partir du temps t
@@ -109,12 +109,12 @@ def P_inc_solar(lat:float, lng:float, t:float):
 
 
 # Surface
-def P_abs_surf_solar(lat: float, long: float, t: float, Pinc: float): ##puissance absorbée par le sol
+def P_abs_surf_solar(lat: float, long: float, t: float, Pinc: float): '''->float''' ##puissance absorbée par le sol
     AbsSurf = albedo(lat,lng,t)
     return AbsSurf * Pinc
 
 
-def P_em_surf_thermal(lat: float, long: float, t: float, T: float): ##puissance émise par le sol dans les infrarouges
+def P_em_surf_thermal(lat: float, long: float, t: float, T: float):'''->float''' ##puissance émise par le sol dans les infrarouges
     return SIGMA * (T**4)
 
 
