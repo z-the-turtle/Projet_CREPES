@@ -62,7 +62,7 @@ def Temp(lat, lng, nb_jours_simulation=30):
 if __name__ == "__main__":
     try:
         print("=== Simulation avec API NASA ===")
-        Temp(48,7, nb_jours_simulation=1000)  # 500 jours seulement
+        Temp(45,4, nb_jours_simulation=1000)  # 500 jours seulement
 
     except Exception as e:
         print(f"Erreur lors de la simulation: {e}")

@@ -353,7 +353,7 @@ def P_inc_solar(lat:float, lng:float, t:float):
 
 # Surface
 def P_abs_surf_solar(lat: float, long: float, t: float, Pinc: float): ##puissance absorbée par le sol
-    AbsSurf = get_nasa_albedo(lat,lng)
+    AbsSurf = 1 - get_nasa_albedo(lat,lng)
     return AbsSurf * Pinc
 
 
