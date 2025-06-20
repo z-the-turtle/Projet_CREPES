@@ -9,3 +9,4 @@ dT_{atmo} = P_{convection} + \sigma(\mathbf{\epsilon}T_{Terre}^4-2\epsilon T_{at
 \end{cases}$$ 
 
 * P_{convection} est ici cédé à l'atmosphère (cf : Dossier "Modélisation convection"). $$\alpha$$ est l'albédo de la surface de la Terre considérée et $$\epsilon$$ est l'emissivité de l'atmosphère, c'est à dire la proportion des infrarouges qu'elle absorbe et la proportion qu'elle ré-émet (elle n'es pas considérée comme un corps noir mais comme un [corps gris (pages 4 à 7)](https://staff.univ-batna2.dz/sites/default/files/nabil_bessanane/files/partie-i_cours_rayonnement_generalitesdefinitions-m1erm.pdf))
+* (On remarquera que la fonction renvoie une liste des valeurs de températures très (très) longue et non pas un graphique des températures au cours du temps, si on veut modifier ça, on peut remplacer le "return liste_T" à la fin par un "return 0" et enlever le commentaire devant le plt.show)
