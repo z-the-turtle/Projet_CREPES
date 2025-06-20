@@ -9,7 +9,7 @@ from Temp_Terre_et_atm_dynamiques_avec_infrarouge import Temp
 from fonction_découpage_capacité_couleurs import colours, capacite
 
 def color_zones(ax, res=10):
-    """Colorie la carte selon capacite/colours."""
+    """Colorie la carte selon le découpage."""
     for lon in np.arange(-180, 180, res):
         for lat in np.arange(-90, 90, res):
             cap = capacite(lat + res/2, lon + res/2)
