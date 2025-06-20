@@ -1,35 +1,25 @@
-#Cette librairie propose une convention pour le nom des puissances surfaciques considérées, mais n'a pas vocation à être réutilisée telle quelle.
-# conventions:
-# lat: float (radian), 0 is at equator, -pi/2 is at south pole, and +pi/2 is at north pole
-# long: float (radian), 0 is at greenwich meridiant
-# t: float (s), 0 is at 00:00 (greenwich time) january 1, 365*24*60*60 is at the end of the year, (maybe use 365.25? no idea what is best, or maybe use UTC ?)
-
-
+import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-import numpy as np
-from math import sqrt
+from math import cos, sin, pi
+import requests
 from datetime import datetime, timedelta
 
-P0 = 1340  # W/m² – zenith irradiance at the top of the atmosphere
+# Constantes et paramètres
+dt = 600  # Pas de temps
+rho_terre = 5500  # Masse volumique de la Terre
+rho_atmosphère = 1.2  # Masse volumique de l'atmosphère
+capa_atm = 1000
+epaisseur_atm = 13000  # Epaisseur de l'atmosphère
+Prof = 0.6  # Profondeur typique de variation de température
+sigma = 5.67e-8  # CORRECTION: Constante de Stefan-Boltzmann (était 4.67*10**(-8))
+pi = np.pi
+puiss = np.array([1340, 0, 0])
+epsilon = 0.71
 PHI = 0.409  # precession angle rad  (23.45 deg)
-SIGMA = 5.67e-8  # W/m²K⁴ – Stefan-Boltzmann constant
-
-# Capacités thermiques (constantes)
-capa_glace = 2060
-capa_eau = 4185
-capa_neige = 2092
-capa_desert = 835
-capa_foret = 2400
-capa_terre = 750
-
-#Fonctions qui servent à déterminer des constantes
 
 # Cache pour stocker les albédos calculés par l'API NASA
 albedo_cache = {}
 
-
-# Fonction annexe utilisée dans la fonction get_nasa_albedo, qui fait appel à l'API de la NASA
 def get_albedo_estimation(latitude, longitude, start_date, end_date):
     """Récupère l'estimation d'albédo depuis l'API NASA POWER"""
     url = "https://power.larc.nasa.gov/api/temporal/daily/point"
@@ -96,8 +86,6 @@ def get_albedo_estimation(latitude, longitude, start_date, end_date):
         print(f"Erreur lors du traitement: {e}")
         return None
 
-
-#Fonction à appeler pour avoir l'albedo en un point précis de latitude et de longitude donnée. Fait appel à l'API de la NASA
 def get_nasa_albedo(lat, lng, date_debut="2022-01-01", duree_simulation_jours=365):
     """Récupère l'albédo moyen depuis l'API NASA pour une position donnée"""
     # Clé pour le cache
@@ -147,113 +135,24 @@ def get_nasa_albedo(lat, lng, date_debut="2022-01-01", duree_simulation_jours=36
     albedo_cache[cache_key] = albedo_moyen
     return albedo_moyen
 
+def convertir(degres):
+    """Permet de convertir une valeur en degrés en radians"""
+    rad = (degres * 2 * pi) / 360
+    return rad
 
-#Pour calculer l'albedo en un point de latitude et de longitude données, sans faire d'appel API, juste avec un fichier csv fourni ou rempli avec les données de l'API de la NASA
+alpha = convertir(23.5)  # angle Terre
+R = 6371000  # rayon de la Terre
 
-#Permet de transformer un fichier csv en un tableau dataframe propre, lisible en Python
-def charger_donnees_albedo(fichier_csv):
-    """
-    Charge les données d'albédo depuis le fichier CSV.
-
-    Args:
-        fichier_csv (str): Chemin vers le fichier CSV contenant les données d'albédo
-
-    Returns:
-        pandas.DataFrame: DataFrame contenant les données d'albédo
-    """
-    try:
-        df = pd.read_csv(fichier_csv)
-        # Nettoyer les en-têtes (supprimer les espaces)
-        df.columns = df.columns.str.strip()
-        return df
-    except Exception as e:
-        print(f"Erreur lors du chargement du fichier: {e}")
-        return None
-
-
-#Permet de calculer la distance entre deux points, en considérant la Terre localement plate pour des points assez rapprochés
-def distance_euclidienne(lat1, lon1, lat2, lon2):
-    """
-    Calcule la distance euclidienne entre deux points (approximation simple).
-    Pour une précision géographique plus élevée, utilisez la formule de Haversine.
-
-    Args:
-        lat1, lon1: Coordonnées du premier point
-        lat2, lon2: Coordonnées du second point
-
-    Returns:
-        float: Distance euclidienne
-    """
-    return sqrt((lat1 - lat2)**2 + (lon1 - lon2)**2)
-
-#Renvoie l'albdedo du point le  plus proche dans notre jeu de données par rapport au point fourni
-def obtenir_albedo(latitude, longitude, df_albedo):
-    """
-    Trouve l'albédo pour des coordonnées données.
-
-    Args:
-        latitude (float): Latitude recherchée
-        longitude (float): Longitude recherchée
-        df_albedo (pandas.DataFrame): DataFrame contenant les données d'albédo
-        methode (str): Méthode de recherche ('plus_proche' ou 'interpolation')
-
-    Returns:
-        dict: Dictionnaire contenant l'albédo et les métadonnées
-              {'albedo': float, 'albedo_std': float, 'distance': float,
-               'lat_trouve': float, 'lon_trouve': float, 'points_reussis': int}
-        None si aucune donnée n'est trouvée
-    """
-    if df_albedo is None or df_albedo.empty:
-        print("Aucune donnée disponible")
-        return None
-
-    # Calculer les distances pour tous les points
-    df_albedo = df_albedo.copy()
-    df_albedo['distance'] = df_albedo.apply(
-        lambda row: distance_euclidienne(latitude, longitude, row['latitude'], row['longitude']),
-        axis=1
-    )
-
-    # Trouver le point le plus proche
-    point_proche = df_albedo.loc[df_albedo['distance'].idxmin()]
-
-    return {
-        'albedo': point_proche['albedo'],
-        'albedo_std': point_proche['albedo_std'],
-        'distance': point_proche['distance'],
-        'lat_trouve': point_proche['latitude'],
-        'lon_trouve': point_proche['longitude'],
-        'points_reussis': point_proche['points_reussis'],
-        'points_total': point_proche['points_total']
-    }
-
-#Fonction à appeler, qui utilise les trois fonctions précédentes
-def rechercher_albedo_simple(latitude, longitude, fichier_csv='albedo_lat_lon_multisampled_3pts.csv'):
-    """
-    Fonction simplifiée pour rechercher l'albédo.
-
-    Args:
-        latitude (float): Latitude recherchée
-        longitude (float): Longitude recherchée
-        fichier_csv (str): Chemin vers le fichier CSV
-
-    Returns:
-        float: Valeur d'albédo du point le plus proche
-    """
-    df = charger_donnees_albedo(fichier_csv)
-    if df is None:
-        return None
-
-    resultat = obtenir_albedo(latitude, longitude, df)
-    return resultat['albedo'] if resultat else None
-
-#Exemple d'utilisation :
-# albedo_simple = rechercher_albedo_simple(0,0)
-# print(albedo_simple)
-
-
-def capacite(lat: float, lng: float, t: float = 0):
+def capacite(lat, lng, t=0):
     """Capacité thermique massique en fonction de la localisation"""
+    # Capacités thermiques (constantes)
+    capa_glace = 2060
+    capa_eau = 4185
+    capa_neige = 2092
+    capa_desert = 835
+    capa_foret = 2400
+    capa_terre = 750
+
     if lat >= 65 or lat <= -65:
         return capa_glace
     elif lng >= 160 or lng <= -140:
@@ -317,7 +216,7 @@ def capacite(lat: float, lng: float, t: float = 0):
 
 
 
-def P_inc_solar(lat:float, lng:float, t:float):
+def dpuiss(lat, lng, t):
     # Constantes
     S0 = 1361  # Constante solaire en W/m²
     obliquity = np.radians(23.44)  # Inclinaison axe Terre (en radians)
@@ -349,41 +248,58 @@ def P_inc_solar(lat:float, lng:float, t:float):
     else:
         return 0
 
+def Temp(lat, lng, date_debut="2022-01-01", nb_jours_simulation=30):
+    """Simulation de température avec albédo NASA"""
+    print(f"Début simulation pour lat={lat}, lng={lng}")
+    print(f"Date de début: {date_debut}")
+    print(f"Durée: {nb_jours_simulation} jours")
 
-# Surface
-def P_abs_surf_solar(lat: float, long: float, t: float, Pinc: float): ##puissance absorbée par le sol
-    AbsSurf = get_nasa_albedo(lat,lng)
-    return AbsSurf * Pinc
+    # Récupérer l'albédo depuis l'API NASA
+    try:
+        albedo_local = get_nasa_albedo(lat, lng, date_debut, nb_jours_simulation)
+        print(f"Albédo utilisé: {albedo_local:.3f}")
+    except Exception as e:
+        print(f"Erreur albédo NASA: {e}")
+        albedo_local = 0.3  # Valeur par défaut
+        print(f"Utilisation albédo par défaut: {albedo_local}")
 
+    T_T = 280
+    T_atm = 220
+    liste_T = []
+    liste_T_atm = []
+    liste_t = []
 
-def P_em_surf_thermal(lat: float, long: float, t: float, T: float): ##puissance émise par le sol dans les infrarouges
-    '''->float'''
-    return SIGMA * (T**4)
+    t = 0  # Temps en secondes depuis le 1er janvier minuit
+    temps_final = nb_jours_simulation * 86400  # Temps final en secondes
 
+    while t < temps_final:
+        dT_T = ((1 - albedo_local) * dpuiss(lat, lng, t)
+                + sigma * (epsilon * T_atm ** 4 - T_T ** 4)) * dt / (
+                capacite(lat, lng) * rho_terre * Prof)
+        dT_atm = (sigma * (epsilon * T_T ** 4 - 2 * epsilon * T_atm ** 4)) * dt / (
+                capa_atm * rho_atmosphère * epaisseur_atm)
+        T_T += dT_T
+        T_atm += dT_atm
+        liste_T.append(T_T-273) #Conversion en degrés celsius
+        liste_T_atm.append(T_atm-273) #Conversion en degrés celsius
+        liste_t.append(t)
+        t += dt
 
-def P_em_surf_conv(lat: float, long: float, t: float): ##pas existante/ en reflexion
+    fig, ax = plt.subplots()
+
+    plt.plot(liste_t, liste_T)
+    ax.set_xlabel('temps (s)', fontsize=15)
+    ax.set_ylabel('Température à la surface (°C)', fontsize=15)
+    plt.show()
     return 0
 
+# Exemple d'utilisation
+if __name__ == "__main__":
+    try:
+        print("=== Simulation avec API NASA ===")
+        # Test avec une simulation plus courte pour commencer
+        Temp(27,31, date_debut="2022-01-01", nb_jours_simulation=500)  # 500 jours seulement
 
-def P_em_surf_evap(lat: float, long: float, t: float): ##pas existante
-    return 0
-
-
-# atmosphere
-def P_abs_atm_solar(lat: float, long: float, t: float, Pinc: float): ## on considère l'amosphere transparente au visible
-    return 0
-
-
-def P_abs_atm_thermal(lat: float, long: float, t: float, T_T: float): ## puissance abrobé par l'atmosphère dans l'infrarouge
-    epsilon = 0.71 #Proportions des rayons infrarouges qui sont effectivement absorbés par l'atmosphère, on considère que le reste est perdu dans le vide intersidéral
-    return (P_em_surf_thermal(lat,lng,t,T_T)*epsilon)
-
-
-def P_em_atm_thermal_up(lat: float, long: float, t: float, T_atm:float):  ## puissance emise par atmosphère domaine infrarouge dans le vide intersidéral
-    '''->float'''
-    return SIGMA * (T_atm**4)
-
-
-def P_em_atm_thermal_down(lat: float, long: float, t: float, T_atm:float): ## puissance emise par atmosphère domaine infrarouge vers l'intérieur de la Terre
-    '''->float'''
-    return SIGMA * (T_atm**4)
+    except Exception as e:
+        print(f"Erreur lors de la simulation: {e}")
+        print("Vérifiez votre connexion internet et que l'API NASA POWER est accessible.")
