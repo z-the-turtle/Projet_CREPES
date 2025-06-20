@@ -15,7 +15,6 @@ epaisseur_atm = 13000  # Epaisseur de l'atmosphère
 Prof = 0.6  # Profondeur typique de variation de température
 sigma = 5.67e-8  # CORRECTION: Constante de Stefan-Boltzmann (était 4.67*10**(-8))
 pi = np.pi
-puiss = np.array([1340, 0, 0])
 epsilon = 0.71
 PHI = 0.409  # precession angle rad  (23.45 deg)
 
