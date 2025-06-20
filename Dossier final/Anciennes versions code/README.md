@@ -23,7 +23,7 @@ Temp_Terre_et_atm_dynamiques.py:
 version avec le système d'équations différentielles gérant l'effet de serre résolu mais pas très précis : mélange entre visible et infrarouge.
 -> atmosphere transparent au visible et opaque a l'infrarouge.
 
-Remarque: Tous ces codes ont une erreur dans le calcul du produit scanlaire dans la fonction dpuiss (corrigé dans la version finale)
-
 Temp_Terre_et_atm_dynamiques_avec_infrarouge.py: 
 Version précédente plus précise avec considération de l'infrarouge : l'atmosphère n'est plus opaque à 100% à l'infrarouge.
+
+Remarque: Tous ces codes ont une erreur dans le calcul du produit scanlaire dans la fonction dpuiss (corrigé dans la version finale)
