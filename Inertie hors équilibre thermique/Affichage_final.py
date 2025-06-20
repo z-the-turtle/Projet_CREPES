@@ -9,7 +9,7 @@ from Temp_Terre_et_atm_dynamiques_avec_infrarouge import Temp
 from fonction_découpage_capacité_couleurs import colours, capacite
 
 def color_zones(ax, res=10):
-    """Colorie la carte selon le découpage."""
+    """Colorie la carte selon capacite/colours."""
     for lon in np.arange(-180, 180, res):
         for lat in np.arange(-90, 90, res):
             cap = capacite(lat + res/2, lon + res/2)
@@ -80,7 +80,59 @@ canvas_temp = FigureCanvasTkAgg(fig_temp, master=frame_right)
 canvas_temp.draw()
 canvas_temp.get_tk_widget().pack(fill=tk.BOTH, expand=True)
 
-# Clic
+# === Zoom avec la molette ===
+def on_scroll(event):
+    if event.inaxes != ax_temp:
+        return
+    base_scale = 1.2
+    # Sens corrigé : molette vers le haut (écarter doigts) = zoom avant
+    scale_factor = 1 / base_scale if event.button == 'up' else base_scale
+
+    xlim = ax_temp.get_xlim()
+    ylim = ax_temp.get_ylim()
+    xdata = event.xdata
+    ydata = event.ydata
+
+    new_xlim = [
+        xdata - (xdata - xlim[0]) * scale_factor,
+        xdata + (xlim[1] - xdata) * scale_factor
+    ]
+    new_ylim = [
+        ydata - (ydata - ylim[0]) * scale_factor,
+        ydata + (ylim[1] - ydata) * scale_factor
+    ]
+
+    ax_temp.set_xlim(new_xlim)
+    ax_temp.set_ylim(new_ylim)
+    canvas_temp.draw()
+
+# === Pan (déplacement) avec clic + glisser ===
+pan_start = {'x': None, 'y': None, 'xlim': None, 'ylim': None}
+
+def on_button_press(event):
+    if event.inaxes != ax_temp:
+        return
+    pan_start['x'], pan_start['y'] = event.xdata, event.ydata
+    pan_start['xlim'] = ax_temp.get_xlim()
+    pan_start['ylim'] = ax_temp.get_ylim()
+
+def on_motion(event):
+    if event.inaxes != ax_temp or pan_start['x'] is None or pan_start['y'] is None:
+        return
+    dx = event.xdata - pan_start['x']
+    dy = event.ydata - pan_start['y']
+    ax_temp.set_xlim(pan_start['xlim'][0] - dx, pan_start['xlim'][1] - dx)
+    ax_temp.set_ylim(pan_start['ylim'][0] - dy, pan_start['ylim'][1] - dy)
+    canvas_temp.draw()
+
+def on_button_release(event):
+    pan_start['x'], pan_start['y'] = None, None
+
+# Connexion des événements
 fig_map.canvas.mpl_connect('button_press_event', on_map_click)
+fig_temp.canvas.mpl_connect('scroll_event', on_scroll)
+fig_temp.canvas.mpl_connect('button_press_event', on_button_press)
+fig_temp.canvas.mpl_connect('motion_notify_event', on_motion)
+fig_temp.canvas.mpl_connect('button_release_event', on_button_release)
 
 root.mainloop()
