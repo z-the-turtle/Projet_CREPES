@@ -11,21 +11,21 @@ sol_width = 36e6
 sol_height = 250e3
 air_height = 10e3
 
-nb_blocs = 18
+nb_blocs = 360
 bloc_width = sol_width / nb_blocs
 vitesse = 10
 
 # Physique
-m = 4e11
+m = (4e11)/20
 c = 1000.0
-A = 2000e3
-h = 15.0
-dt = 24*3600/100
+A = (2000e3)/20
+h = 10.0
+dt = 24*3600*100
 k = (h * A) / (m * c)
 
 # Température du sol
 def sol_temperature(x):
-    return -10 if x < sol_width / 2 else 20  # Nuit à -10°C, Jour à 20°C
+    return 10 if x < sol_width / 2 else 40  # Nuit à -10°C, Jour à 20°C
 
 # Initialisation
 bloc_positions = np.arange(0, sol_width, bloc_width)
@@ -52,11 +52,13 @@ arrows = []
 power_labels = []
 
 max_arrow_length = 100000
-scaling_factor = 0.08 #on sait pas trop
+scaling_factor = 0.08
 
 for i, x in enumerate(bloc_positions):
     temp = bloc_temps[i]
-    color_ratio = (temp + 10) / 30  # Échelle adaptée [-10 ; 20] → [0 ; 1]
+    color_ratio = np.clip((temp + 10) / 30, 0, 1)
+
+    #color_ratio = (temp + 10) / 30  # Échelle adaptée [-10 ; 20] → [0 ; 1]
     rect = patches.Rectangle((x, y_air), bloc_width, air_height,
                              facecolor=(color_ratio, 0.2, 1 - color_ratio), edgecolor='black')
     ax.add_patch(rect)
@@ -87,7 +89,9 @@ def update(frame):
         list_t_air.append(T_air)
         bloc_temps[i] = T_air_next
 
-        color_ratio = (T_air_next + 10) / 30
+        #color_ratio = (T_air_next + 10) / 30
+        color_ratio = np.clip((T_air_next + 10) / 30, 0, 1)
+
         color = (color_ratio, 0.2, 1 - color_ratio)
         blocs[i].set_x(bloc_positions[i])
         blocs[i].set_facecolor(color)
@@ -117,7 +121,7 @@ def update(frame):
     return blocs + labels + arrows + power_labels
 
 ani = animation.FuncAnimation(fig, update, frames=300, interval=20, blit=True)
-n_steps = 100000
+n_steps = 100
 def puissance_echange(t_heure):
 
     dt_sim = t_heure / n_steps
@@ -127,7 +131,7 @@ def puissance_echange(t_heure):
     for step in range(n_steps):
         positions_sim = (positions_sim + vitesse * dt_sim) % sol_width
         for i in range(nb_blocs):
-            x_center = (positions_sim[i] + bloc_width / 2) % sol_width
+            x_center = (positions_sim[i] + vitesse * dt_sim ) % sol_width
             T_sol = sol_temperature(x_center)
             T_air = temps_air_sim[i]
             T_air_next = T_air + k * (T_sol - T_air) * dt_sim
@@ -135,7 +139,7 @@ def puissance_echange(t_heure):
 
     # DEBUG ICI, après 100 étapes
     for i in range(nb_blocs):
-        x_center = (positions_sim[i] + bloc_width / 2) % sol_width
+        x_center = (positions_sim[i] + vitesse * dt_sim) % sol_width
         T_sol = sol_temperature(x_center)
         T_air = temps_air_sim[i]
         # print(f"Bloc {i} : T_air = {T_air:.2f}°C, T_sol = {T_sol:.2f}°C")
@@ -143,10 +147,10 @@ def puissance_echange(t_heure):
         puissances = [h * A * (T_sol - T_air) for i in range(nb_blocs)]
         #print(puissances)
 
-    return sum(puissances)
+    return sum(puissances)/360
 
 
-temps = np.linspace(0, dt*n_steps, 100)
+temps = np.linspace(0, dt*n_steps, n_steps)
 puissances = [puissance_echange(t) for t in temps]
 
 
@@ -166,6 +170,12 @@ for i in range (len(list_t_sol)):
     blab.append(i)
 for i in range (len(list_t_air)):
     bloub.append(i)
+
+plt.plot(blab, list_t_sol)
+plt.show()
+plt.plot(bloub, list_t_air)
+plt.show()
+
 
 plt.plot(blab, list_t_sol)
 plt.show()
