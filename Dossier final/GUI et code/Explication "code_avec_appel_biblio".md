@@ -1,2 +1,2 @@
 Ce code importe la bibliothèque avec nos fonctions et s'appuie grandement dessus. Il est donc nécessaire qu'il se trouve dans le même dossier que le fichier python librairie_puissances soit dans le même dossier (ou a minima dans le répertoire de travail de python) :
-* Premièrement, on définit les constantes utiles pour  le code. Les valeurs pour ces dernières sont justifiées [ici](https://github.com/z-the-turtle/Projet_CREPES/blob/main/Dossier%20final/Justification%20constantes.md)
+* Premièrement, on définit les constantes utiles pour  le code. Les valeurs pour ces dernières sont justifiées [ici](https://github.com/z-the-turtle/Projet_CREPES/blob/main/Dossier%20final/GUI%20et%20code/Justification%20constantes.md))
