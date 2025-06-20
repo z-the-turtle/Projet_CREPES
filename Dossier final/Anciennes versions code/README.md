@@ -29,4 +29,4 @@ Il tient compte du fait que les rayons n'arrivent pas avec la même incidence su
   
     Version précédente plus précise avec considération de l'infrarouge : l'atmosphère n'est plus opaque à 100% à l'infrarouge.
 
-**Remarque :** Tous ces codes ont une erreur dans le calcul du produit scanlaire dans la fonction dpuiss (corrigé dans la version finale)
+**Remarque :** Tous ces codes ont une erreur dans le calcul du produit scalaire dans la fonction dpuiss (corrigé dans la version finale)
