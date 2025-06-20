@@ -88,7 +88,7 @@ def capacite(lat: float, lng: float, t: float = 0):
 
 
 
-def P_inc_solar(lat, lng, t):
+def P_inc_solar(lat:float, lng:float, t:float):
     puiss = np.array([1340, 0, 0])
     '''Puissance reçu par une maille avec er la projection du vecteur de la base sphérique dans la base cartesienne'''
     # Calcul du jour et de l'heure à partir du temps t
@@ -110,7 +110,7 @@ def P_inc_solar(lat, lng, t):
 
 # Surface
 def P_abs_surf_solar(lat: float, long: float, t: float, Pinc: float): ##puissance absorbée par le sol
-    AbsSurf = 0.62
+    AbsSurf = albedo(lat,lng,t)
     return AbsSurf * Pinc
 
 
@@ -119,26 +119,26 @@ def P_em_surf_thermal(lat: float, long: float, t: float, T: float): ##puissance 
 
 
 def P_em_surf_conv(lat: float, long: float, t: float): ##pas existante/ en reflexion
-    return 18
+    return 0
 
 
 def P_em_surf_evap(lat: float, long: float, t: float): ##pas existante
-    return 86
+    return 0
 
 
 # atmosphere
 def P_abs_atm_solar(lat: float, long: float, t: float, Pinc: float): ## on considère l'amosphere transparente au visible
-    AbsAtmo = 0.22
-    return AbsAtmo * Pinc
+    return 0
 
 
 def P_abs_atm_thermal(lat: float, long: float, t: float, T: float): ## puissance abrobé par l'atmosphère dans l'infrarouge
-    return 358
+    epsilon = 0.71 #Proportions des rayons infrarouges qui sont effectivement absorbés par l'atmosphère, on considère que le reste est perdu dans le vide intersidéral
+    return (P_em_surf_thermal*epsilon)
 
 
-def P_em_atm_thermal_up(lat: float, long: float, t: float): ## pas existante pour nous
-    return 170
+def P_em_atm_thermal_up(lat: float, long: float, t: float, T_atm:float):  ## puissance emise par atmosphère domaine infrarouge dans le vide intersidéral
+    return SIGMA * (T_atm**4)
 
 
-def P_em_atm_thermal_down(lat: float, long: float, t: float): ## puissance emise par atmosphère domaine infrarouge
-    return 340
+def P_em_atm_thermal_down(lat: float, long: float, t: float, T_atm:float): ## puissance emise par atmosphère domaine infrarouge vers l'intérieur de la Terre
+    return SIGMA * (T_atm**4)
