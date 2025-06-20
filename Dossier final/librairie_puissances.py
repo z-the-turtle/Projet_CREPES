@@ -363,7 +363,7 @@ def P_em_surf_thermal(lat: float, long: float, t: float, T: float): ##puissance 
 
 
 def P_em_surf_conv(lat: float, long: float, t: float): ##pas existante/ en reflexion
-    return 0
+    return 200
 
 
 def P_em_surf_evap(lat: float, long: float, t: float): ##pas existante

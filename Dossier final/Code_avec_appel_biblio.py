@@ -41,7 +41,7 @@ def Temp(lat, lng, nb_jours_simulation=30):
         dT_T = ((1 - albedo_local) * P_inc_solar(lat, lng, t)
                 + sigma * (epsilon * T_atm ** 4 - T_T ** 4)) * dt / (
                 capacite(lat, lng) * rho_terre * Prof)
-        dT_atm = (sigma * (epsilon * T_T ** 4 - 2 * epsilon * T_atm ** 4)) * dt / (
+        dT_atm = (P_em_surf_conv(lat,lng, t) +sigma * (epsilon * T_T ** 4 - 2 * epsilon * T_atm ** 4)) * dt / (
                 capa_atm * rho_atmosphère * epaisseur_atm)
         T_T += dT_T
         T_atm += dT_atm
@@ -62,7 +62,7 @@ def Temp(lat, lng, nb_jours_simulation=30):
 if __name__ == "__main__":
     try:
         print("=== Simulation avec API NASA ===")
-        Temp(48,7, nb_jours_simulation=500)  # 500 jours seulement
+        Temp(48,7, nb_jours_simulation=1000)  # 500 jours seulement
 
     except Exception as e:
         print(f"Erreur lors de la simulation: {e}")
