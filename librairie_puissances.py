@@ -21,6 +21,125 @@ capa_terre = 750
 
 #Fonctions qui servent à déterminer des constantes
 
+# Cache pour stocker les albédos calculés par l'API NASA
+albedo_cache = {}
+
+def get_albedo_estimation(latitude, longitude, start_date, end_date):
+    """Récupère l'estimation d'albédo depuis l'API NASA POWER"""
+    url = "https://power.larc.nasa.gov/api/temporal/daily/point"
+
+    params = {
+        "parameters": "ALLSKY_SFC_SW_DWN,ALLSKY_SFC_SW_UP",
+        "community": "AG",
+        "longitude": longitude,
+        "latitude": latitude,
+        "start": start_date,
+        "end": end_date,
+        "format": "JSON"
+    }
+
+    try:
+        print(f"Requête API NASA: {url}")
+        print(f"Paramètres: {params}")
+
+        response = requests.get(url, params=params, timeout=30)
+        print(f"Status code: {response.status_code}")
+
+        if response.status_code != 200:
+            print(f"Erreur HTTP: {response.status_code}")
+            print(f"Réponse: {response.text[:500]}")
+            return None
+
+        data = response.json()
+        print("Réponse JSON reçue avec succès")
+
+        # Vérifier la structure de la réponse
+        if 'properties' not in data or 'parameter' not in data['properties']:
+            print("Structure de réponse inattendue")
+            print(f"Clés disponibles: {data.keys()}")
+            return None
+
+        # Extraire les données de rayonnement solaire
+        parameters = data['properties']['parameter']
+        if 'ALLSKY_SFC_SW_DWN' not in parameters or 'ALLSKY_SFC_SW_UP' not in parameters:
+            print("Paramètres de rayonnement non trouvés dans la réponse")
+            return None
+
+        down_radiation = parameters['ALLSKY_SFC_SW_DWN']
+        up_radiation = parameters['ALLSKY_SFC_SW_UP']
+
+        # Calculer l'albédo pour chaque jour
+        albedo_estimation = {}
+        for date in down_radiation.keys():
+            down_val = down_radiation[date]
+            up_val = up_radiation[date]
+
+            if down_val and up_val and down_val > 0:
+                albedo_val = up_val / down_val
+                # Limiter l'albédo entre 0 et 1
+                albedo_estimation[date] = max(0, min(1, albedo_val))
+            else:
+                albedo_estimation[date] = None
+
+        return albedo_estimation
+
+    except requests.RequestException as e:
+        print(f"Erreur de requête: {e}")
+        return None
+    except Exception as e:
+        print(f"Erreur lors du traitement: {e}")
+        return None
+
+def get_nasa_albedo(lat, lng, date_debut="2022-01-01", duree_simulation_jours=365):
+    """Récupère l'albédo moyen depuis l'API NASA pour une position donnée"""
+    # Clé pour le cache
+    cache_key = f"{lat},{lng},{date_debut},{duree_simulation_jours}"
+
+    if cache_key in albedo_cache:
+        print(f"Albédo trouvé dans le cache: {albedo_cache[cache_key]:.3f}")
+        return albedo_cache[cache_key]
+
+    # Limiter les requêtes à 1 an maximum pour éviter les timeouts
+    duree_limitee = min(duree_simulation_jours, 365)
+
+    # Convertir les dates au format requis par l'API
+    date_debut_obj = datetime.strptime(date_debut, "%Y-%m-%d")
+    date_fin_obj = date_debut_obj + timedelta(days=duree_limitee-1)
+
+    start_date_str = date_debut_obj.strftime("%Y%m%d")
+    end_date_str = date_fin_obj.strftime("%Y%m%d")
+
+    print(f"Récupération albédo NASA pour lat={lat}, lng={lng} du {start_date_str} au {end_date_str}")
+
+    # Appel à l'API
+    albedo_data = get_albedo_estimation(lat, lng, start_date_str, end_date_str)
+
+    if albedo_data is None:
+        print("Échec de récupération des données NASA, utilisation d'une valeur par défaut")
+        # Utiliser une valeur par défaut raisonnable
+        albedo_defaut = 0.3  # Valeur moyenne pour terre/végétation
+        albedo_cache[cache_key] = albedo_defaut
+        return albedo_defaut
+
+    # Calculer la moyenne des albédos valides
+    valeurs_valides = [v for v in albedo_data.values() if v is not None and 0 <= v <= 1]
+
+    if not valeurs_valides:
+        print("Aucune donnée d'albédo valide, utilisation d'une valeur par défaut")
+        albedo_defaut = 0.3
+        albedo_cache[cache_key] = albedo_defaut
+        return albedo_defaut
+
+    albedo_moyen = sum(valeurs_valides) / len(valeurs_valides)
+    # Limiter l'albédo entre 0.05 et 0.95 pour éviter les valeurs extrêmes
+    albedo_moyen = max(0.05, min(0.95, albedo_moyen))
+    print(f"Albédo NASA calculé: {albedo_moyen:.3f} (basé sur {len(valeurs_valides)} mesures)")
+
+    # Mettre en cache
+    albedo_cache[cache_key] = albedo_moyen
+    return albedo_moyen
+
+
 def capacite(lat: float, lng: float, t: float = 0):  '''->float'''
     """Capacité thermique massique en fonction de la localisation"""
     if lat >= 65 or lat <= -65:
@@ -110,7 +229,7 @@ def P_inc_solar(lat:float, lng:float, t:float): '''->float'''
 
 # Surface
 def P_abs_surf_solar(lat: float, long: float, t: float, Pinc: float): '''->float''' ##puissance absorbée par le sol
-    AbsSurf = albedo(lat,lng,t)
+    AbsSurf = get_nasa_albedo(lat,lng)
     return AbsSurf * Pinc
 
 
