@@ -15,26 +15,18 @@ epaisseur_atm = 13000  # Epaisseur de l'atmosphère
 Prof = 0.6  # Profondeur typique de variation de température
 sigma = 5.67e-8  # CORRECTION: Constante de Stefan-Boltzmann (était 4.67*10**(-8))
 pi = np.pi
-puiss = np.array([1340, 0, 0])
 epsilon = 0.71
 PHI = 0.409  # precession angle rad  (23.45 deg)
 
 # Cache pour stocker les albédos calculés par l'API NASA
 
-def Temp(lat, lng, date_debut="2022-01-01", nb_jours_simulation=30):
-    """Simulation de température avec albédo NASA"""
+def Temp(lat, lng, nb_jours_simulation=30):
+    """Simulation de température avec albédo NASA, sans appel API"""
     print(f"Début simulation pour lat={lat}, lng={lng}")
-    print(f"Date de début: {date_debut}")
     print(f"Durée: {nb_jours_simulation} jours")
 
-    # Récupérer l'albédo depuis l'API NASA
-    try:
-        albedo_local = get_nasa_albedo(lat, lng, date_debut, nb_jours_simulation)
-        print(f"Albédo utilisé: {albedo_local:.3f}")
-    except Exception as e:
-        print(f"Erreur albédo NASA: {e}")
-        albedo_local = 0.3  # Valeur par défaut
-        print(f"Utilisation albédo par défaut: {albedo_local}")
+    albedo_local = rechercher_albedo_simple(lat,lng)
+    print(f"Albédo utilisé: {albedo_local:.3f}")
 
     T_T = 280
     T_atm = 220
@@ -70,7 +62,7 @@ def Temp(lat, lng, date_debut="2022-01-01", nb_jours_simulation=30):
 if __name__ == "__main__":
     try:
         print("=== Simulation avec API NASA ===")
-        Temp(27,31, date_debut="2022-01-01", nb_jours_simulation=500)  # 500 jours seulement
+        Temp(48,7, nb_jours_simulation=500)  # 500 jours seulement
 
     except Exception as e:
         print(f"Erreur lors de la simulation: {e}")
