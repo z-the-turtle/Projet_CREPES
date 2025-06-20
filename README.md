@@ -1,8 +1,9 @@
 # Projet_CREPES
 Projet de Cap ECL
-Nom de groupe:
 
-la fonction decoupage capacité et albedo api sont prêtes a être utilisés dans le code , prennent en paramètres la latitude et la longitude.
+-finir bibliothèque de fonctions
+
+-faire la validation scientifique 
 
 dans ce document sont toutes les infos regroupées, vous pouvez rajouter vos sources :
 https://docs.google.com/document/d/1brJ2jxt_qV-7utBuGxu4oJdD93AJbg-jqgVYEiY2jeY/edit?usp=sharing
@@ -12,5 +13,3 @@ https://enisefr-my.sharepoint.com/:x:/g/personal/zahara_nasr_enise_fr/ERl2IKZVWd
  
 pour generer des sources type universitaire: https://www.mybib.com/
 
-
-Capacité thermique de la terre (en moyenne): celle de l'eau à 25°C
