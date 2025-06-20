@@ -7,7 +7,7 @@
 
 import numpy as np
 
-P0 = 1360  # W/m² – zenith irradiance at the top of the atmosphere
+P0 = 1340  # W/m² – zenith irradiance at the top of the atmosphere
 PHI = 0.409  # precession angle rad  (23.45 deg)
 SIGMA = 5.67e-8  # W/m²K⁴ – Stefan-Boltzmann constant
 
