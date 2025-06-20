@@ -32,4 +32,7 @@ Il tient compte du fait que les rayons n'arrivent pas avec la même incidence su
     Version précédente plus précise avec considération de l'infrarouge : l'atmosphère n'est plus opaque à 100% à l'infrarouge.
     Et correction du produit scalaire.
 
+**- Version_finale_avec_API_NASA.py :**
 
+    Version restructurée pour être comme dans la librairie.
+    ne fait pas encore appel au focntions de la librairie.
