@@ -24,4 +24,4 @@ version avec le système d'équations différentielles gérant l'effet de serre 
 -> atmosphere transparent au visible et opaque a l'infrarouge.
 
 Temp_Terre_et_atm_dynamiques_avec_infrarouge.py: 
-Version précédente plus précise avec considération de l'infrarouge.
+Version précédente plus précise avec considération de l'infrarouge : l'atmosphère n'est plus opaque à 100% à l'infrarouge.
