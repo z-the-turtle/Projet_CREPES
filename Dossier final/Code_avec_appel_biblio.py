@@ -59,11 +59,4 @@ def Temp(lat, lng, nb_jours_simulation=30):
     return 0
 
 # Exemple d'utilisation
-if __name__ == "__main__":
-    try:
-        print("=== Simulation avec API NASA ===")
-        Temp(45,4, nb_jours_simulation=1000)  # 500 jours seulement
-
-    except Exception as e:
-        print(f"Erreur lors de la simulation: {e}")
-        print("Vérifiez votre connexion internet et que l'API NASA POWER est accessible.")
+Temp(45,4, nb_jours_simulation=1000)  # 500 jours seulement
