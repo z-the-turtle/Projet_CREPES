@@ -28,7 +28,7 @@ def on_map_click(event):
         return
     lon, lat = round(lon,2), round(lat,2)
     # Récupérer les températures
-    temp_vals = Temp(lat, lon, date_debut="2022-01-01", days=365)
+    temp_vals = Temp(lat, lon, date_debut="2022-01-01", nb_jours_simulation=365)
     # L'axe X en jours (0 à 365)
     t = np.linspace(0, 365, len(temp_vals))
     # Tracer
