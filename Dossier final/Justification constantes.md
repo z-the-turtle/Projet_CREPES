@@ -11,4 +11,5 @@
  * [Masse volumique de la troposphère](https://education.toutcomment.com/article/troposphere-definition-et-caracteristiques-15086.html) 
  * [Capacité thermique de la troposphère](https://fr.wikipedia.org/wiki/Capacit%C3%A9_thermique_massique)(en faisant une moyenne pondérée des différents gaz présents).
  * [epsilon](https://web.lmd.jussieu.fr/~jldufres/Exposes/Duf_ERRE_psud_1.pdf) (émissivité de la Terre dans les infrarouges) (slide 27), on en déduit que   $\frac{1-\epsilon}{\epsilon}$ = $\frac{240}{390}$, c.à.d $\epsilon$ = 0.71
+ * [Lien de l'API de la NASA appelé pour l'albedo](https://power.larc.nasa.gov/api/temporal/daily/point)
  
