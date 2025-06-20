@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import matplotlib.patches as mpatches
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from Version_finale_avec_API_NASA import Temp
+from Code_avec_appel_biblio import Temp
 from fonction_découpage_capacité_couleurs import colours, capacite
 
 def color_zones(ax, res=10):
