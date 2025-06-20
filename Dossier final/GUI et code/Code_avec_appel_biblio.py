@@ -55,8 +55,8 @@ def Temp(lat, lng, nb_jours_simulation=30):
     plt.plot(liste_t, liste_T)
     ax.set_xlabel('temps (s)', fontsize=15)
     ax.set_ylabel('Température à la surface (°C)', fontsize=15)
-    plt.show()
-    return 0
+    # plt.show()
+    return liste_T
 
 # Exemple d'utilisation
-Temp(45,4, nb_jours_simulation=1000)  # 500 jours seulement
+# Temp(45,4, nb_jours_simulation=1000)  # 500 jours seulement
