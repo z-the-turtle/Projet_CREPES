@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 import numpy as np
 from math import sqrt
+from datetime import datetime, timedelta
 
 P0 = 1340  # W/m² – zenith irradiance at the top of the atmosphere
 PHI = 0.409  # precession angle rad  (23.45 deg)
@@ -213,18 +214,18 @@ def obtenir_albedo(latitude, longitude, df_albedo):
         axis=1
     )
 
-        # Trouver le point le plus proche
-        point_proche = df_albedo.loc[df_albedo['distance'].idxmin()]
+    # Trouver le point le plus proche
+    point_proche = df_albedo.loc[df_albedo['distance'].idxmin()]
 
-        return {
-            'albedo': point_proche['albedo'],
-            'albedo_std': point_proche['albedo_std'],
-            'distance': point_proche['distance'],
-            'lat_trouve': point_proche['latitude'],
-            'lon_trouve': point_proche['longitude'],
-            'points_reussis': point_proche['points_reussis'],
-            'points_total': point_proche['points_total']
-        }
+    return {
+        'albedo': point_proche['albedo'],
+        'albedo_std': point_proche['albedo_std'],
+        'distance': point_proche['distance'],
+        'lat_trouve': point_proche['latitude'],
+        'lon_trouve': point_proche['longitude'],
+        'points_reussis': point_proche['points_reussis'],
+        'points_total': point_proche['points_total']
+    }
 
 #Fonction à appeler, qui utilise les trois fonctions précédentes
 def rechercher_albedo_simple(latitude, longitude, fichier_csv='albedo_lat_lon_multisampled_3pts.csv'):
@@ -251,7 +252,7 @@ def rechercher_albedo_simple(latitude, longitude, fichier_csv='albedo_lat_lon_mu
 # print(albedo_simple)
 
 
-def capacite(lat: float, lng: float, t: float = 0):  '''->float'''
+def capacite(lat: float, lng: float, t: float = 0):
     """Capacité thermique massique en fonction de la localisation"""
     if lat >= 65 or lat <= -65:
         return capa_glace
@@ -350,12 +351,13 @@ def P_inc_solar(lat:float, lng:float, t:float):
 
 
 # Surface
-def P_abs_surf_solar(lat: float, long: float, t: float, Pinc: float): '''->float''' ##puissance absorbée par le sol
+def P_abs_surf_solar(lat: float, long: float, t: float, Pinc: float): ##puissance absorbée par le sol
     AbsSurf = get_nasa_albedo(lat,lng)
     return AbsSurf * Pinc
 
 
-def P_em_surf_thermal(lat: float, long: float, t: float, T: float):'''->float''' ##puissance émise par le sol dans les infrarouges
+def P_em_surf_thermal(lat: float, long: float, t: float, T: float): ##puissance émise par le sol dans les infrarouges
+    '''->float'''
     return SIGMA * (T**4)
 
 
@@ -377,9 +379,11 @@ def P_abs_atm_thermal(lat: float, long: float, t: float, T_T: float): ## puissan
     return (P_em_surf_thermal(lat,lng,t,T_T)*epsilon)
 
 
-def P_em_atm_thermal_up(lat: float, long: float, t: float, T_atm:float):  '''->float'''## puissance emise par atmosphère domaine infrarouge dans le vide intersidéral
+def P_em_atm_thermal_up(lat: float, long: float, t: float, T_atm:float):  ## puissance emise par atmosphère domaine infrarouge dans le vide intersidéral
+    '''->float'''
     return SIGMA * (T_atm**4)
 
 
-def P_em_atm_thermal_down(lat: float, long: float, t: float, T_atm:float): '''->float'''## puissance emise par atmosphère domaine infrarouge vers l'intérieur de la Terre
+def P_em_atm_thermal_down(lat: float, long: float, t: float, T_atm:float): ## puissance emise par atmosphère domaine infrarouge vers l'intérieur de la Terre
+    '''->float'''
     return SIGMA * (T_atm**4)
