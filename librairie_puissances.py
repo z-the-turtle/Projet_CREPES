@@ -136,9 +136,9 @@ def P_abs_atm_thermal(lat: float, long: float, t: float, T_T: float): ## puissan
     return (P_em_surf_thermal(lat,lng,t,T_T)*epsilon)
 
 
-def P_em_atm_thermal_up(lat: float, long: float, t: float, T_atm:float):  ## puissance emise par atmosphère domaine infrarouge dans le vide intersidéral
+def P_em_atm_thermal_up(lat: float, long: float, t: float, T_atm:float):  '''->float'''## puissance emise par atmosphère domaine infrarouge dans le vide intersidéral
     return SIGMA * (T_atm**4)
 
 
-def P_em_atm_thermal_down(lat: float, long: float, t: float, T_atm:float): ## puissance emise par atmosphère domaine infrarouge vers l'intérieur de la Terre
+def P_em_atm_thermal_down(lat: float, long: float, t: float, T_atm:float): '''->float'''## puissance emise par atmosphère domaine infrarouge vers l'intérieur de la Terre
     return SIGMA * (T_atm**4)
