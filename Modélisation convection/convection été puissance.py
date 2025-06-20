@@ -164,17 +164,6 @@ plt.grid(True)
 plt.tight_layout()
 plt.show()
 
-blab = []
-bloub = []
-for i in range (len(list_t_sol)):
-    blab.append(i)
-for i in range (len(list_t_air)):
-    bloub.append(i)
-
-plt.plot(blab, list_t_sol)
-plt.show()
-plt.plot(bloub, list_t_air)
-plt.show()
 
 
 plt.plot(blab, list_t_sol)
