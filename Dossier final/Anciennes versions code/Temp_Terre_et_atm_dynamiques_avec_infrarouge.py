@@ -254,4 +254,4 @@ def Temp(lat, lng, days):
 
 
 # Exemple d'utilisation
-Temp(27,31, 600)
+Temp(27,31, 600) #Egypte
