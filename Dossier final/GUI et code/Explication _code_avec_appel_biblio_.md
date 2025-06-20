@@ -5,5 +5,5 @@ Ce code importe la bibliothèque avec nos fonctions et s'appuie grandement dessu
 
 $$\begin{cases}
 dT_{Terre} = [(1-\alpha)P_{sol} +\sigma (\epsilon T_{atmo}^4-T_{Terre}^4)]\frac{dt}{C_{atmo}\rho_{Terre}Profondeur} \\
-dT_{atmo} = \sigma(\mathbf{\epsilon}T_{Terre}^4-2\epsilon T_{atmo}^4)\frac{dt}{C_{atmo}\rho_{atmo}e_{atm}}
+dT_{atmo} = P_convection + \sigma(\mathbf{\epsilon}T_{Terre}^4-2\epsilon T_{atmo}^4)\frac{dt}{C_{atmo}\rho_{atmo}e_{atm}}
 \end{cases}$$ 
