@@ -66,7 +66,7 @@ def get_nasa_albedo(lat, lng, date_debut="2022-01-01", duree_simulation_jours=36
     return albedo_moyen
 
 # Paramètres de grille
-step_rad = 0.1
+step_rad = 0.5
 latitudes = np.arange(-np.pi/2, np.pi/2, step_rad)
 longitudes = np.arange(-np.pi, np.pi, step_rad)
 
