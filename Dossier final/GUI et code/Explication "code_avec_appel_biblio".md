@@ -1,0 +1,1 @@
+Ce code importe la bibliothèque avec nos fonctions et s'appuie grandement dessus. Il est donc nécessaire qu'il se trouve dans le même dossier que le fichier python librairie_puissances soit dans le même dossier (ou a minima dans le répertoire de travail de python).
