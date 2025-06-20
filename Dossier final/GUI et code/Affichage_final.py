@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import matplotlib.patches as mpatches
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from Temp_Terre_et_atm_dynamiques_avec_infrarouge import Temp
+from Version_finale_avec_API_NASA import Temp
 from fonction_découpage_capacité_couleurs import colours, capacite
 
 def color_zones(ax, res=10):
@@ -28,7 +28,7 @@ def on_map_click(event):
         return
     lon, lat = round(lon,2), round(lat,2)
     # Récupérer les températures
-    temp_vals = Temp(lat, lon, days=365)
+    temp_vals = Temp(lat, lon, date_debut="2022-01-01", days=365)
     # L'axe X en jours (0 à 365)
     t = np.linspace(0, 365, len(temp_vals))
     # Tracer
