@@ -316,25 +316,36 @@ def capacite(lat: float, lng: float, t: float = 0):  '''->float'''
 
 
 
+def P_inc_solar(lat:float, lng:float, t:float):
+    # Constantes
+    S0 = 1361  # Constante solaire en W/m²
+    obliquity = np.radians(23.44)  # Inclinaison axe Terre (en radians)
 
+    # Temps
+    day = t / 86400  # Nombre de jours écoulés depuis t=0
+    hour = (t % 86400) / 3600  # Heure locale approximative
 
-def P_inc_solar(lat:float, lng:float, t:float): '''->float'''
-    puiss = np.array([1340, 0, 0])
-    '''Puissance reçu par une maille avec er la projection du vecteur de la base sphérique dans la base cartesienne'''
-    # Calcul du jour et de l'heure à partir du temps t
-    j = t // 86400  # Jour (nombre entier de jours écoulés)
-    h = (t % 86400) / 3600  # Heure dans la journée courante
+    # Coordonnées en radians
+    lat = np.radians(lat)
+    lng = np.radians(lng)
 
-    B = B_point(t)
+    # Angle horaire (rotation de la Terre)
+    omega = 2 * np.pi * (t % 86400) / 86400  # angle entre midi local et le moment t
 
-    er = np.array([cos(lng+((h - 8) * 2 * pi / 24)-pi/2) * sin(B + (pi / 2) - lat), sin(B + (pi / 2) - lat) * sin(lng+((h - 8) * 2 * pi / 24)-pi/2), cos((B + (pi / 2) - lat))])
+    # Jour de l’année (simplifié)
+    n = int(day % 365)
 
-    vec = np.dot(er, puiss)
+    # Déclinaison solaire (approximation de Cooper)
+    delta = np.radians(23.44) * np.sin(2 * np.pi * (284 + n) / 365)
 
-    if vec <= 0 :
-        return abs(vec)
+    # Calcul de l'angle zénithal
+    cos_theta = (np.sin(lat) * np.sin(delta) +
+                 np.cos(lat) * np.cos(delta) * np.cos(omega - lng))
 
-    else :
+    # Puissance reçue
+    if cos_theta > 0:
+        return S0 * cos_theta
+    else:
         return 0
 
 

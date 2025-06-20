@@ -8,7 +8,7 @@ rho_atmosphère = 1.2 #Masse volumique de l'atmosphère, en fonction de la conce
 capa_atm = 1000
 epaisseur_atm = 13000 #Epaisseur de l'atmosphère
 Prof = 0.6 #Profondeur typique de variation de température de la terre sur une journée
-sigma = 4.67*10**(-8) #Constante de Stefan-Boltzmann
+sigma = 5.67*10**(-8) #Constante de Stefan-Boltzmann
 pi = np.pi
 
 epsilon = 0.71 #Proportions des rayons infrarouges qui sont effectivement absorbés par l'atmosphère, on considère que le reste est perdu dans le vide intersidéral
@@ -184,26 +184,43 @@ def B_point(t):
     j = t / 86400  # 86400 secondes dans une journée
     return alpha*cos(2*pi*j/365) #Le jour n°0 correspond ainsi au solstice d'été, le 21 juin
 
+import numpy as np
+
 def dpuiss(lat, lng, t):
-    puiss = np.array([1340, 0, 0])
-    '''Puissance reçu par une maille avec er la projection du vecteur de la base sphérique dans la base cartesienne'''
-    # Calcul du jour et de l'heure à partir du temps t
-    j = t // 86400  # Jour (nombre entier de jours écoulés)
-    h = (t % 86400) / 3600  # Heure dans la journée courante
+    # Constantes
+    S0 = 1361  # Constante solaire en W/m²
+    obliquity = np.radians(23.44)  # Inclinaison axe Terre (en radians)
 
-    B = B_point(t)
+    # Temps
+    day = t / 86400  # Nombre de jours écoulés depuis t=0
+    hour = (t % 86400) / 3600  # Heure locale approximative
 
-    er = np.array([cos(lng+((h - 8) * 2 * pi / 24)-pi/2) * sin(B + (pi / 2) - lat), sin(B + (pi / 2) - lat) * sin(lng+((h - 8) * 2 * pi / 24)-pi/2), cos((B + (pi / 2) - lat))])
+    # Coordonnées en radians
+    lat = np.radians(lat)
+    lng = np.radians(lng)
 
-    vec = np.dot(er, puiss)
+    # Angle horaire (rotation de la Terre)
+    omega = 2 * np.pi * (t % 86400) / 86400  # angle entre midi local et le moment t
 
-    if vec <= 0 :
-        return abs(vec)
+    # Jour de l’année (simplifié)
+    n = int(day % 365)
 
-    else :
+    # Déclinaison solaire (approximation de Cooper)
+    delta = np.radians(23.44) * np.sin(2 * np.pi * (284 + n) / 365)
+
+    # Calcul de l'angle zénithal
+    cos_theta = (np.sin(lat) * np.sin(delta) +
+                 np.cos(lat) * np.cos(delta) * np.cos(omega - lng))
+
+    # Puissance reçue
+    if cos_theta > 0:
+        return S0 * cos_theta
+    else:
         return 0
 
+
 def Temp(lat, lng, days):
+
     T_T = 280
     T_atm = 220
     liste_T = []
@@ -231,10 +248,10 @@ def Temp(lat, lng, days):
     plt.plot(liste_t, liste_T)
     ax.set_xlabel('temps (s)', fontsize=15)
     ax.set_ylabel('Température à la surface (°C)', fontsize=15)
-    #plt.show()
-    return liste_T
+    plt.show()
+    return 0
 
 
 
 # Exemple d'utilisation
-#Temp(45, 4, 600)
+Temp(27,31, 600)

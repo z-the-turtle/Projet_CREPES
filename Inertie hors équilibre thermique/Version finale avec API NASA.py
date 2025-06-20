@@ -217,26 +217,34 @@ def capacite(lat, lng, t=0):
 
 
 def dpuiss(lat, lng, t):
-    """Puissance reçue par une maille"""
-    puiss_local = np.array([1340, 0, 0])
+    # Constantes
+    S0 = 1361  # Constante solaire en W/m²
+    obliquity = np.radians(23.44)  # Inclinaison axe Terre (en radians)
 
-    # Calcul du jour et de l'heure à partir du temps t
-    j = t / 86400  # Jour en valeur continue
-    h = (t % 86400) / 3600  # Heure dans la journée courante
+    # Temps
+    day = t / 86400  # Nombre de jours écoulés depuis t=0
+    hour = (t % 86400) / 3600  # Heure locale approximative
 
-    B = PHI * cos(2 * pi * j / 365)
+    # Coordonnées en radians
+    lat = np.radians(lat)
+    lng = np.radians(lng)
 
-    er = np.array([
-        cos(lng + ((h - 8) * 2 * pi / 24) - pi/2) * sin(B + (pi / 2) - lat),
-        sin(B + (pi / 2) - lat) * sin(lng + ((h - 8) * 2 * pi / 24) - pi/2),
-        cos((B + (pi / 2) - lat))
-    ])
+    # Angle horaire (rotation de la Terre)
+    omega = 2 * np.pi * (t % 86400) / 86400  # angle entre midi local et le moment t
 
-    vec = np.dot(er, puiss_local)
+    # Jour de l’année (simplifié)
+    n = int(day % 365)
 
-    # CORRECTION: Retourner 0 si vec <= 0 (pas de soleil), sinon vec
-    if vec > 0:
-        return vec
+    # Déclinaison solaire (approximation de Cooper)
+    delta = np.radians(23.44) * np.sin(2 * np.pi * (284 + n) / 365)
+
+    # Calcul de l'angle zénithal
+    cos_theta = (np.sin(lat) * np.sin(delta) +
+                 np.cos(lat) * np.cos(delta) * np.cos(omega - lng))
+
+    # Puissance reçue
+    if cos_theta > 0:
+        return S0 * cos_theta
     else:
         return 0
 
@@ -255,59 +263,42 @@ def Temp(lat, lng, date_debut="2022-01-01", nb_jours_simulation=30):
         albedo_local = 0.3  # Valeur par défaut
         print(f"Utilisation albédo par défaut: {albedo_local}")
 
-    t = 0
-    liste_T_atm = []
+    T_T = 280
+    T_atm = 220
     liste_T = []
+    liste_T_atm = []
     liste_t = []
-    T_T = 280  # Température initiale surface
-    T_atm = 250  # Température initiale atmosphère
 
-    temps_final = nb_jours_simulation * 86400
+    t = 0  # Temps en secondes depuis le 1er janvier minuit
+    temps_final = nb_jours_simulation * 86400  # Temps final en secondes
 
     while t < temps_final:
-        # CORRECTION: Utiliser albedo_local au lieu d'appeler albedo() à chaque itération
-        puissance_recue = dpuiss(lat, lng, t)
-
-        dT_T = ((1 - albedo_local) * puissance_recue
+        dT_T = ((1 - albedo_local) * dpuiss(lat, lng, t)
                 + sigma * (epsilon * T_atm ** 4 - T_T ** 4)) * dt / (
                 capacite(lat, lng) * rho_terre * Prof)
-
         dT_atm = (sigma * (epsilon * T_T ** 4 - 2 * epsilon * T_atm ** 4)) * dt / (
                 capa_atm * rho_atmosphère * epaisseur_atm)
-
         T_T += dT_T
         T_atm += dT_atm
-
-        liste_T.append(T_T - 273)  # Conversion en degrés celsius
-        liste_T_atm.append(T_atm - 273)  # Conversion en degrés celsius
+        liste_T.append(T_T-273) #Conversion en degrés celsius
+        liste_T_atm.append(T_atm-273) #Conversion en degrés celsius
         liste_t.append(t)
-
         t += dt
 
-    # Affichage des résultats
-    fig, ax = plt.subplots(figsize=(12, 6))
-    plt.plot(np.array(liste_t) / 86400, liste_T, label='Température surface', linewidth=2)
-    plt.plot(np.array(liste_t) / 86400, liste_T_atm, label='Température atmosphère', linewidth=2)
+    fig, ax = plt.subplots()
 
-    ax.set_xlabel('Temps (jours)', fontsize=15)
-    ax.set_ylabel('Température (°C)', fontsize=15)
-    ax.set_title(f'Simulation - Lat:{lat}° Lng:{lng}° - Albédo:{albedo_local:.3f}', fontsize=14)
-    plt.grid(True, alpha=0.3)
-    plt.legend()
-    plt.tight_layout()
-    #plt.show()
-
-    print(f"Température finale surface: {liste_T[-1]:.1f}°C")
-    print(f"Température finale atmosphère: {liste_T_atm[-1]:.1f}°C")
-
-    #return liste_T
+    plt.plot(liste_t, liste_T)
+    ax.set_xlabel('temps (s)', fontsize=15)
+    ax.set_ylabel('Température à la surface (°C)', fontsize=15)
+    plt.show()
+    return 0
 
 # Exemple d'utilisation
 if __name__ == "__main__":
     try:
         print("=== Simulation avec API NASA ===")
         # Test avec une simulation plus courte pour commencer
-        Temp(45, 4, date_debut="2022-06-01", nb_jours_simulation=500)  # 500 jours seulement
+        Temp(27,31, date_debut="2022-01-01", nb_jours_simulation=500)  # 500 jours seulement
 
     except Exception as e:
         print(f"Erreur lors de la simulation: {e}")
