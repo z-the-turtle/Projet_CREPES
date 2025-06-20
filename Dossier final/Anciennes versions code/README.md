@@ -6,7 +6,7 @@ Il tient compte du fait que les rayons n'arrivent pas avec la même incidence su
 
     Il tient donc de l'heure de la journée et de la saison en laquelle nous nous trouvons.
     Il manque une initialisation du temps (en gros, définir à quoi correspond t = 0).
-    Aussi, il prend en compte une valeur moyenne de la capacité thermique de la Terre, il faut en réalité prendre en compte la capacité thermique      de la surface considérée pour le point sur lequel on est.
+    Aussi, il prend en compte une valeur moyenne de la capacité thermique de la Terre, il faut en réalité prendre en compte la capacité thermique de la surface considérée pour le point sur lequel on est.
     Il faudrait y implémenter, une fois terminé, le modèle conducto-convectif.
     Il faudrait prendre en compte l'humidité de l'air en fonction de la zone géographique.
 
