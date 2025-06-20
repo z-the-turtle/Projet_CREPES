@@ -6,8 +6,7 @@ Le but du code final est de simuler sous forme animée le déplacement de blocs 
 
 **- modele 1D convection.py :**
 
-    Dans ce code on a introduit la modélisation du transfert de chaleur en appliquant une forme discrète de la loi de Newton du refroidissement, à chaque pas de temps dt.Voir Loi de Newton.png pour visualiser la formule.
-Cette formule permet de prendre en compte la convection dans notre modèle.
+    Dans ce code on a introduit la modélisation du transfert de chaleur en appliquant une forme discrète de la loi de Newton du refroidissement, à chaque pas de temps dt.Voir Loi de Newton.png pour visualiser la formule. Cette formule permet de prendre en compte la convection dans notre modèle.
 
 **- courbes temperatures.py :**
 
