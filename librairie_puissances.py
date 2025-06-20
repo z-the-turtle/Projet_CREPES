@@ -131,14 +131,14 @@ def P_abs_atm_solar(lat: float, long: float, t: float, Pinc: float): ## on consi
     return 0
 
 
-def P_abs_atm_thermal(lat: float, long: float, t: float, T: float): ## puissance abrobé par l'atmosphère dans l'infrarouge
+def P_abs_atm_thermal(lat: float, long: float, t: float, T: float): '''->float''' ## puissance abrobé par l'atmosphère dans l'infrarouge
     epsilon = 0.71 #Proportions des rayons infrarouges qui sont effectivement absorbés par l'atmosphère, on considère que le reste est perdu dans le vide intersidéral
     return (P_em_surf_thermal*epsilon)
 
 
-def P_em_atm_thermal_up(lat: float, long: float, t: float, T_atm:float):  ## puissance emise par atmosphère domaine infrarouge dans le vide intersidéral
+def P_em_atm_thermal_up(lat: float, long: float, t: float, T_atm:float):  '''->float'''## puissance emise par atmosphère domaine infrarouge dans le vide intersidéral
     return SIGMA * (T_atm**4)
 
 
-def P_em_atm_thermal_down(lat: float, long: float, t: float, T_atm:float): ## puissance emise par atmosphère domaine infrarouge vers l'intérieur de la Terre
+def P_em_atm_thermal_down(lat: float, long: float, t: float, T_atm:float): '''->float'''## puissance emise par atmosphère domaine infrarouge vers l'intérieur de la Terre
     return SIGMA * (T_atm**4)
