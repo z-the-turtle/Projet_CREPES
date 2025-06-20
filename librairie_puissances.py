@@ -24,6 +24,8 @@ capa_terre = 750
 # Cache pour stocker les albédos calculés par l'API NASA
 albedo_cache = {}
 
+
+# Fonction annexe utilisée dans la fonction get_nasa_albedo, qui fait appel à l'API de la NASA
 def get_albedo_estimation(latitude, longitude, start_date, end_date):
     """Récupère l'estimation d'albédo depuis l'API NASA POWER"""
     url = "https://power.larc.nasa.gov/api/temporal/daily/point"
@@ -90,6 +92,8 @@ def get_albedo_estimation(latitude, longitude, start_date, end_date):
         print(f"Erreur lors du traitement: {e}")
         return None
 
+
+#Fonction à appeler pour avoir l'albedo en un point précis de latitude et de longitude donnée. Fait appel à l'API de la NASA
 def get_nasa_albedo(lat, lng, date_debut="2022-01-01", duree_simulation_jours=365):
     """Récupère l'albédo moyen depuis l'API NASA pour une position donnée"""
     # Clé pour le cache
