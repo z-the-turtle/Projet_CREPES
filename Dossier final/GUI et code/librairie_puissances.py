@@ -8,13 +8,13 @@
 import numpy as np
 import pandas as pd
 import numpy as np
-import requests
 from math import sqrt
 from datetime import datetime, timedelta
 
 P0 = 1340  # W/m² – zenith irradiance at the top of the atmosphere
 PHI = 0.409  # precession angle rad  (23.45 deg)
 SIGMA = 5.67e-8  # W/m²K⁴ – Stefan-Boltzmann constant
+epsilon = 0.71 #Proportions des rayons infrarouges qui sont effectivement absorbés par l'atmosphère, on considère que le reste est perdu dans le vide intersidéral
 
 # Capacités thermiques (constantes)
 capa_glace = 2060
@@ -363,7 +363,7 @@ def P_em_surf_thermal(lat: float, long: float, t: float, T: float): ##puissance 
 
 
 def P_em_surf_conv(lat: float, long: float, t: float): ##pas existante/ en reflexion
-    return 200
+    return 0
 
 
 def P_em_surf_evap(lat: float, long: float, t: float): ##pas existante
@@ -376,17 +376,14 @@ def P_abs_atm_solar(lat: float, long: float, t: float, Pinc: float): ## on consi
 
 
 def P_abs_atm_thermal(lat: float, long: float, t: float, T_T: float): ## puissance abrobé par l'atmosphère dans l'infrarouge
-    epsilon = 0.71 #Proportions des rayons infrarouges qui sont effectivement absorbés par l'atmosphère, on considère que le reste est perdu dans le vide intersidéral
     return (P_em_surf_thermal(lat,lng,t,T_T)*epsilon)
 
 
 def P_em_atm_thermal_up(lat: float, long: float, t: float, T_atm:float):  ## puissance emise par atmosphère domaine infrarouge dans le vide intersidéral
     '''->float'''
-    return SIGMA * (T_atm**4)
+    return epsilon*SIGMA * (T_atm**4)
 
 
 def P_em_atm_thermal_down(lat: float, long: float, t: float, T_atm:float): ## puissance emise par atmosphère domaine infrarouge vers l'intérieur de la Terre
     '''->float'''
-    return SIGMA * (T_atm**4)
-
-
+    return epsilon*SIGMA * (T_atm**4)
