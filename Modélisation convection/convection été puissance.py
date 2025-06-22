@@ -25,7 +25,7 @@ k = (h * A) / (m * c)
 
 # Température du sol
 def sol_temperature(x):
-    return 10 if x < sol_width / 2 else 40  # Nuit à -10°C, Jour à 20°C
+    return 10 if x < sol_width / 2 else 40  # Nuit à 10°C, Jour à 40°C
 
 # Initialisation
 bloc_positions = np.arange(0, sol_width, bloc_width)
