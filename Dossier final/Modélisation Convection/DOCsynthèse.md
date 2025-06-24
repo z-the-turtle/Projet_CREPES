@@ -64,5 +64,5 @@ Avec :
 - Des hypothèses idéalisées sont prises (température uniforme par zone, pas d’échanges entre blocs, pas d’humidité, etc.).
 - On est passé de 18 blocs d'air à 360 blocs d'air pour éviter d'avoir une surface variable ( puisque certains blocs seraient entre les 2 sols ).
 
----
+
 
