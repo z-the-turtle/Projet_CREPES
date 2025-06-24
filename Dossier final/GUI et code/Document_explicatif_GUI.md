@@ -8,7 +8,7 @@ Une estimation de l’albédo a aussi été effectuée pour chaque zone, en fonc
 
 <details>
 <summary>  <b>Affichage à droite</b> </summary>
-Le graphique de la température est généré à partir de la fonction *Temp* dans le fichier *Code_avec_appel_biblio.py*. Pour générer un graphique il faut cliquer sur un endroit sur la carte à gauche pour qu'il prenne les valeurs de longitude et latitude renvoyées par cette action et les rentre ensuite dans la fonction *Temp*. Puis, le graphique est affiché à gauche de manière que l'on puisse zoomer et se déplacer sur la courbe. 
+Le graphique de la température est généré à partir de la fonction Temp dans le fichier Code_avec_appel_biblio.py. Pour générer un graphique il faut cliquer sur un endroit sur la carte à gauche pour qu'il prenne les valeurs de longitude et latitude renvoyées par cette action et les rentre ensuite dans la fonction *Temp*. Puis, le graphique est affiché à gauche de manière que l'on puisse zoomer et se déplacer sur la courbe. 
 </details>
 
 <details>
