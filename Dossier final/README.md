@@ -1,21 +1,15 @@
-**ICI** expliquer les fichiers/dossiers présents 
-
 **- Albédo :**
 
-    Différentes versions de traiter l'albédo
+Ce dossier regroupe plusieurs versions de modélisation de l’effet de l’albédo terrestre.
 
-**- Modélisation Convection :**
+**- Modélisation convection :**
 
-**- Anciennes versions code :**
+Contient les codes principaux de simulation de la convection atmosphérique. Ces fichiers implémentent la loi de Newton pour modéliser les échanges thermiques entre le sol (nuit/jour) et des blocs d’air se déplaçant à vitesse constante.
 
-    Anciennes versions du code principal qu'on utilise dans le GUI.
+**- Anciennes versions du code :**
+
+Ce dossier contient les anciennes versions du code principal utilisé dans le code principal.
 
 **- GUI et code :**
 
-
-
-Fichier zip regroupant 
-  - Document de synthèse (sources + explication projet)
-  - Code source + code librairie
-  - Pistes pour l'année suivante
-  - README pour chaque sous-dossier expliquant chaque fichier présent
+Ce dossier contient l’interface graphique (GUI) ainsi que le code complet du projet.

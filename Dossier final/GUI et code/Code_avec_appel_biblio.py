@@ -59,4 +59,4 @@ def Temp(lat, lng, nb_jours_simulation=30):
     return liste_T
 
 # Exemple d'utilisation
-# Temp(45,4, nb_jours_simulation=1000)  # 500 jours seulement
+# Temp(45,4, nb_jours_simulation=1000)  # simulation sur 1000 jours, au point de latitude 45 et de loongitude 4 (à côté du Puy en Velay)
