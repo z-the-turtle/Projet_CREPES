@@ -8,7 +8,7 @@ sol_width = 100
 sol_height = 2
 air_height = 5
 bloc_width = 5
-vitesse = 1  # pixels/frame
+vitesse = 1  
 nb_blocs = sol_width // bloc_width
 
 # Paramètres physiques
