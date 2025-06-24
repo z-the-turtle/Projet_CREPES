@@ -33,7 +33,8 @@ Visualiser :
 
 ## 🧮 Loi de Newton du refroidissement
 
-Le modèle repose sur la loi de Newton appliquée à chaque pas de temps (approche discrète) : TON IMAGE
+Le modèle repose sur la loi de Newton appliquée à chaque pas de temps (approche discrète) : ![image](https://github.com/user-attachments/assets/4afdb17e-582d-448b-b5ea-d3df37518f10)
+
 
 
 Avec :
