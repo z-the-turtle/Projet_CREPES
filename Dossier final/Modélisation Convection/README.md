@@ -39,7 +39,7 @@
 
 **- Explications.md**
 
-    Explication détaillée des codes, sources et modélisations.
+    Explication détaillée de notre modélisation de la convection.
 
 
     

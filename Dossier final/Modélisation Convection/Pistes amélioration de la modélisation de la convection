@@ -1,0 +1,8 @@
+Pistes d'amélioration : 
+1D :
+- Pour le sol visuel : création d'un gradient de température entre le sol de nuit et le sol de jour 
+- Vitesse variable en fonction du temps
+- h variable en fonction de l'espace
+2D : 
+- Choix de la vitesse des vents : prise en compte de l'API des vents et ne plus prendre la seule valeur de 10m/s
+- Adaptation 1D/2D
