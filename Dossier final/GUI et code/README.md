@@ -1,7 +1,7 @@
 **- Affichage_final.py :**
 
-        Interface d'utilisateur qui affiche une carte du monde interactif, l'utilisateur clique dessus pour obtenir une graphique qui affiche l'évolution de la température au cours d'un an.
-        modules à installer:
+        Interface d'utilisateur qui affiche une carte du monde intéractive, l'utilisateur clique dessus pour obtenir un graphique qui affiche l'évolution de la température au cours d'un an.
+        Modules à installer:
         pip install requests
         pip install pandas
         pip install cartopy
@@ -12,11 +12,11 @@
 
 **- Explication_code_avec_appel_biblio.md :** 
 
-        Explication et détails généraux du code **Code_avec_appel_biblio.py**.
+        Explication et détails généraux du code *Code_avec_appel_biblio.py*.
 
 **- justification constantes.md :** 
   
-        Validation scientifique du code **Code_avec_appel_biblio.py**.
+        Validation scientifique du code *Code_avec_appel_biblio.py*.
 
 **- albedo_lat_lon_multisampled_3pts.csv :** 
   
@@ -24,15 +24,16 @@
 
 **- fonction_découpage_capacité_couleurs.py :**
 
-        Cette fonction permet de découper le monde en des zones avec des capacitéc calorifiques différentes (selon le longiude et la latitude), ces capacités calorifiques sont également assignés des couleurs pour permettre le traçage sur la carte du monde dans le GUI.
+        Cette fonction permet de découper le monde en des zones avec des capacités calorifiques différentes (selon la longitude et la latitude), ces capacités calorifiques sont également assignés des couleurs pour permettre le traçage sur la carte du monde dans le GUI.
 
 **- imageterreaveclatlong.jpg :**
 
-        Cette image de la carte du monde avec les lignes de latitude et longitude est utilisé dans l'affichage du GUI pour la carte interactive. 
+        Cette image de la carte du monde avec les lignes de latitude et longitude est utilisée dans l'affichage du GUI pour la carte intéractive. 
+        
 **- librairie_puissances.py :**
 
-        Bibliothèque regroupant les différents fonctions de calcul utilisées dans le modèle
+        Bibliothèque regroupant les différentes fonctions de calcul utilisées dans le modèle.
 
 **- Document_explicatif_GUI.md :**
 
-        Mode d'emploi du GUI et explication de ses différentes fonctionnalités
+        Mode d'emploi du GUI et explication de ses différentes fonctionnalités.
