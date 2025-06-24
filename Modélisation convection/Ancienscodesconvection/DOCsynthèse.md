@@ -13,6 +13,7 @@ Modèle :
     - En hiver : nuit = -10 °C, jour = 20 °C
     - En été  : nuit = 10 °C,  jour = 40 °C
     - Ce sont des valeurs prise d'un autre groupe grâce au rayonnement solaire
+    - La difference de température jour nuit est de 30 °C dans les 2 cas, donc on observe les même effets de convection 
 - Le côté gauche de la figure correspond à la face nocturne de la Terre,
   le côté droit correspond à la face ensoleillée.
 
