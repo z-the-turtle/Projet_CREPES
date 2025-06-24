@@ -18,7 +18,8 @@ dT_{atmo} = P_{convection} + \sigma(\mathbf{\epsilon}T_{Terre}^4-2\epsilon T_{at
 > la fonction renvoie une liste des valeurs de températures très (très) longue et non pas un graphique des températures au cours du temps, si on veut modifier ça, on peut remplacer le `return liste_T` ligne 59 par un `return 0` et enlever le commentaire devant le `plt.show`, si on a fait ça (le return liste_T et le fait d'avoir commenté le ***plt.show***, c'est pour convenir aux besoins du GUI))
   
 * Vous trouverez à la fin du programme un exemple d'utilisation du code, qui prend donc en entrée, une latitude et une longitude, celles du point sur lequel nous voulons connaître la température de surface.
-  
-* On remarquera de plus (quand on plot l'évolution de la température en un point au cours du temps (en décommentant le plt.show(), ligne 58)) que la température n'a pas l'air d'être périodique au cours d'un an. C'est normal : au début du code, on initialise la température avec une valeur bateau et notre code met un peu de temps avant de se stabiliser. Ainsi le premier/les deux premiers mois ne sont pas représentatifs de notre modèle. Il faut bien garder cela en tête lors des simulations et ne pas hésiter à faire la simulation sur un temps plus long (un an et demi ou deux).
+
+> [!NOTE]
+> On remarquera de plus (quand on plot l'évolution de la température en un point au cours du temps (en décommentant le `plt.show()`, ligne 58)) que la température n'a pas l'air d'être périodique au cours d'un an. C'est normal : au début du code, on initialise la température avec une valeur bateau et notre code met un peu de temps avant de se stabiliser. Ainsi le premier/les deux premiers mois ne sont pas représentatifs de notre modèle. Il faut bien garder cela en tête lors des simulations et ne pas hésiter à faire la simulation sur un temps plus long (un an et demi ou deux).
 
 [^1]:(cf : Dossier "Modélisation convection")
