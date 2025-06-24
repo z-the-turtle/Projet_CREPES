@@ -26,7 +26,8 @@
 **- 4 - Modele 1D convection avec puissance.py :**
 
     Code : 
-    Introduction de la modélisation du transfert de chaleur en appliquant une forme discrète de la loi de Newton du refroidissement, à chaque pas de temps dt.         Cf DOCsynthèse pour visualiser la formule. Cette formule permet de prendre en compte la convection dans notre modèle.
+    Introduction de la modélisation du transfert de chaleur en appliquant une forme discrète de la loi de Newton du refroidissement, à chaque pas de temps dt. 
+    Cf DOCsynthèse pour visualiser la formule. Cette formule permet de prendre en compte la convection dans notre modèle.
 
 
 **- 5 - Modélisation convection finale**
