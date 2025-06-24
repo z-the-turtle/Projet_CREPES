@@ -60,13 +60,9 @@ Avec :
 
 ## Remarques
 
-- Le modèle est volontairement simplifié pour se concentrer sur les effets thermiques principaux.
+- Le modèle est volontairement simplifié pour se concentrer sur les effets convectifs.
 - Des hypothèses idéalisées sont prises (température uniforme par zone, pas d’échanges entre blocs, pas d’humidité, etc.).
-- Cette simulation peut servir de base à une extension prenant en compte l’albédo, l’effet de serre ou la rotation de la Terre.
+- On est passé de 18 blocs d'air à 360 blocs d'air pour éviter d'avoir une surface variable ( puisque certains blocs seraient entre les 2 sols ).
 
 ---
-
-### Pistes d'amélioration
-
-
 
