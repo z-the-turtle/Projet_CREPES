@@ -1,14 +1,6 @@
-# Présentation des fichiers et dossiers
-
-Ce projet est structuré en plusieurs dossiers. Chaque dossier contient des fichiers associés à une partie spécifique du développement ou de la modélisation.
-
 ## - Albédo
 
-Ce dossier regroupe plusieurs essais et versions de modélisation de l’effet de l’albédo terrestre (réflexion de la lumière solaire par la surface de la Terre) sur les échanges thermiques.
-
-Contenu :
-- Scripts testant différentes valeurs d’albédo selon la nature du sol (océans, déserts, neige, etc.).
-- Tentatives d’implémentation d’un albédo dynamique, variant selon la latitude, la saison ou l’heure de la journée.
+Ce dossier regroupe plusieurs essais et versions de modélisation de l’effet de l’albédo terrestre.
 
 ## - Modélisation Convection
 
