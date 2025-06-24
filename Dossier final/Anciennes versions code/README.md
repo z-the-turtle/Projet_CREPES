@@ -12,17 +12,17 @@ Il tient compte du fait que les rayons n'arrivent pas avec la même incidence su
 
 **- evolution_temp_avec_albedo_capacite v2.py:**
 
-    test pour relier le premier code ci-dessus avec le decoupage de capacitées et l'API de l'Albédo
+    Test pour relier le premier code ci-dessus avec le decoupage de capacitées et l'API de l'Albédo
 
 
 **- Hors equilibre, gère les variations quotidiennes-v3.py :**
 
-    version avec l'ablédo suivant le même découpage que la capacité 
+    Version avec l'ablédo suivant le même découpage que la capacité 
     (pas appel API car calcul avec moyenne sur une année)
 
 **- Temp_Terre_et_atm_dynamiques.py:**
 
-    version avec le système d'équations différentielles gérant l'effet de serre résolu mais pas très précis : mélange entre visible et infrarouge.
+    Version avec le système d'équations différentielles gérant l'effet de serre résolu mais pas très précis : mélange entre visible et infrarouge.
     -> atmosphere transparent au visible et opaque a l'infrarouge.
 
 **Remarque :** Tous les codes ci-dessus ont une erreur dans le calcul du produit scalaire dans la fonction dpuiss (corrigé dans la version finale)

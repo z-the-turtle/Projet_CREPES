@@ -90,3 +90,4 @@ def update(frame):
 ani = animation.FuncAnimation(fig, update, frames=300, interval=100, blit=True)
 plt.tight_layout()
 plt.show()
+
