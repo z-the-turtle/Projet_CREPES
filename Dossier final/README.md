@@ -1,10 +1,10 @@
 **ICI** expliquer les fichiers/dossiers présents 
 
-**- dossier Albédo :**
+**- Albédo :**
 
     Différentes versions de traiter l'albédo
 
-**- dossier Modélisation Convection :**
+**- Modélisation Convection :**
 
 **- Anciennes versions code :**
 
