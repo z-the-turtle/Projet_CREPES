@@ -1,4 +1,4 @@
-#Arborescence du groupe C
+## Arborescence du groupe C
 <details>
 <summary> <b>Albédo</b> </summary> 
   
