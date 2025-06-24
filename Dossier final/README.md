@@ -1,7 +1,4 @@
-
-* <details><summary> ** Albédo ** </summary> </details>
-
-Ce dossier regroupe plusieurs versions de modélisation de l’effet de l’albédo terrestre.
+<details><summary> ** Albédo ** </summary> Ce dossier regroupe plusieurs versions de modélisation de l’effet de l’albédo terrestre. </details>
 
 **- Modélisation convection :**
 
