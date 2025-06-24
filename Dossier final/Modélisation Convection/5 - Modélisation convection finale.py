@@ -148,8 +148,9 @@ def puissance_echange(t_heure):
 
     return sum(puissances)/360 # moyenne des puissances 
 
+# Echelle de temps pour le traçage de la courbe de la puissance 
 temps = np.linspace(0, dt*n_steps, n_steps)
-puissances = [puissance_echange(t) for t in temps]
+puissances = [puissance_echange(t) for t in temps] # chaque puissance selon chaque pas de temps
 
 # Affichage de la figure et de la courbe de la puissance en fonction du temps
 plt.figure(figsize=(10, 5))
