@@ -1,6 +1,10 @@
 **- Affichage_final.py :**
 
-        Interface d'utilisateur qui affiche une carte du monde interactif, l'utilisateur clique dessus pour obtenir une graphique qui affiche l'évolution de la température au cours d'un an. 
+        Interface d'utilisateur qui affiche une carte du monde interactif, l'utilisateur clique dessus pour obtenir une graphique qui affiche l'évolution de la température au cours d'un an.
+        modules à installer:
+        pip install requests
+        pip install pandas
+        pip install cartopy
         
 **- Code_avec_appel_biblio.py :** 
 
