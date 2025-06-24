@@ -8,7 +8,7 @@ Contient les codes principaux de simulation de la convection atmosphérique. Ces
 
 **- Anciennes versions du code :**
 
-Ce dossier contient les anciennes versions du code principal utilisé dans le code principal.
+Ce dossier contient les anciennes versions du code principal.
 
 **- GUI et code :**
 
