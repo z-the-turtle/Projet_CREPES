@@ -6,7 +6,7 @@
 
 **- justification constantes.md :** Validation scientifique du code **Code_avec_appel_biblio.py**.
 
-**- albedo_lat_lon_multisampled_3pts.csv :**
+**- albedo_lat_lon_multisampled_3pts.csv :** Stockage des albédos obtenus avec les appels API de la NASA.
 
 **- fonction_découpage_capacité_couleurs.py :**
 
