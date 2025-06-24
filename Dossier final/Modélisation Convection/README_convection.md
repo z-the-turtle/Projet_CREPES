@@ -9,7 +9,8 @@
 
     Code : 
     Modélisation du déplacement des blocs d’air de la zone nuit vers la zone jour, c’est-à-dire d’un thermostat à un autre où chaque bloc d'air garde sa température initiale pendant le déplacement. 
-    Représenation de 18 blocs faisant chacun 2000 km sont représentés. Le vent va à 10m/s, donc à chaque fois qu'un bloc prend la place du bloc à sa droite il s'est écoulé 55h30.
+    Représentation de 18 blocs de 2000 km chacun. 
+    Vent à 10m/s : à chaque fois qu'un bloc prend la place du bloc à sa droite il s'est écoulé 55h30.
 
 **- 2 - Evolution températures 1D.py :**
 
@@ -20,7 +21,7 @@
 **- 3 - Modèle 1D convection.py :**
 
     Code :
-    Représentation de la variation de température des blocs d'air sur un sol découpé en deux thermostats : 10 et 40°C (été) en fonction du temps et du vent.
+    Représentation de la variation de température des blocs d'air sur un sol divisé en deux thermostats : 10 et 40°C (été) ou -10 et 20°C (hiver) en fonction du temps et du vent.
 
 **- 4 - Modele 1D convection avec puissance.py :**
 
