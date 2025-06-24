@@ -1,13 +1,14 @@
 **- Affichage_final.py :**
-
+        
         Interface d'utilisateur qui affiche une carte du monde interactif, l'utilisateur clique dessus pour obtenir une graphique qui affiche l'évolution de la température au cours d'un an. 
+
 **- Code_avec_appel_biblio.py :** 
 
     Code le plus abouti sans interface graphique : sert de base à l'interface graphique (GUI).
 
 **- Explication_code_avec_appel_biblio.md :** 
 
-    Explication et détails généraux du code **Code_avec_appel_biblio.py**.
+    Explication et détails généraux du code *Code_avec_appel_biblio.py*.
 
 **- justification constantes.md :** 
   
