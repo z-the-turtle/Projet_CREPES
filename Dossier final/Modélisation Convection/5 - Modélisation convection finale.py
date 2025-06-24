@@ -20,7 +20,7 @@ vitesse = 10 # m/s
 m = (4e11)/20 # masse de la couche d'air
 c = 1000.0 # capacité calorifique de l'air 
 A = (2000e3)/20 # surface considérée
-h = 10.0 # loi de newton 
+h = 10.0 # coefficient de convection (loi de Newton)
 dt = 24*3600*100 
 k = (h * A) / (m * c)
 
