@@ -5,29 +5,19 @@ import numpy as np
 
 sol_l = 36e6          #largeur du sol
 sol_h = 250e3         #hauteur du sol
-air_h = 10e3          #hauteur des blocs d'air
+air_h = 10e3          #hauteur des blocs d'air    
 
-
-# Grandeurs physiques
-m = 1.0      #masse du bloc d'air (kg)
-c = 1000.0   #capacité thermique massique (J/Kg/K)
-A = 1.0      #surface d'échange thermique (m²)
-h = 15.0     #coefficient d'échange thermique (W/(m²·K))
-dt = 1.0     #pas de temps (s)
-k = (h * A) / (m * c)     # coefficient thermique combiné (en 1/s) pour la loi de Newton
-
-# Température du sol
-nb_blocs = 18
-bloc_l = sol_l / nb_blocs
+nb_blocs = 18         
+bloc_l = sol_l / nb_blocs   #largeur d'un bloc
 vitesse = 10
 
-# Physique
-m = 4e11
-c = 1000.0
-A = 2000e3
-h = 15.0
-dt = 24*3600/100
-k = (h * A) / (m * c)
+# Grzndeurs physiques
+m = 4e11                #masse du bloc d'air (kg)
+c = 1000.0              #capacité thermique massique (J/Kg/K)
+A = 2000e3              #surface d'échange thermique (m²)
+h = 15.0                #coefficient d'échange thermique (W/(m²·K))
+dt = 24*3600/100        #pas de temps (s)
+k = (h * A) / (m * c)   # coefficient thermique combiné (en 1/s) pour la loi de Newton
 
 # Température du sol
 def sol_temperature(x):
