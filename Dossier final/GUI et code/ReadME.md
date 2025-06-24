@@ -33,4 +33,4 @@
 
         Bibliothèque regroupant les différents fonctions de calcul utilisées dans le modèle
 
-**- Document_explicatif_GUI:**
+**- Document_explicatif_GUI.md :**
