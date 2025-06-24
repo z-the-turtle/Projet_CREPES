@@ -3,7 +3,7 @@
         Interface d'utilisateur qui affiche une carte du monde intéractive, l'utilisateur clique dessus pour obtenir un graphique qui affiche l'évolution de la température au cours d'un an.
         
 >[!IMPORTANT]
- >Modules à installer:
+ >**Modules à installer**:
  >pip install requests, pandas, cartopy
         
 **- Code_avec_appel_biblio.py :** 
