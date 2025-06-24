@@ -1,5 +1,5 @@
-**- Albédo :**
-<summary> ** Albédo ** </summary>
+
+* <details><summary> ** Albédo ** </summary> </details>
 
 Ce dossier regroupe plusieurs versions de modélisation de l’effet de l’albédo terrestre.
 
