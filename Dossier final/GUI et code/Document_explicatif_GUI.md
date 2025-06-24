@@ -1,4 +1,4 @@
-##Ce programme python permet d'afficher une carte du monde dans une fenêtre Tkinter et de générer une courbe traçant la température prédit par notre modèle (fonction *Temp*).
+#Ce programme python permet d'afficher une carte du monde dans une fenêtre Tkinter et de générer une courbe traçant la température prédit par notre modèle (fonction *Temp*).
 
 <details>
 <summary> <b>Affichage à gauche  </b></summary>
