@@ -11,7 +11,7 @@ Ce script simule, sous forme animée, le déplacement de blocs d'air fragmentés
   - **Hiver** : nuit = `-10 °C` · jour = `20 °C`
   - **Été**   : nuit = `10 °C` · jour = `40 °C`
   - Ces valeurs ont été fournies par un autre groupe à partir d’un modèle de rayonnement solaire.
-  - La **différence de température est constante** de 30 °C entre nuit et jour permet de comparer les effets de convection de manière cohérente.
+  - La difference de température jour nuit est de 30 °C dans les 2 cas, donc on observe les même effets de convection 
 
 - **Disposition visuelle** :
   - Côté gauche de la figure : **nuit**
@@ -24,7 +24,6 @@ Ce script simule, sous forme animée, le déplacement de blocs d'air fragmentés
 Visualiser :
 - L’**évolution de la température** des blocs d’air.
 - La **puissance thermique échangée** entre le sol et les blocs d’air.
-- L’effet du **vent** et du contraste thermique sol/nuit sur la répartition énergétique dans l’atmosphère.
 
 ---
 
