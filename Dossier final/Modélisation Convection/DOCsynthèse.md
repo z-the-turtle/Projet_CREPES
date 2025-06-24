@@ -36,11 +36,12 @@ Le modèle repose sur la loi de Newton appliquée à chaque pas de temps (approc
 
 
 Avec :
-- `h` : coefficient de convection thermique (`10 W/m²/K`)  
-- `A` : surface d’échange du bloc
 - `T_sol` : température du sol
 - `T_air` : température du bloc d’air
 - `Δt` : durée du pas de temps
+-  k = (h * A) / (m * c)
+-  `h` : coefficient de convection thermique (`10 W/m²/K`)
+- `A` : surface d’échange du bloc
 - `m` : masse du bloc d’air
 - `c` : capacité thermique massique de l’air (≈ 1000 J/kg/°C)
 
