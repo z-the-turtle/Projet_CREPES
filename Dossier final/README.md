@@ -2,7 +2,7 @@
 
 **- dossier Albédo :**
 
-    différentes versions de traiter l'albédo
+    Différentes versions de traiter l'albédo
 
 **- dossier Modélisation Convection :**
 
