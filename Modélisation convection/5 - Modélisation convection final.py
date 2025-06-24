@@ -79,7 +79,7 @@ for i, x in enumerate(bloc_positions):
 def update(frame):
     global bloc_positions, bloc_temps
 
-    bloc_positions[:] = (bloc_positions + vitesse*dt) % sol_width #changement de position de chaque blocs au cours du temps (avec une vitesse de 10m/s)
+    bloc_positions[:] = (bloc_positions + vitesse*dt) % sol_width # changement de position de chaque blocs au cours du temps (avec une vitesse de 10m/s)
 
     for i in range(nb_blocs):
         x_center = (bloc_positions[i] + vitesse*dt) % sol_width
