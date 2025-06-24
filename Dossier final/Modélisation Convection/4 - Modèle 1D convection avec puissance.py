@@ -4,22 +4,22 @@ import matplotlib.animation as animation
 import numpy as np
 
 # Paramètres généraux
-sol_width = 100  #largeur du sol
-sol_height = 2   #hauteur du sol
-air_height = 10  #hauteur des blocs d'air
+sol_width = 100
+sol_height = 2
+air_height = 10
 
-nb_blocs = 18  # ici 18 blocs
-bloc_width = sol_width / nb_blocs  # ≈ 5.5555
+nb_blocs = 18
+bloc_width = sol_width / nb_blocs
 
 vitesse = 1
 
 # Grandeurs physiques
-m = 1.0      #masse du bloc d'air (kg)
-c = 1000.0   #capacité thermique massique (J/Kg/K)
-A = 1.0      #surface d'échange thermique (m²)
-h = 15.0     #coefficient d'échange thermique (W/(m²·K))
-dt = 1.0     #pas de temps (s)
-k = (h * A) / (m * c)     # coefficient thermique combiné (en 1/s) pour la loi de Newton
+m = 1.0
+c = 1000.0
+A = 1.0
+h = 15.0
+dt = 24 * 3600
+k = (h * A) / (m * c)
 
 # Température du sol
 def sol_temperature(x):
@@ -30,7 +30,7 @@ bloc_positions = np.arange(0, sol_width, bloc_width)
 bloc_temps = np.array([sol_temperature(x + bloc_width / 2) for x in bloc_positions], dtype=float)
 
 sol_y = 4
-y_air = sol_y + sol_height + 0.5   #0.5 représente l'espace entre l'air et le sol (la couche limite)
+y_air = sol_y + sol_height + 0.5
 
 fig, ax = plt.subplots(figsize=(14, 8))
 ax.set_xlim(0, sol_width)
@@ -54,7 +54,7 @@ scaling_factor = 0.08
 
 for i, x in enumerate(bloc_positions):
     temp = bloc_temps[i]
-    color_ratio = (temp - 10) / 10
+    color_ratio = np.clip((temp - 10) / 10, 0, 1)
     rect = patches.Rectangle((x, y_air), bloc_width, air_height,
                              facecolor=(color_ratio, 0.2, 1 - color_ratio), edgecolor='black')
     ax.add_patch(rect)
@@ -83,7 +83,7 @@ def update(frame):
         T_air_next = T_air + k * (T_sol - T_air) * dt
         bloc_temps[i] = T_air_next
 
-        color_ratio = (T_air_next - 10) / 10
+        color_ratio = np.clip((T_air_next - 10) / 10, 0, 1)
         color = (color_ratio, 0.2, 1 - color_ratio)
         blocs[i].set_x(bloc_positions[i])
         blocs[i].set_facecolor(color)
@@ -114,28 +114,12 @@ def update(frame):
 
 ani = animation.FuncAnimation(fig, update, frames=300, interval=100, blit=True)
 
+n_steps = 1000
 def puissance_echange(t_heure):
-    """
-    Calcule la puissance totale échangée entre sol et air
-    à un temps t donné en heures réelles.
-
-    t_heure : float, temps en heures
-
-    Retourne : puissance totale en Watts (float)
-    """
-
-    # Conversion temps réel en pas de temps (dt simulé)
-    # dt simulé correspond à 20 heures réelles
     dt_sim = t_heure / 20.0
-
-    # On calcule la nouvelle position des blocs (en simulé)
     new_positions = (bloc_positions + vitesse * dt_sim) % sol_width
-
-    # On copie les températures actuelles pour simuler l'évolution sur dt_sim
     temps_air_sim = bloc_temps.copy()
 
-    # On applique l'évolution de la température sur dt_sim (approximation)
-    # Ici on fait juste une étape discrète avec k*dt_sim
     for i in range(nb_blocs):
         x_center = (new_positions[i] + bloc_width / 2) % sol_width
         T_sol = sol_temperature(x_center)
@@ -143,7 +127,6 @@ def puissance_echange(t_heure):
         T_air_next = T_air + k * (T_sol - T_air) * dt_sim
         temps_air_sim[i] = T_air_next
 
-    # Calcul de la puissance totale échangée (somme sur tous les blocs)
     puissances = []
     for i in range(nb_blocs):
         x_center = (new_positions[i] + bloc_width / 2) % sol_width
@@ -152,22 +135,16 @@ def puissance_echange(t_heure):
         P = h * A * (T_sol - T_air)
         puissances.append(P)
 
-    P_totale = sum(puissances)
-    return P_totale
+    return sum(puissances)
 
-
-temps = np.linspace(0, 24, 100)  # 100 points entre 0 et 24h
+temps = np.linspace(0, vitesse * dt, n_steps)
 puissances = [puissance_echange(t) for t in temps]
 
-plt.figure(figsize=(10,5))
+plt.figure(figsize=(10, 5))
 plt.plot(temps, puissances, color='orange', lw=2)
-plt.xlabel("Temps (heures)")
+plt.xlabel("Temps (sec)")
 plt.ylabel("Puissance totale échangée (W)")
 plt.title("Puissance échangée sol-air sur 24 heures")
 plt.grid(True)
-plt.show()
-
-
 plt.tight_layout()
 plt.show()
-
