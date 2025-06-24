@@ -22,3 +22,6 @@ Ce dossier contient les anciennes versions du code principal.
   
 Ce dossier contient l’interface graphique (GUI) ainsi que le code complet du projet.
 </details>
+
+> [!TIP]
+> les fichiers .md peuvent s'ouvrir avec un compte GitHub 
