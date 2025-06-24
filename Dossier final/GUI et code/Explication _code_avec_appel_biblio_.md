@@ -3,7 +3,7 @@
 
 * Premièrement, on définit les constantes utiles pour  le code. Les valeurs pour ces dernières sont justifiées [ici (Justification constantes.md)](https://github.com/z-the-turtle/Projet_CREPES/blob/main/Dossier%20final/GUI%20et%20code/Justification%20constantes.md).
   
-* Ensuite, on initialise les ***température***.
+* Ensuite, on initialise les ***températures***.
   
 * On met enfin en place la ***méthode d'Euler*** pour modéliser la température de la Terre et celle de l'atmosphère, qui obéissent au système différentiel suivant :
 
