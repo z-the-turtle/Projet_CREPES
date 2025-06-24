@@ -1,7 +1,6 @@
 # Simulation de convection atmosphérique — Modèle Terre simplifié
 
-Ce script simule, sous forme animée, le déplacement de blocs d'air fragmentés (représentant l'atmosphère) au-dessus d'un sol divisé en deux zones thermiques : une zone de **nuit** et une zone de **jour**, ayant des températures différentes. L’objectif est de visualiser les échanges thermiques selon la **loi de Newton du refroidissement** et de représenter un phénomène de **convection atmosphérique** à l’échelle planétaire de manière intuitive.
-
+Ce script simule, sous forme animée, le déplacement de blocs d'air fragmentés (représentant l'atmosphère) au-dessus d'un sol divisé en deux zones thermiques : une zone de **nuit** et une zone de **jour**, ayant des températures différentes. L’objectif est de visualiser les échanges thermiques selon la **loi de Newton du refroidissement**.
 ---
 
 ##  Modèle
