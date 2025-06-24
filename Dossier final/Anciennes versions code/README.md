@@ -23,8 +23,8 @@ Ils tiennent compte du fait que les rayons n'arrivent pas avec la même incidenc
 
     Version avec le système d'équations différentielles gérant l'effet de serre résolu mais pas très précis : mélange entre visible et infrarouge.
     -> atmosphère transparent au visible et opaque à l'infrarouge.
-
-**Remarque :** Tous les codes ci-dessus ont une erreur dans le calcul du produit scalaire dans la fonction dpuiss (corrigé dans la version finale)
+> [!NOTE]
+>**Remarque :** Tous les codes ci-dessus ont une erreur dans le calcul du produit scalaire dans la fonction dpuiss (corrigé dans la version finale)
 
 **- Temp_Terre_et_atm_dynamiques_avec_infrarouge.py:**
   
