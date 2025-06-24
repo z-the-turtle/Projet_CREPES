@@ -85,18 +85,18 @@ def update(frame):
         T_sol = sol_temperature(x_center)
         T_air = bloc_temps[i]
         T_air_next = T_air + k * (T_sol - T_air) * dt # calcul nouvelle température
-        list_t_sol.append(T_sol)
-        list_t_air.append(T_air)
+        list_t_sol.append(T_sol) # constante au cours du temps (thermostat)
+        list_t_air.append(T_air) 
         bloc_temps[i] = T_air_next
 
         # Couleur des blocs (visuel)
         color_ratio = np.clip((T_air_next + 10) / 30, 0, 1)
-        color = (color_ratio, 0.2, 1 - color_ratio)
+        color = (color_ratio, 0.2, 1 - color_ratio) 
         blocs[i].set_x(bloc_positions[i])
         blocs[i].set_facecolor(color)
 
-        labels[i].set_position((bloc_positions[i] + bloc_width / 2, y_air + air_height / 2))
-        labels[i].set_text(f"{T_air_next:.1f}°C")
+        labels[i].set_position((bloc_positions[i] + bloc_width / 2, y_air + air_height / 2)) # position texte température bloc
+        labels[i].set_text(f"{T_air_next:.1f}°C") # texte température bloc
 
         # Calcul puissance pour faire apparaître les flèches de puissance
         P = h * A * (T_sol - T_air)
