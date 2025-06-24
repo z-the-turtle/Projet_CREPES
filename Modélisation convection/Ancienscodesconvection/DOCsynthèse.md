@@ -1,4 +1,4 @@
-"""
+
 Simulation de convection atmosphérique — modèle Terre simplifié
 
 Ce script simule, sous forme animée, le déplacement de blocs d'air fragmentés ( répresente l'atmosphère ) au-dessus d'un sol 
@@ -18,4 +18,4 @@ Modèle :
 Objectif :
 Observer l’évolution de la température et donc la puissance échangé entre le sol et l'atmosphère afin de visualiser 
 l’effet du vent sur la distribution thermique atmosphérique.
-"""
+
