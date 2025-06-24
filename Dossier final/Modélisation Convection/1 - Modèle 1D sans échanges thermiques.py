@@ -27,7 +27,7 @@ ax.set_ylim(0, HAUTEUR_SOL + HAUTEUR_AIR + 2)
 ax.axis('off')
 plt.title("Masse d'air fragmentée : échanges thermiques jour/nuit", fontsize=14, pad=20)
 
-# ===================== SOL VISUEL =====================
+# ===================== SOL =====================
 sol_nuit = patches.Rectangle((0, 0), LARGEUR_SOL / 2, HAUTEUR_SOL, facecolor='midnightblue', edgecolor='black')
 sol_jour = patches.Rectangle((LARGEUR_SOL / 2, 0), LARGEUR_SOL / 2, HAUTEUR_SOL, facecolor='lightcoral', edgecolor='black')
 ax.add_patch(sol_nuit)
