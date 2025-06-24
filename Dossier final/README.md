@@ -1,6 +1,6 @@
 <details>
 <summary> Albédo </summary> 
-Ce dossier regroupe plusieurs versions de modélisation de l’effet de l’albédo terrestre. 
+Ce dossier regroupe plusieurs versions de modélisation de l’effet de l’albédo terrestre (par découpage terrestre ou par appel API de la NASA). 
 </details>
 
 <details>
@@ -14,6 +14,6 @@ Ce dossier contient les anciennes versions du code principal.
 </details>
 
 <details>
-  <summary> GUI et code </summary>
+<summary> GUI et code </summary>
 Ce dossier contient l’interface graphique (GUI) ainsi que le code complet du projet.
 </details>
