@@ -8,6 +8,8 @@
 
 **- Anciennes versions code :**
 
+    Anciennes versions du code principal qu'on utilise dans le GUI.
+
 **- GUI et code :**
 
 
