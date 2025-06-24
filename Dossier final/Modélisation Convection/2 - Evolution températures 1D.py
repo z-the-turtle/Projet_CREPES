@@ -16,12 +16,9 @@ k = (h * A) / (m * c)  # en 1/s
 T_air_1 = [20.0]   # Bloc au-dessus d’un sol à 20°C
 T_air_2 = [-10.0]   # Bloc au-dessus d’un sol à -10°C
 
-
 # Températures fixes (sols/thermostats)
 T_sol_1 = -10.0
 T_sol_2 = 20.0
-
-
 
 # Évolution des températures
 for t in range(steps):
@@ -30,13 +27,10 @@ for t in range(steps):
     T_air_1.append(T_next_1)
     T_air_2.append(T_next_2)
 
-
 # Affichage graphique
 plt.plot(T_air_1, label="Sol à 20°C", color='orange')
 plt.plot(T_air_2, label="Sol à -10°C", color='red')
-
 plt.hlines([T_sol_1, T_sol_2], 0, steps, linestyles='dashed', colors=['orange', 'red'], alpha=0.3)
-
 plt.xlabel("Temps (s)")
 plt.ylabel("Température de l'air (°C)")
 plt.title("Évolution thermique de 2 blocs d'air (loi de Newton)")
