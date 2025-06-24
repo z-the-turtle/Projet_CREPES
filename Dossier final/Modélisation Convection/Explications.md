@@ -1,6 +1,6 @@
 # Simulation de convection atmosphérique — Modèle Terre simplifié
 
-Ce script simule le déplacement de blocs d'air fragmentés (représentant l'atmosphère) au-dessus d'un sol divisé en deux zones thermiques : une zone de **nuit** et une zone de **jour**, ayant des températures différentes. L’objectif est de visualiser les échanges thermiques selon la **loi de Newton du refroidissement.**
+>Ce script simule le déplacement de blocs d'air fragmentés (représentant l'atmosphère) au-dessus d'un sol divisé en deux zones thermiques : une    >zone de **nuit** et une zone de **jour**, ayant des températures différentes. L’objectif est de visualiser les échanges thermiques selon la **loi >de Newton du refroidissement.**
 
 
 ---
@@ -57,12 +57,10 @@ Avec :
 | Coefficient de convection | `10 W/m²/K`            | [SolidWorks Help](https://help.solidworks.com/2012/french/SolidWorks/cworks/Convection_Heat_Coefficient.htm) |
 
 ---
-
-## Remarques
-
-- Le modèle est volontairement simplifié pour se concentrer sur les effets convectifs.
-- Des hypothèses idéalisées sont prises (température uniforme par zone, pas d’échanges entre blocs, pas d’humidité, etc.).
-- On est passé de 18 blocs d'air à 360 blocs d'air pour éviter d'avoir une surface variable ( puisque certains blocs seraient entre les 2 sols ).
+> [!NOTE]
+>- Le modèle est volontairement simplifié pour se concentrer sur les effets convectifs.
+>- Des hypothèses idéalisées sont prises (température uniforme par zone, pas d’échanges entre blocs, pas d’humidité, etc.).
+>- On est passé de 18 blocs d'air à 360 blocs d'air pour éviter d'avoir une surface variable ( puisque certains blocs seraient entre les 2 sols ).
 
 
 

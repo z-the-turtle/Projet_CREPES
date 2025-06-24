@@ -1,3 +1,6 @@
+## Arborescence du groupe C
+
+### Projet de modélisation dynamique de la température terrestre
 <details>
 <summary> <b>Albédo</b> </summary> 
   
@@ -21,3 +24,6 @@ Ce dossier contient les anciennes versions du code principal.
   
 Ce dossier contient l’interface graphique (GUI) ainsi que le code complet du projet.
 </details>
+
+> [!TIP]
+> les fichiers .md peuvent s'ouvrir avec un compte GitHub ou sur le site https://stackedit.io/

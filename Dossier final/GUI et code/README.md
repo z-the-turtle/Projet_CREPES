@@ -1,3 +1,5 @@
+## Readme GUI et code
+### Le GUI (interphace graphique) permet de faire afficher un planisphère de la Terre sur lequel on peut cliquer et qui renvoie un graphique de la température à cette position en fonction du temps
 **- Affichage_final.py :**
 
         Interface d'utilisateur qui affiche une carte du monde intéractive, l'utilisateur clique dessus pour obtenir un graphique qui affiche l'évolution de la température au cours d'un an.
