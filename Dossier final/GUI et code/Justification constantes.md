@@ -14,7 +14,7 @@
    
  * [epsilon](https://web.lmd.jussieu.fr/~jldufres/Exposes/Duf_ERRE_psud_1.pdf) (émissivité de la Terre dans les infrarouges) (slide 27), on en déduit que   $\frac{1-\epsilon}{\epsilon}$ = $\frac{240}{390}$, c.à.d $\epsilon$ = 0.71
    
- * [Lien de l'API de la NASA appelé pour l'albedo](https://power.larc.nasa.gov/api/temporal/daily/point)
+ * [Lien de l'API de la NASA appelé pour l'albedo](https://power.larc.nasa.gov/api/pages/)
 
  * La valeur de la puissance cédée à l'atmosphère par convection est justifiée dans le dossier "\Dossier final\Modélisation convection".
  
