@@ -11,7 +11,7 @@ Ce script simule, sous forme animée, le déplacement de blocs d'air fragmentés
   - **Hiver** : nuit = `-10 °C` · jour = `20 °C`
   - **Été**   : nuit = `10 °C` · jour = `40 °C`
   - Ces valeurs ont été fournies par un autre groupe à partir d’un modèle de rayonnement solaire.
-  - La **différence constante** de 30 °C entre nuit et jour permet de comparer les effets de convection de manière cohérente.
+  - La **différence de température est constante** de 30 °C entre nuit et jour permet de comparer les effets de convection de manière cohérente.
 
 - **Disposition visuelle** :
   - Côté gauche de la figure : **nuit**
