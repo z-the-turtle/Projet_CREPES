@@ -1,5 +1,6 @@
 ### README Convection
-
+>Ce dossier contient une série de scripts et de documents permettant de modéliser la convection thermique dans une approche 1D. Les différentes étapes du projet permettent de passer progressivement d’un modèle simple à une modélisation plus complète prenant en compte les échanges thermiques et la puissance échangée.
+>
 **- 1 - Schéma modèle 1D.pdf :**
 
     Schéma : 
