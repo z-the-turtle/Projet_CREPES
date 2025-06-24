@@ -37,7 +37,7 @@
     360 blocs sur un sol découpé en deux thermostats : 10 et 40°C (été).
     Prise en compte du vent à 10m/s.
 
-**- Explication**
+**- Explication.md**
 
     Explication détaillée des codes, sources et modélisations.
 
