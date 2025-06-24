@@ -1,6 +1,8 @@
-Tous ces programmes contiennent un calcul de la température à un point précis de la planète en fonction de sa longitude et de sa latitude.
-Ils tiennent compte que l'on soit en dehors de l'équilibre thermique. La nuit, il n'y a pas de terme source, le premier principe de la thermodynamique donne donc $dT/dt = -\sigma T^4/C*\rho*prof$, avec prof une profondeur caractéristique de variation de la température en une journée.
-Ils tiennent compte du fait que les rayons n'arrivent pas avec la même incidence sur la Terre selon la latitude et la longitude.
+## Readme des anciennes versions du code principal
+
+>Tous ces programmes contiennent un calcul de la température à un point précis de la planète en fonction de sa longitude et de sa latitude.
+>Ils tiennent compte que l'on soit en dehors de l'équilibre thermique. La nuit, il n'y a pas de terme source, le premier principe de la thermodynamique donne donc $dT/dt = -\sigma T^4/C*\rho*prof$, avec prof une profondeur caractéristique de variation de la température en une journée.
+>Ils tiennent compte du fait que les rayons n'arrivent pas avec la même incidence sur la Terre selon la latitude et la longitude.
 
 **- Hors equilibre, gère les variations quotidiennes.py:**
 
