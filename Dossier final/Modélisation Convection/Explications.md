@@ -57,7 +57,7 @@ Avec :
 | Coefficient de convection | `10 W/m²/K`            | [SolidWorks Help](https://help.solidworks.com/2012/french/SolidWorks/cworks/Convection_Heat_Coefficient.htm) |
 
 ---
-> [!Remarques]
+> [!REMARQUE]
 >- Le modèle est volontairement simplifié pour se concentrer sur les effets convectifs.
 >- Des hypothèses idéalisées sont prises (température uniforme par zone, pas d’échanges entre blocs, pas d’humidité, etc.).
 >- On est passé de 18 blocs d'air à 360 blocs d'air pour éviter d'avoir une surface variable ( puisque certains blocs seraient entre les 2 sols ).
