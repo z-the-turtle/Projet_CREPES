@@ -1,4 +1,3 @@
-Le but du code final est de simuler sous forme animée le déplacement de blocs d'air fragmentés au-dessus d'un sol composé de deux zones thermiques (nuit/jour) avec des températures différentes pour modéliser la convection sur Terre. L'objectif est d'observer l’évolution de la température des blocs d’air au cours de leur déplacement. On considère dans ce modèle la Terre comme un segment de périmètre 2πR(=36000 km), avec un vent de 10m/s, une température de nuit de -10°C et une température de jour de 20°C pour l'hiver et une température de nuit de 10°C et une température de jour de 40°C pour l'été. Pour tous les codes de ce dossier le côté gauche de la figure créée correspond au côté de la Terre où il fait nuit, et le côté droit correspond au côté de la Terre où il fait jour.
 
 **- Modèle 1D sans échanges thermiques.py :**
 
