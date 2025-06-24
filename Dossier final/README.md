@@ -24,4 +24,4 @@ Ce dossier contient l’interface graphique (GUI) ainsi que le code complet du p
 </details>
 
 > [!TIP]
-> les fichiers .md peuvent s'ouvrir avec un compte GitHub ou sur le site >https://stackedit.io/
+> les fichiers .md peuvent s'ouvrir avec un compte GitHub ou sur le site https://stackedit.io/
