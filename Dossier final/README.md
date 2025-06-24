@@ -2,6 +2,8 @@
 
 **- dossier Albédo :**
 
+    différentes versions de traiter l'albédo
+
 **- dossier Modélisation Convection :**
 
 **- Anciennes versions code :**

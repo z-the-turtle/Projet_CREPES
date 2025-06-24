@@ -8,11 +8,11 @@ list_t_sol = [] # liste température des sols (thermostats)
 list_t_air = [] # liste température des blocs (changera au cours du temps)
 
 # Paramètres interface visuelle
-sol_width = 36e6 # périmètre de la Terre
-sol_height = 250e3 # hauteur du sol
-air_height = 10e3 # hauteur de la couche d'air (hauteur de chaque bloc)
+sol_width = 36e6 # périmètre de la Terre en m
+sol_height = 250e3 # hauteur du sol en m
+air_height = 10e3 # hauteur de la couche d'air (hauteur de chaque bloc) en m
 
-nb_blocs = 360
+nb_blocs = 360 
 bloc_width = sol_width / nb_blocs # calcul largeur de chaque bloc
 vitesse = 10 # m/s
 
