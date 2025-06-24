@@ -6,8 +6,6 @@ Ce script simule, sous forme animée, le déplacement de blocs d'air fragmentés
 
 ##  Modèle
 
-- **Modèle terrestre** : la Terre est modélisée comme un segment circulaire de périmètre  
-  `2πR ≈ 36 000 km` ([source](https://www.notre-planete.info/terre/chiffres_cle.php)).
 - **Blocs d’air** : des blocs se déplacent au-dessus du sol à une vitesse constante de  
   `10 m/s` (vent) ([source](https://meteo-parapente.com/#/)).
 - **Température du sol** selon la saison :
@@ -38,7 +36,6 @@ Le modèle repose sur la loi de Newton appliquée à chaque pas de temps (approc
 
 
 Avec :
-- `Q` : puissance échangée (W)
 - `h` : coefficient de convection thermique (`10 W/m²/°C`)  
   ([source](https://help.solidworks.com/2012/french/SolidWorks/cworks/Convection_Heat_Coefficient.htm))
 - `A` : surface d’échange du bloc
