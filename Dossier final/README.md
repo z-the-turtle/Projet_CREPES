@@ -1,6 +1,6 @@
 ## - Albédo
 
-Ce dossier regroupe plusieurs essais et versions de modélisation de l’effet de l’albédo terrestre.
+Ce dossier regroupe plusieurs versions de modélisation de l’effet de l’albédo terrestre.
 
 ## - Modélisation Convection
 
@@ -13,18 +13,11 @@ Contenu :
 
 ## - Anciennes versions code
 
-Ce dossier contient les anciennes versions du code principal utilisé dans le projet. Il permet de retracer l’évolution de l’implémentation et les choix successifs (visuels, paramètres physiques, gestion des blocs, etc.).
+Ce dossier contient les anciennes versions du code principal utilisé dans le code principal.
 
 ## - GUI et code
 
 Ce dossier contient l’interface graphique (GUI) ainsi que le code complet du projet.
-
-Contenu :
-- Interface utilisateur interactive pour lancer les simulations.
-- Scripts Python du modèle thermique et des animations.
-- Fichiers de ressources nécessaires à l’exécution du projet.
-
----
 
 ## Fichier ZIP final
 
