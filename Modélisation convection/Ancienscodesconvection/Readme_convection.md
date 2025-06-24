@@ -21,7 +21,11 @@
     Prise en compte des déplacements des blocs d'un sol à l'autre et des échanges thermiques.
 
 **- Convection été puissance**
+
     Code : 
+    Représentation de la puissance échangée sol-air en fonction du temps. 
+    360 blocs sur un sol découpé en deux thermostats : 10 et 40°C (été).
+    Prise en compte du vent à 10m/s.
     
 
 
