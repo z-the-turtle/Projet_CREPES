@@ -34,3 +34,5 @@
         Bibliothèque regroupant les différents fonctions de calcul utilisées dans le modèle
 
 **- Document_explicatif_GUI.md :**
+
+        Mode d'emploi du GUI et explication de ses différentes fonctionnalités
