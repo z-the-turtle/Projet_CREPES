@@ -54,7 +54,7 @@ Avec :
 | Largeur totale du sol     | `36 000 000 m`          | [notre-planete.info](https://www.notre-planete.info/terre/chiffres_cle.php) |
 | Vitesse du vent           | `10 m/s`                | [meteo-parapente.com](https://meteo-parapente.com/#/) |
 | Masse volumique de l’air  | `1.225 kg/m³` à 15 °C   | [Wikipedia](https://fr.wikipedia.org/wiki/Masse_volumique_de_l%27air) |
-| Coefficient de convection | `10 W/m²/°C`            | [SolidWorks Help](https://help.solidworks.com/2012/french/SolidWorks/cworks/Convection_Heat_Coefficient.htm) |
+| Coefficient de convection | `10 W/m²/K`            | [SolidWorks Help](https://help.solidworks.com/2012/french/SolidWorks/cworks/Convection_Heat_Coefficient.htm) |
 
 ---
 
