@@ -1,4 +1,3 @@
-
 Simulation de convection atmosphérique — modèle Terre simplifié
 
 Ce script simule, sous forme animée, le déplacement de blocs d'air fragmentés ( répresente l'atmosphère ) au-dessus d'un sol 

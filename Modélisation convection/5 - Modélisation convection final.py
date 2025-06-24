@@ -8,11 +8,11 @@ list_t_sol = [] # liste température des sols (thermostats)
 list_t_air = [] # liste température des blocs (changera au cours du temps)
 
 # Paramètres interface visuelle
-sol_width = 36e6 # périmètre de la Terre
-sol_height = 250e3 # hauteur du sol
-air_height = 10e3 # hauteur de la couche d'air (hauteur de chaque bloc)
+sol_width = 36e6 # périmètre de la Terre en m
+sol_height = 250e3 # hauteur du sol en m
+air_height = 10e3 # hauteur de la couche d'air (hauteur de chaque bloc) en m
 
-nb_blocs = 360
+nb_blocs = 360 
 bloc_width = sol_width / nb_blocs # calcul largeur de chaque bloc
 vitesse = 10 # m/s
 
@@ -79,7 +79,7 @@ for i, x in enumerate(bloc_positions):
 def update(frame):
     global bloc_positions, bloc_temps
 
-    bloc_positions[:] = (bloc_positions + vitesse*dt) % sol_width #changement de position de chaque blocs au cours du temps (avec une vitesse de 10m/s)
+    bloc_positions[:] = (bloc_positions + vitesse*dt) % sol_width # changement de position de chaque blocs au cours du temps (avec une vitesse de 10m/s)
 
     for i in range(nb_blocs):
         x_center = (bloc_positions[i] + vitesse*dt) % sol_width
