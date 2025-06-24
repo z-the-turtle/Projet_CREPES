@@ -25,7 +25,7 @@
     Introduction de la modélisation du transfert de chaleur en appliquant une forme discrète de la loi de Newton du refroidissement, à chaque pas de temps dt.         Cf Loi de Newton.png pour visualiser la formule. Cette formule permet de prendre en compte la convection dans notre modèle.
 
 
-**- Convection été puissance**
+**- 5 - Modélisation convection finale**
 
     Code : 
     Représentation de la puissance échangée sol-air en fonction du temps. 
