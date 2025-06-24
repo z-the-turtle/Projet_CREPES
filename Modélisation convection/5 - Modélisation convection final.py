@@ -1,4 +1,4 @@
-èt# Importation des bibliothèques
+# Importation des bibliothèques
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.animation as animation
