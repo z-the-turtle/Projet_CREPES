@@ -17,7 +17,7 @@ T_air_1 = [20.0]   # Bloc au-dessus d’un sol à 20°C
 T_air_2 = [-10.0]   # Bloc au-dessus d’un sol à -10°C
 
 
-# Températures fixes (sols / thermostat)
+# Températures fixes (sols/thermostats)
 T_sol_1 = -10.0
 T_sol_2 = 20.0
 
