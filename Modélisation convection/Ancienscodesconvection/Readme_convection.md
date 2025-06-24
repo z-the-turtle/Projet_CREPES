@@ -15,6 +15,12 @@
     Représentation de la température de deux blocs d'air placés sur deux sols de températures différentes (-10°C et 20°C) en fonction du temps. 
     Prise en compte des déplacements des blocs d'un sol à l'autre et des échanges thermiques.
 
+**- 3 - Modele 1D convection.py :**
+
+    Code :
+    
+
+
 **- 4 - Modele 1D convection avec puissance.py :**
 
     Code : 
