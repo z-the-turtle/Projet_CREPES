@@ -18,6 +18,7 @@
 **- 3 - Modèle 1D convection.py :**
 
     Code :
+    Représentation de la variation de température des blocs d'air sur un sol découpé en deux thermostats : 10 et 40°C (été) en fonction du temps et du vent.
 
 **- 4 - Modele 1D convection avec puissance.py :**
 
