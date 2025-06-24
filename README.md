@@ -1,9 +1,7 @@
 # Projet_CREPES
 Projet de Cap ECL
 
--finir bibliothèque de fonctions
-
--faire la validation scientifique 
+- finir le document de synthèse général
 
 dans ce document sont toutes les infos regroupées, vous pouvez rajouter vos sources :
 https://docs.google.com/document/d/1brJ2jxt_qV-7utBuGxu4oJdD93AJbg-jqgVYEiY2jeY/edit?usp=sharing
