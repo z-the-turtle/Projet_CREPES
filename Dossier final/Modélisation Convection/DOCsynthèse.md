@@ -8,7 +8,7 @@ Ce script simule, sous forme animée, le déplacement de blocs d'air fragmentés
 ##  Modèle
 
 - **Blocs d’air** : des blocs se déplacent au-dessus du sol à une vitesse constante de  
-  `10 m/s` (vent) ([source](https://meteo-parapente.com/#/)).
+  `10 m/s` (vent) 
 - **Température du sol** selon la saison :
   - **Hiver** : nuit = `-10 °C` · jour = `20 °C`
   - **Été**   : nuit = `10 °C` · jour = `40 °C`
@@ -37,7 +37,6 @@ Le modèle repose sur la loi de Newton appliquée à chaque pas de temps (approc
 
 Avec :
 - `h` : coefficient de convection thermique (`10 W/m²/°C`)  
-  ([source](https://help.solidworks.com/2012/french/SolidWorks/cworks/Convection_Heat_Coefficient.htm))
 - `A` : surface d’échange du bloc
 - `T_sol` : température du sol
 - `T_air` : température du bloc d’air
