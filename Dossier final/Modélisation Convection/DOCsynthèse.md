@@ -36,7 +36,7 @@ Le modèle repose sur la loi de Newton appliquée à chaque pas de temps (approc
 
 
 Avec :
-- `h` : coefficient de convection thermique (`10 W/m²/°C`)  
+- `h` : coefficient de convection thermique (`10 W/m²/K`)  
 - `A` : surface d’échange du bloc
 - `T_sol` : température du sol
 - `T_air` : température du bloc d’air
