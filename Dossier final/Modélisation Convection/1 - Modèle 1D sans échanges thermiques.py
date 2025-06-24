@@ -3,78 +3,88 @@ import matplotlib.patches as patches
 import matplotlib.animation as animation
 import numpy as np
 
-# Paramètres
-sol_width = 100          # Largeur totale du sol
-sol_height = 2           # Hauteur du sol
-air_height = 5           # Hauteur des blocs d'air
-bloc_width = 5           # Largeur de chaque bloc d'air
-vitesse = 1              # Vitesse de déplacement horizontal (blocs d'air), ici 10 m/s
-nb_blocs = sol_width // bloc_width  # Nombre total de blocs
+# ===================== PARAMÈTRES =====================
+LARGEUR_SOL = 100       # Largeur du sol 
+HAUTEUR_SOL = 2         # Hauteur du sol
+HAUTEUR_AIR = 5         # Hauteur des blocs d'air
+LARGEUR_BLOC = 5        # Largeur de chaque bloc d'air
+VITESSE_BLOCS = 1       # Vitesse de déplacement horizontal
+NB_BLOCS = LARGEUR_SOL // LARGEUR_BLOC  # Nombre de blocs
 
+# ===================== TEMPÉRATURE DU SOL =====================
+def temperature_sol(x):
+    """Retourne la température du sol en position x."""
+    return 10 if x < LARGEUR_SOL / 2 else 20  # Nuit à gauche, jour à droite
 
-# Température du sol
-def sol_temperature(x):
-   return 10 if x < sol_width / 2 else 20
+# ===================== INITIALISATION DES BLOCS =====================
+positions_blocs = np.arange(0, LARGEUR_SOL, LARGEUR_BLOC)  # Positions initiales (x)
+temperatures_blocs = np.array([temperature_sol(x + LARGEUR_BLOC / 2) for x in positions_blocs]) # Température initiale 
 
-# Températures initiales par bloc
-bloc_positions = np.arange(0, sol_width, bloc_width)
-bloc_temps = np.array([sol_temperature(x + bloc_width / 2) for x in bloc_positions])
-
-# Initialisation figure
+# ===================== CRÉATION FIGURE =====================
 fig, ax = plt.subplots(figsize=(12, 6))
-ax.set_xlim(0, sol_width)
-ax.set_ylim(0, sol_height + air_height + 2)
+ax.set_xlim(0, LARGEUR_SOL)
+ax.set_ylim(0, HAUTEUR_SOL + HAUTEUR_AIR + 2)
 ax.axis('off')
 plt.title("Masse d'air fragmentée : échanges thermiques jour/nuit", fontsize=14, pad=20)
 
-# Sol visuel : dessin du sol en deux couleurs représentant la température (bleu pour froid, rouge pour chaud).
-sol_gauche = patches.Rectangle((0, 0), sol_width / 2, sol_height, facecolor='midnightblue', edgecolor='black')
-sol_droite = patches.Rectangle((sol_width / 2, 0), sol_width / 2, sol_height, facecolor='lightcoral', edgecolor='black')
-ax.add_patch(sol_gauche)
-ax.add_patch(sol_droite)
+# ===================== SOL VISUEL =====================
+sol_nuit = patches.Rectangle((0, 0), LARGEUR_SOL / 2, HAUTEUR_SOL, facecolor='midnightblue', edgecolor='black')
+sol_jour = patches.Rectangle((LARGEUR_SOL / 2, 0), LARGEUR_SOL / 2, HAUTEUR_SOL, facecolor='lightcoral', edgecolor='black')
+ax.add_patch(sol_nuit)
+ax.add_patch(sol_jour)
+
+# Étiquettes de température du sol
 ax.text(25, 0.5, "Sol nuit 10°C", ha='center', fontsize=10, color='white')
 ax.text(75, 0.5, "Sol jour 20°C", ha='center', fontsize=10, color='black')
 
-# Position verticale des blocs
-y_air = sol_height + 0.5
+# ===================== BLOCS D'AIR =====================
+hauteur_blocs = HAUTEUR_SOL + 0.5  # Position verticale fixe des blocs
 
-# Création des blocs graphiques
-blocs = []
-labels = []
+blocs_graphiques = []   # Rectangles
+etiquettes = []         # Étiquettes de température
 
-for i, x in enumerate(bloc_positions):
-   temp = bloc_temps[i]
-   color_ratio = (temp - 10) / 10
-   rect = patches.Rectangle((x, y_air), bloc_width, air_height,
-                            facecolor=(color_ratio, 0.2, 1 - color_ratio), edgecolor='black')
-   ax.add_patch(rect)
-   label = ax.text(x + bloc_width / 2, y_air + air_height / 2, f"{temp:.1f}°C",
-                   ha='center', va='center', fontsize=9, color='white', weight='bold')
-   blocs.append(rect)
-   labels.append(label)
+for i, x in enumerate(positions_blocs):
+    temp = temperatures_blocs[i]
+    ratio_couleur = (temp - 10) / 10  # Interpolation de couleur entre bleu (10°C) et rouge (20°C)
+    couleur = (ratio_couleur, 0.2, 1 - ratio_couleur)
+    
+    bloc = patches.Rectangle((x, hauteur_blocs), LARGEUR_BLOC, HAUTEUR_AIR,
+                             facecolor=couleur, edgecolor='black')
+    ax.add_patch(bloc)
+    blocs_graphiques.append(bloc)
 
-# Animation
-def update(frame):
-   global bloc_positions
+    etiquette = ax.text(x + LARGEUR_BLOC / 2, hauteur_blocs + HAUTEUR_AIR / 2,
+                        f"{temp:.1f}°C", ha='center', va='center',
+                        fontsize=9, color='white', weight='bold')
+    etiquettes.append(etiquette)
 
-   # Avancer tous les blocs
-   bloc_positions = (bloc_positions + vitesse) % sol_width
+# ===================== ANIMATION =====================
+def mise_a_jour(frame):
+    """Fonction appelée à chaque frame pour animer les blocs."""
+    global positions_blocs
 
-   for i in range(nb_blocs):
-       # Température fixe, pas de mise à jour thermique
-       temp = bloc_temps[i]
-       color_ratio = (temp - 10) / 10
-       color = (color_ratio, 0.2, 1 - color_ratio)
+    # Déplacement horizontal (cyclique)
+    positions_blocs = (positions_blocs + VITESSE_BLOCS) % LARGEUR_SOL
 
-       blocs[i].set_x(bloc_positions[i])
-       blocs[i].set_facecolor(color)
+    for i in range(NB_BLOCS):
+        x = positions_blocs[i]
+        temp = temperatures_blocs[i]
+        ratio_couleur = (temp - 10) / 10
+        couleur = (ratio_couleur, 0.2, 1 - ratio_couleur)
 
-       labels[i].set_position((bloc_positions[i] + bloc_width / 2, y_air + air_height / 2))
-       labels[i].set_text(f"{temp:.1f}°C")
+        # Mise à jour position et couleur du bloc
+        blocs_graphiques[i].set_x(x)
+        blocs_graphiques[i].set_facecolor(couleur)
 
-   return blocs + labels
+        # Mise à jour position et texte de l’étiquette
+        etiquettes[i].set_position((x + LARGEUR_BLOC / 2, hauteur_blocs + HAUTEUR_AIR / 2))
+        etiquettes[i].set_text(f"{temp:.1f}°C")
 
-ani = animation.FuncAnimation(fig, update, frames=300, interval=100, blit=True)
+    return blocs_graphiques + etiquettes
+
+# Lancement de l’animation (300 frames, 100 ms entre chaque image)
+ani = animation.FuncAnimation(fig, mise_a_jour, frames=300, interval=100, blit=True)
+
+# Affichage final
 plt.tight_layout()
 plt.show()
-
