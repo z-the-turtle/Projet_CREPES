@@ -1,21 +1,22 @@
 **- Affichage_final.py :**
 
         Interface d'utilisateur qui affiche une carte du monde interactif, l'utilisateur clique dessus pour obtenir une graphique qui affiche l'évolution de la température au cours d'un an. 
+        
 **- Code_avec_appel_biblio.py :** 
 
-    Code le plus abouti sans interface graphique : sert de base à l'interface graphique (GUI).
+        Code le plus abouti sans interface graphique : sert de base à l'interface graphique (GUI).
 
 **- Explication_code_avec_appel_biblio.md :** 
 
-    Explication et détails généraux du code **Code_avec_appel_biblio.py**.
+        Explication et détails généraux du code **Code_avec_appel_biblio.py**.
 
 **- justification constantes.md :** 
   
-    Validation scientifique du code **Code_avec_appel_biblio.py**.
+        Validation scientifique du code **Code_avec_appel_biblio.py**.
 
 **- albedo_lat_lon_multisampled_3pts.csv :** 
   
-    Stockage des albédos obtenus avec les appels API de la NASA.
+        Stockage des albédos obtenus avec les appels API de la NASA.
 
 **- fonction_découpage_capacité_couleurs.py :**
 
