@@ -5,4 +5,4 @@ Pistes d'amélioration :
 - h variable en fonction de l'espace
 2D : 
 - Choix de la vitesse des vents : prise en compte de l'API des vents et ne plus prendre la seule valeur de 10m/s
-- Modéliser à l'aide d'une carte des vents? 
+- Adaptation 1D/2D
