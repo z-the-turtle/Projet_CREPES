@@ -12,6 +12,7 @@ Modèle :
 - Le sol présente deux températures distinctes selon la saison :
     - En hiver : nuit = -10 °C, jour = 20 °C
     - En été  : nuit = 10 °C,  jour = 40 °C
+    - Ce sont des valeurs prise d'un autre groupe grâce au rayonnement solaire
 - Le côté gauche de la figure correspond à la face nocturne de la Terre,
   le côté droit correspond à la face ensoleillée.
 
