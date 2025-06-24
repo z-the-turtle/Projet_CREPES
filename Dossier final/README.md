@@ -18,12 +18,3 @@ Ce dossier contient les anciennes versions du code principal utilisé dans le co
 ## - GUI et code
 
 Ce dossier contient l’interface graphique (GUI) ainsi que le code complet du projet.
-
-## Fichier ZIP final
-
-Le fichier `.zip` fourni regroupe l’ensemble du projet :
-
-- **Document de synthèse** : sources scientifiques et explications du modèle physique.
-- **Code source** : scripts Python du projet et de ses bibliothèques associées.
-- **Pistes pour l’année suivante** : propositions d’améliorations ou d’extensions.
-- **README** : présent dans chaque sous-dossier pour décrire le rôle et le contenu de chaque fichier.
