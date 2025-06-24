@@ -4,7 +4,7 @@ Ce script simule, sous forme animée, le déplacement de blocs d'air fragmentés
 
 ---
 
-## 🌀 Modèle
+##  Modèle
 
 - **Modèle terrestre** : la Terre est modélisée comme un segment circulaire de périmètre  
   `2πR ≈ 36 000 km` ([source](https://www.notre-planete.info/terre/chiffres_cle.php)).
@@ -22,7 +22,7 @@ Ce script simule, sous forme animée, le déplacement de blocs d'air fragmentés
 
 ---
 
-## 🔬 Objectif
+##  Objectif
 
 Visualiser :
 - L’**évolution de la température** des blocs d’air.
@@ -31,7 +31,7 @@ Visualiser :
 
 ---
 
-## 🧮 Loi de Newton du refroidissement
+##  Loi de Newton du refroidissement
 
 Le modèle repose sur la loi de Newton appliquée à chaque pas de temps (approche discrète) : ![image](https://github.com/user-attachments/assets/4afdb17e-582d-448b-b5ea-d3df37518f10)
 
@@ -50,7 +50,7 @@ Avec :
 
 ---
 
-## ⚙️ Paramètres utilisés
+##  Paramètres utilisés
 
 | Paramètre                  | Valeur                  | Source |
 |---------------------------|-------------------------|--------|
@@ -61,7 +61,7 @@ Avec :
 
 ---
 
-## 📌 Remarques
+## Remarques
 
 - Le modèle est volontairement simplifié pour se concentrer sur les effets thermiques principaux.
 - Des hypothèses idéalisées sont prises (température uniforme par zone, pas d’échanges entre blocs, pas d’humidité, etc.).
