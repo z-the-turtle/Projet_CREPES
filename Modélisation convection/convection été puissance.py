@@ -1,10 +1,11 @@
+# Importation des bibliothèques
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.animation as animation
 import numpy as np
 
 list_t_sol = [] # liste température des sols (thermostats)
-list_t_air = [] # liste température des blocs (change au cours du temps)
+list_t_air = [] # liste température des blocs (changera au cours du temps)
 
 # Paramètres interface visuelle
 sol_width = 36e6 # périmètre de la Terre
@@ -145,12 +146,10 @@ def puissance_echange(t_heure):
         T_air = temps_air_sim[i]
         puissances = [h * A * (T_sol - T_air) for i in range(nb_blocs)]
 
-    return sum(puissances)/360 #moyenne des puissances 
-
+    return sum(puissances)/360 # moyenne des puissances 
 
 temps = np.linspace(0, dt*n_steps, n_steps)
 puissances = [puissance_echange(t) for t in temps]
-
 
 # Affichage de la figure et de la courbe de la puissance en fonction du temps
 plt.figure(figsize=(10, 5))
