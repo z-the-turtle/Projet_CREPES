@@ -34,7 +34,7 @@ Contenu :
 
 ---
 
-## 📦 Fichier ZIP final
+## Fichier ZIP final
 
 Le fichier `.zip` fourni regroupe l’ensemble du projet :
 
