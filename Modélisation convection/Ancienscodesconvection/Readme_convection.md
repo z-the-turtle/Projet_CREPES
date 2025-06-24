@@ -14,7 +14,8 @@
 
 **- courbes temperatures.py :**
 
-    Ce code permet de représenter la température de deux blocs d'air placés sur deux sols de températures différentes en fonction du temps. Comme dans les codes précédents, les blocs vont d'un sol à l'autre. On prend en compte les échanges thermiques.
+    Code : 
+    Représentation de la température de deux blocs d'air placés sur deux sols de températures différentes en fonction du temps. Comme dans les codes précédents, les blocs vont d'un sol à l'autre. On prend en compte les échanges thermiques.
 
 
 
