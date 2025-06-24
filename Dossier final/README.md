@@ -1,5 +1,5 @@
 <details>
-<summary> Albédo </summary> 
+<summary> **Albédo** </summary> 
 Ce dossier regroupe plusieurs versions de modélisation de l’effet de l’albédo terrestre (par découpage terrestre ou par appel API de la NASA). 
 </details>
 
