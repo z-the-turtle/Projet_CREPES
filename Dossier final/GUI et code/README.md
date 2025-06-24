@@ -12,11 +12,11 @@
 
 **- Explication_code_avec_appel_biblio.md :** 
 
-        Explication et détails généraux du code *Code_avec_appel_biblio.py*.
+        Explication et détails généraux du code Code_avec_appel_biblio.py.
 
 **- justification constantes.md :** 
   
-        Validation scientifique du code **Code_avec_appel_biblio.py**.
+        Validation scientifique du code Code_avec_appel_biblio.py.
 
 **- albedo_lat_lon_multisampled_3pts.csv :** 
   
