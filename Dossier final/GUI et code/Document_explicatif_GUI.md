@@ -11,7 +11,8 @@ Le graphique de la température est généré à partir de la fonction Temp dans
 
 **Généralités:**
 Durée de fonctionnement: Actuellement le programme se déroule sur un an, pour modifier cela il faut modifier les lignes 31, 32 et 40 en remplançant 365 par le nombre de jours de simulation désiré.
-Installations nécéssaires: 
+
+**Installations nécéssaires:**
 pip install: pandas, requests, cartopy
 
 
