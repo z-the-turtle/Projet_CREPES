@@ -26,7 +26,7 @@ def Temp(lat, lng, nb_jours_simulation=30):
     print(f"Durée: {nb_jours_simulation} jours")
 
     albedo_local = rechercher_albedo_simple(lat,lng)
-    print(f"Albédo utilisé: {albedo_local:.3f}")
+    #print(f"Albédo utilisé: {albedo_local:.3f}")
 
     T_T = 280
     T_atm = 220
