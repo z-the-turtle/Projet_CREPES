@@ -32,7 +32,10 @@
     Représentation de la puissance échangée sol-air en fonction du temps. 
     360 blocs sur un sol découpé en deux thermostats : 10 et 40°C (été).
     Prise en compte du vent à 10m/s.
-    
+
+**- DOCsynthèse**
+
+    Explication détaillée des codes, sources et modélisations.
 
 
     
