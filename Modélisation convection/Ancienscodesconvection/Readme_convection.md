@@ -3,7 +3,7 @@
     Schéma : 
     Explication globale de la modélisation.
 
-**- 1 - Modèle 1D sans échanges thermiques.py :**
+**- 1_Modèle 1D sans échanges thermiques.py :**
 
     Code : 
     Modélisation du déplacement des blocs d’air de la zone nuit vers la zone jour, c’est-à-dire d’un thermostat à un autre où chaque bloc d'air garde sa température initiale pendant le déplacement. 
