@@ -30,7 +30,7 @@
     Cf DOCsynthèse pour visualiser la formule. Cette formule permet de prendre en compte la convection dans notre modèle.
 
 
-**- 5 - Modélisation convection finale**
+**- 5 - Modélisation convection finale.py**
 
     Code : 
     Représentation de la puissance échangée sol-air en fonction du temps. 
